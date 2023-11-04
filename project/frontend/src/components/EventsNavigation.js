@@ -17,7 +17,7 @@ function EventsNavigation() {
               }
               end
             >
-              All Events
+              모든 물건
             </NavLink>
           </li>
           {token && (
@@ -28,7 +28,7 @@ function EventsNavigation() {
                   isActive ? classes.active : undefined
                 }
               >
-                New Event
+                물건 등록
               </NavLink>
             </li>
           )}

@@ -2,8 +2,8 @@ import PageContent from '../components/PageContent';
 
 function HomePage() {
   return (
-    <PageContent title='Welcome!'>
-      <p>Browse all our amazing events!</p>
+    <PageContent title='Welcome to C2C service!'>
+      <p>이곳을 편집하려면 Home.js을 편집하세요.</p>
     </PageContent>
   );
 }

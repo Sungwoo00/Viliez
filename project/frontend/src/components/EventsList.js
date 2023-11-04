@@ -8,7 +8,7 @@ function EventsList({ events }) {
 
   return (
     <div className={classes.events}>
-      <h1>All Events</h1>
+      <h1>모든 물건</h1>
       <ul className={classes.list}>
         {events.map((event) => (
           <li key={event.id} className={classes.item}>
@@ -16,6 +16,7 @@ function EventsList({ events }) {
               <img src={event.image} alt={event.title} />
               <div className={classes.content}>
                 <h2>{event.title}</h2>
+                <h2>{event.price}</h2>
                 <time>{event.date}</time>
               </div>
             </Link>

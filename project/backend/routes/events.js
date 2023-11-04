@@ -6,6 +6,7 @@ const {
   isValidText,
   isValidDate,
   isValidImageUrl,
+  isValidPrice,
 } = require('../util/validation');
 
 const router = express.Router();
@@ -45,6 +46,10 @@ router.post('/', async (req, res, next) => {
     errors.description = 'Invalid description.';
   }
 
+  if (!isValidPrice(data.price)) {
+    errors.price = 'Invalid price.';
+  }
+
   if (!isValidDate(data.date)) {
     errors.date = 'Invalid date.';
   }
@@ -79,6 +84,10 @@ router.patch('/:id', async (req, res, next) => {
 
   if (!isValidText(data.description)) {
     errors.description = 'Invalid description.';
+  }
+
+  if (!isValidPrice(data.price)) {
+    errors.price = 'Invalid price.';
   }
 
   if (!isValidDate(data.date)) {

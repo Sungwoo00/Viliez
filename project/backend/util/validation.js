@@ -2,6 +2,10 @@ function isValidText(value, minLength = 1) {
   return value && value.trim().length >= minLength;
 }
 
+function isValidPrice(value, minLength = 1) {
+  return value && value.trim().length >= minLength;
+}
+
 function isValidDate(value) {
   const date = new Date(value);
   return value && date !== 'Invalid Date';
@@ -16,6 +20,7 @@ function isValidEmail(value) {
 }
 
 exports.isValidText = isValidText;
+exports.isValidPrice = isValidPrice;
 exports.isValidDate = isValidDate;
 exports.isValidImageUrl = isValidImageUrl;
 exports.isValidEmail = isValidEmail;

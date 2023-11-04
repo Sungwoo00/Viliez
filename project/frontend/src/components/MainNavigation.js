@@ -28,7 +28,7 @@ function MainNavigation() {
                 isActive ? classes.active : undefined
               }
             >
-              Events
+              Objects
             </NavLink>
           </li>
           <li>

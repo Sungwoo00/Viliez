@@ -31,7 +31,7 @@ function EventForm({ method, event }) {
         </ul>
       )}
       <p>
-        <label htmlFor='title'>Title</label>
+        <label htmlFor='title'>제목</label>
         <input
           id='title'
           type='text'
@@ -41,7 +41,7 @@ function EventForm({ method, event }) {
         />
       </p>
       <p>
-        <label htmlFor='image'>Image</label>
+        <label htmlFor='image'>사진</label>
         <input
           id='image'
           type='url'
@@ -51,7 +51,17 @@ function EventForm({ method, event }) {
         />
       </p>
       <p>
-        <label htmlFor='date'>Date</label>
+        <label htmlFor='price'>가격 (원)</label>
+        <input
+          id='price'
+          type='number'
+          name='price'
+          required
+          defaultValue={event ? event.price : ''}
+        />
+      </p>
+      <p>
+        <label htmlFor='amount'>대여 가능 날짜</label>
         <input
           id='date'
           type='date'
@@ -61,7 +71,7 @@ function EventForm({ method, event }) {
         />
       </p>
       <p>
-        <label htmlFor='description'>Description</label>
+        <label htmlFor='description'>설명</label>
         <textarea
           id='description'
           name='description'
@@ -92,6 +102,7 @@ export async function action({ request, params }) {
     title: data.get('title'),
     image: data.get('image'),
     date: data.get('date'),
+    price: data.get('price'),
     description: data.get('description'),
   };
 

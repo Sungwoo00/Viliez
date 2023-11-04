@@ -7,7 +7,7 @@ function EventItem({ event }) {
   const submit = useSubmit();
 
   function startDeleteHandler() {
-    const proceed = window.confirm('Are you sure?');
+    const proceed = window.confirm('정말 삭제하겠습니까 ?');
 
     if (proceed) {
       submit(null, { method: 'delete' });
@@ -18,7 +18,8 @@ function EventItem({ event }) {
     <article className={classes.event}>
       <img src={event.image} alt={event.title} />
       <h1>{event.title}</h1>
-      <time>{event.date}</time>
+      <time>{'대여 가능 날짜 : ' + event.date}</time>
+      <h2>{event.price + '원'}</h2>
       <p>{event.description}</p>
       {token && (
         <menu className={classes.actions}>
