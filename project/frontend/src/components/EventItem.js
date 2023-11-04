@@ -19,7 +19,13 @@ function EventItem({ event }) {
       <img src={event.image} alt={event.title} />
       <h1>{event.title}</h1>
       <time>{'대여 가능 날짜 : ' + event.date}</time>
-      <h2>{event.price + '원'}</h2>
+      {/* <h2>{event.price.toString() + '원'}</h2> */}
+      <h2>
+        {new Intl.NumberFormat('ko-KR', {
+          style: 'currency',
+          currency: 'KRW',
+        }).format(event.price)}
+      </h2>
       <p>{event.description}</p>
       {token && (
         <menu className={classes.actions}>
