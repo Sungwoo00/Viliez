@@ -16,8 +16,14 @@ function EventsList({ events }) {
               <img src={event.image} alt={event.title} />
               <div className={classes.content}>
                 <h2>{event.title}</h2>
-                <h2>{event.price}</h2>
-                <time>{event.date}</time>
+                <h2>
+                  {new Intl.NumberFormat('ko-KR', {
+                    style: 'currency',
+                    currency: 'KRW',
+                  }).format(event.price)}
+                </h2>
+                <h2>수량-EventList{event.amount}</h2>
+                {/* <time>{event.date}</time> */}
               </div>
             </Link>
           </li>

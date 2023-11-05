@@ -57,17 +57,20 @@ function EventForm({ method, event }) {
           type='number'
           name='price'
           required
+          step='500'
           defaultValue={event ? event.price : ''}
         />
       </p>
+
       <p>
-        <label htmlFor='amount'>대여 가능 날짜</label>
+        <label htmlFor='amount'>수량</label>
         <input
-          id='date'
-          type='date'
-          name='date'
+          id='amount'
+          type='number'
+          name='amount'
           required
-          defaultValue={event ? event.date : ''}
+          min='1'
+          defaultValue={event ? event.amount : ''}
         />
       </p>
       <p>
@@ -101,7 +104,7 @@ export async function action({ request, params }) {
   const eventData = {
     title: data.get('title'),
     image: data.get('image'),
-    date: data.get('date'),
+    amount: data.get('amount'),
     price: data.get('price'),
     description: data.get('description'),
   };

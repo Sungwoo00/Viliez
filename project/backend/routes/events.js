@@ -4,9 +4,10 @@ const { getAll, get, add, replace, remove } = require('../data/event');
 const { checkAuth } = require('../util/auth');
 const {
   isValidText,
-  isValidDate,
+  // isValidDate,
   isValidImageUrl,
   isValidPrice,
+  isValidAmount,
 } = require('../util/validation');
 
 const router = express.Router();
@@ -49,10 +50,14 @@ router.post('/', async (req, res, next) => {
   if (!isValidPrice(data.price)) {
     errors.price = 'Invalid price.';
   }
-
-  if (!isValidDate(data.date)) {
-    errors.date = 'Invalid date.';
+  console.log(data.event + 'xx');
+  if (!isValidAmount(data.amount)) {
+    errors.amount = 'Invalid amount.';
   }
+
+  // if (!isValidDate(data.date)) {
+  //   errors.date = 'Invalid date.';
+  // }
 
   if (!isValidImageUrl(data.image)) {
     errors.image = 'Invalid image.';
@@ -89,10 +94,15 @@ router.patch('/:id', async (req, res, next) => {
   if (!isValidPrice(data.price)) {
     errors.price = 'Invalid price.';
   }
+  console.log(data.event + 'zz');
 
-  if (!isValidDate(data.date)) {
-    errors.date = 'Invalid date.';
+  if (!isValidAmount(data.amount)) {
+    errors.amount = 'Invalid amount.';
   }
+
+  // if (!isValidDate(data.date)) {
+  //   errors.date = 'Invalid date.';
+  // }
 
   if (!isValidImageUrl(data.image)) {
     errors.image = 'Invalid image.';
