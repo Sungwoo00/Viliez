@@ -57,11 +57,11 @@ function EventForm({ method, event }) {
           type='number'
           name='price'
           required
-          step='500'
+          min='1000'
+          step='100'
           defaultValue={event ? event.price : ''}
         />
       </p>
-
       <p>
         <label htmlFor='amount'>수량</label>
         <input
@@ -70,9 +70,11 @@ function EventForm({ method, event }) {
           name='amount'
           required
           min='1'
+          step='1'
           defaultValue={event ? event.amount : ''}
         />
       </p>
+
       <p>
         <label htmlFor='description'>설명</label>
         <textarea
@@ -85,10 +87,10 @@ function EventForm({ method, event }) {
       </p>
       <div className={classes.actions}>
         <button type='button' onClick={cancelHandler} disabled={isSubmitting}>
-          Cancel
+          취소하기
         </button>
         <button disabled={isSubmitting}>
-          {isSubmitting ? 'Submitting...' : 'Save'}
+          {isSubmitting ? 'Submitting...' : '저장하기'}
         </button>
       </div>
     </Form>
@@ -104,10 +106,11 @@ export async function action({ request, params }) {
   const eventData = {
     title: data.get('title'),
     image: data.get('image'),
-    amount: data.get('amount'),
     price: data.get('price'),
+    amount: data.get('amount'),
     description: data.get('description'),
   };
+  console.log(eventData);
 
   let url = 'http://localhost:8080/events';
 

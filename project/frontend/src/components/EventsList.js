@@ -22,7 +22,7 @@ function EventsList({ events }) {
                     currency: 'KRW',
                   }).format(event.price)}
                 </h2>
-                <h2>수량-EventList{event.amount}</h2>
+                <h2>수량 : {event.amount}</h2>
                 {/* <time>{event.date}</time> */}
               </div>
             </Link>

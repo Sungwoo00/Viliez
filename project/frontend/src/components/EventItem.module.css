@@ -30,3 +30,8 @@
   border: none;
   color: var(--color-primary-800);
 }
+
+.eventBorrowed {
+  filter: blur(5px);
+  opacity: 0.5;
+}
