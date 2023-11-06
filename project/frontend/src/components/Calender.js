@@ -31,7 +31,7 @@ const Calender = () => {
         shouldCloseOnSelect={false}
         monthsShown={2}
         minDate={new Date()}
-        dateFormat="yyyy년 MM월 dd일"
+        dateFormat=" yyyy년 MM월 dd일 "
       />
     </div>
   );
