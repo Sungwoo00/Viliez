@@ -34,9 +34,14 @@ function AuthForm() {
         </p>
         <p>
           <label htmlFor='image'>Password</label>
-          {/* htmlFor ?? */}
           <input id='password' type='password' name='password' required />
         </p>
+        {!isLogin && (
+          <p>
+            <label htmlFor='nickname'>Nickname</label>
+            <input id='nickname' type='text' name='nickname' required />
+          </p>
+        )}
         <div className={classes.actions}>
           <Link to={`?mode=${isLogin ? 'signup' : 'login'}`}>
             {isLogin ? 'Create new user' : 'Login'}
