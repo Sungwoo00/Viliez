@@ -37,12 +37,18 @@ function AuthForm() {
           {/* htmlFor ?? */}
           <input id='password' type='password' name='password' required />
         </p>
+        {!isLogin && (
+          <p>
+            <label htmlFor='nickname'>Nickname</label>
+            <input id='nickname' type='text' name='nickname' required />
+          </p>
+        )}
         <div className={classes.actions}>
           <Link to={`?mode=${isLogin ? 'signup' : 'login'}`}>
-            {isLogin ? 'Create new user' : 'Login'}
+            {isLogin ? '회원가입' : '로그인 페이지'}
           </Link>
           <button disabled={isSubmitting}>
-            {isSubmitting ? 'Submitting...' : 'Save'}
+            {isSubmitting ? 'Submitting...' : '로그인'}
           </button>
         </div>
       </Form>

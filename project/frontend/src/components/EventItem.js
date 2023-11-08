@@ -17,6 +17,7 @@ function EventItem({ event }) {
   return (
     <article className={classes.event}>
       <img src={event.image} alt={event.title} />
+
       <h1>{event.title}</h1>
       {/* <time>{'대여 가능 날짜 : ' + event.date}</time> */}
       <h2>수량 : {event.amount}</h2>
@@ -27,10 +28,10 @@ function EventItem({ event }) {
         }).format(event.price)}
       </h2>
       <p>{event.description}</p>
+
       {token && (
         <menu className={classes.actions}>
           <Link to='edit'>수정하기</Link>
-          <Link to='/events'>빌리기</Link>
           <button onClick={startDeleteHandler}>삭제하기</button>
         </menu>
       )}
