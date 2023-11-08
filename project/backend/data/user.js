@@ -11,20 +11,20 @@ async function add(data) {
   if (!storedData.users) {
     storedData.users = [];
   }
-  storedData.users.push({ ...data, password: hashedPw, id: userId });
+  storedData.users.push({ ...data, password: hashedPw, id: userId, nickname: data.nickname });
   await writeData(storedData);
-  return { id: userId, email: data.email };
+  return { id: userId, email: data.email, nickname: data.nickname };
 }
 
-async function get(email) {
+async function get(email, nickname) {
   const storedData = await readData();
   if (!storedData.users || storedData.users.length === 0) {
     throw new NotFoundError('Could not find any users.');
   }
 
-  const user = storedData.users.find((ev) => ev.email === email);
+  const user = storedData.users.find((ev) => ev.email === email && ev.nickname === nickname);
   if (!user) {
-    throw new NotFoundError('Could not find user for email ' + email);
+    throw new NotFoundError('Could not find user for email ' + email + ' and nickname ' + nicskname);
   }
 
   return user;

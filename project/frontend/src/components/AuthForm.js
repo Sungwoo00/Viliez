@@ -34,7 +34,6 @@ function AuthForm() {
         </p>
         <p>
           <label htmlFor='image'>Password</label>
-          {/* htmlFor ?? */}
           <input id='password' type='password' name='password' required />
         </p>
         {!isLogin && (
