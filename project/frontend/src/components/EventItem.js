@@ -17,9 +17,7 @@ function EventItem({ event }) {
   return (
     <article className={classes.event}>
       <img src={event.image} alt={event.title} />
-
       <h1>{event.title}</h1>
-      {/* <time>{'대여 가능 날짜 : ' + event.date}</time> */}
       <h2>수량 : {event.amount}</h2>
       <h2>
         {new Intl.NumberFormat('ko-KR', {

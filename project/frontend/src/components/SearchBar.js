@@ -1,24 +1,27 @@
 import React, { useState } from 'react';
-import Style from'./SearchBar.module.css';
+import Style from './SearchBar.module.css';
 
-const SearchBar = ({ placeholder, data }) => {
+const SearchBar = ({ data, event }) => {
   const [filteredData, setFilteredData] = useState([]);
   const [searchWord, setSearchWord] = useState('');
 
   const handleSearch = (e) => {
     const searchWord = e.target.value;
+    // console.log(searchWord);
     setSearchWord(searchWord);
+
     const newFilter = data.filter((value) => {
       return value.toLowerCase().includes(searchWord.toLowerCase());
     });
+    // console.log(newFilter);
     setFilteredData(newFilter);
   };
 
   return (
     <div className={Style['search-container']}>
       <input
-        type="text"
-        placeholder="찾으시는 물건을 검색해보세요" 
+        type='text'
+        placeholder='찾으시는 물건을 검색해보세요'
         value={searchWord}
         onChange={handleSearch}
         className={Style['search-input']}

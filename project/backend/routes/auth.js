@@ -1,7 +1,11 @@
 const express = require('express');
 const { add, get } = require('../data/user');
 const { createJSONToken, isValidPassword } = require('../util/auth');
-const { isValidEmail, isValidText } = require('../util/validation');
+const {
+  isValidEmail,
+  isValidText,
+  isValidNickname,
+} = require('../util/validation');
 
 const router = express.Router();
 
@@ -24,6 +28,10 @@ router.post('/signup', async (req, res, next) => {
     errors.password = 'Invalid password. Must be at least 6 characters long.';
   }
 
+  // if (!isValidNickname(data.nickname)) {
+  //   errors.nickname = 'Invalid Nickname.';
+  // }
+
   if (Object.keys(errors).length > 0) {
     return res.status(422).json({
       message: 'User signup failed due to validation errors.',
@@ -45,6 +53,7 @@ router.post('/signup', async (req, res, next) => {
 router.post('/login', async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
+  // const nickname = req.body.nickname;
 
   let user;
   try {

@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import { getTokenDuration } from '../util/auth';
 
 function RootLayout() {
-  // const navigation = useNavigation();
   const token = useLoaderData();
   const submit = useSubmit();
   useEffect(() => {
@@ -30,7 +29,6 @@ function RootLayout() {
     <>
       <MainNavigation />
       <main>
-        {/* {navigation.state === 'loading' && <p>Loading...</p>} */}
         <Outlet />
       </main>
     </>

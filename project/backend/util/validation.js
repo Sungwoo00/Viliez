@@ -23,9 +23,14 @@ function isValidEmail(value) {
   return value && value.includes('@');
 }
 
+function isValidNickname(value, minLength = 1) {
+  return value && value.trim().length >= minLength;
+}
+
 exports.isValidAmount = isValidAmount;
 exports.isValidText = isValidText;
 exports.isValidPrice = isValidPrice;
 // exports.isValidDate = isValidDate;
 exports.isValidImageUrl = isValidImageUrl;
 exports.isValidEmail = isValidEmail;
+exports.isValidNickname = isValidNickname;
