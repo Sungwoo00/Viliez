@@ -8,6 +8,7 @@ function MainNavigation() {
   return (
     <header className={classes.header}>
       <nav>
+        <p>MainNavigation.js 닉네임</p>
         <ul className={classes.list}>
           <li>
             <NavLink

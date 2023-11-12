@@ -1,18 +1,18 @@
 {
   "events": [
     {
-      "title": "성우야 이게 어렵니 ? ",
+      "title": "SearchBar",
       "image": "https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg",
-      "price": "1200",
-      "amount": "1",
+      "price": "1600",
+      "amount": "2",
       "description": "이게 어려워 ?",
       "id": "ef3a9319-6252-45f7-bb35-1b5ee304d8e7"
     },
     {
-      "title": "커피 혼자 사먹은 이성우",
+      "title": "NickName test",
       "image": "https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg",
       "price": "2000",
-      "amount": "1",
+      "amount": "4",
       "description": "누가 커피를 혼자 사먹나 ?",
       "id": "2ce03905-3646-45fe-a9e4-0b5c59ae836b"
     },
@@ -28,8 +28,9 @@
   "users": [
     {
       "email": "test@test.com",
-      "password": "$2a$12$8CwHGfvWGpAkRWz/qM1.3uBulOkJUDocabxLQ.J4clEHXuFRHvzui",
-      "id": "c2dfe8f3-395e-4ebd-8471-710df92b9157"
+      "password": "$2a$12$rUDpcx7MUHDCPxxzF/vrHu/IKKZSQTbRfZYVgsMo7WUlwZsUyQuvK",
+      "nickname": "Ju",
+      "id": "e272df26-db84-4944-be5d-e01dc1b82346"
     }
   ]
 }

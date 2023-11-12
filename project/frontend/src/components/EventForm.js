@@ -110,7 +110,8 @@ export async function action({ request, params }) {
     amount: data.get('amount'),
     description: data.get('description'),
   };
-  console.log(eventData);
+
+  // const userdata =
 
   let url = 'http://localhost:8080/events';
 

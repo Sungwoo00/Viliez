@@ -1,6 +1,6 @@
 const bodyParser = require('body-parser');
 const express = require('express');
-
+const path = require('path');
 const eventRoutes = require('./routes/events');
 const authRoutes = require('./routes/auth');
 
@@ -22,6 +22,12 @@ app.use((error, req, res, next) => {
   const status = error.status || 500;
   const message = error.message || 'Something went wrong.';
   res.status(status).json({ message: message });
+});
+
+app.use(express.static(path.join(__dirname, 'react-project/build')));
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'project/frontend/build/index.html'));
 });
 
 app.listen(8080);

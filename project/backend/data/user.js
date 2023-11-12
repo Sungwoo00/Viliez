@@ -31,6 +31,8 @@ async function get(email) {
     throw new NotFoundError('Could not find user for email ' + email);
   }
 
+  console.log(user);
+
   return user;
 }
 
