@@ -15,14 +15,9 @@ function App() {
       {isAuthReady ? (
         <BrowserRouter>
           <Nav />
+          {/* <Home /> */}
           <Routes>
             <Route path='/' element={<Home />} />
-            {/* <Route
-              path='/'
-              element={
-                user ? <Home /> : <Navigate replace={true} to='/login' />
-              }
-            /> */}
             <Route
               path='/mypage'
               element={

@@ -52,7 +52,6 @@ const ItemForm = ({ uid }) => {
             required
             onChange={handleData}
           />
-
           <button type='submit'>제출</button>
         </fieldset>
       </form>

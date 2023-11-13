@@ -10,8 +10,13 @@ const Nav = () => {
 
   return (
     <nav className={styles.nav}>
-      <h1 className={styles.tit}>C2C Share Market</h1>
+      <h1 className={styles.tit}>
+        <Link to='/'>C2C Share Market</Link>
+      </h1>
       <ul className={styles.list_nav}>
+        <li>
+          <Link to='/'>홈</Link>
+        </li>
         {!user && (
           <>
             <li>
@@ -24,7 +29,7 @@ const Nav = () => {
         )}
         {user && (
           <>
-            <strong>{user.displayName}님 환영합니다 !</strong>
+            {/* <strong>{user.displayName}님 환영합니다 !</strong> */}
             <li>
               <Link to='/mypage'>마이페이지</Link>
             </li>

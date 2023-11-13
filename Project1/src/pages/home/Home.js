@@ -1,13 +1,23 @@
+import HomeItemList from './HomeItemList';
+import styles from './MyPage.module.css';
+import useCollection from '../../hooks/useCollection';
+
 const Home = () => {
+  const { documents, error } = useCollection('Sharemarket');
+
   return (
-    <>
-      <strong>
-        여기는 Home.js입니다
-        <br /> TODO
-        <br /> 1. 모든 물건 출력하기
-        <br /> 2. 캘릳더 ? 서치바 ?<br /> 3.
-      </strong>
-    </>
+    <main className={styles.container}>
+      <p>
+        TODO : <br /> 1. Nav css <br /> 2.
+      </p>
+      <aside className={styles.side_menu}></aside>
+
+      <ul className={styles.content_list}>
+        <h1>All Item</h1>
+        {error && <strong>{error}</strong>}
+        {documents && <HomeItemList items={documents}></HomeItemList>}
+      </ul>
+    </main>
   );
 };
 

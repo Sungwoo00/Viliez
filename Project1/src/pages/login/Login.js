@@ -25,23 +25,26 @@ const Login = () => {
     <form className={styles.login_form} onSubmit={handleSubmit}>
       <fieldset>
         <legend>로그인</legend>
-        <lable htmlFor='myEmail'>email : </lable>
-        <input
-          type='email'
-          id='myEmail'
-          required
-          value={email}
-          onChange={handleData}
-        />
-
-        <label htmlFor='myPassword'>password : </label>
-        <input
-          type='password'
-          id='myPassword'
-          required
-          value={password}
-          onChange={handleData}
-        />
+        <div className={styles.input_box}>
+          <input
+            type='email'
+            id='myEmail'
+            required
+            value={email}
+            onChange={handleData}
+          />
+          <label htmlFor='myEmail'>email</label>
+        </div>
+        <div className={styles.input_box}>
+          <input
+            type='password'
+            id='myPassword'
+            required
+            value={password}
+            onChange={handleData}
+          />
+          <label htmlFor='myPassword'>password</label>
+        </div>
         {!isPending && (
           <button type='submit' className={styles.btn}>
             {' '}

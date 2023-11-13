@@ -20,7 +20,6 @@ const ItemList = ({ items }) => {
             >
               삭제
             </button>
-            {/* TODO : 삭제버튼 확인 문구 & 편집 버튼 추가 */}
           </li>
         );
       })}
