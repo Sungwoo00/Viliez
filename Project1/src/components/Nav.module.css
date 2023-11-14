@@ -1,34 +1,40 @@
 .nav {
+  position: relative;
+  width: 100%;
   background-color: royalblue;
   padding: 20px 50px;
 }
-.nav .list_nav {
-  display: flex;
-  justify-content: right;
-  align-items: center;
-  gap: 16px;
-}
 
-.nav a {
+.tit a,
+.list_nav a,
+button {
   color: #fff;
   text-decoration: none;
   cursor: pointer;
   transition: 0.5s ease;
 }
-.nav a:hover {
+
+.tit a:hover,
+.list_nav a:hover,
+button:hover {
   color: black;
 }
 
-.nav button {
-  margin-left: 20px;
-  padding: 6px 12px;
-  border-radius: 10px;
-  background-color: mediumseagreen;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.list_nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
 }
 
-button:hover {
-  background-color: darkseagreen;
+.list_nav a {
+  padding: 10px 15px;
+  border-radius: 10px;
+}
+
+button {
+  padding: 10px 15px;
+  border-radius: 10px;
+  background-color: transparent;
+  border: none;
 }

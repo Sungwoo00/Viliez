@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
 import Home from './pages/home/Home';
 import MyPage from './pages/home/MyPage';
+import Chat from './pages/login/Chat';
 import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
 import Nav from './components/Nav';
@@ -22,6 +23,12 @@ function App() {
               path='/mypage'
               element={
                 user ? <MyPage /> : <Navigate replace={true} to='/login' />
+              }
+            />
+            <Route
+              path='/chat'
+              element={
+                user ? <Chat /> : <Navigate replace={true} to='/login' />
               }
             />
             <Route
