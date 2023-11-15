@@ -3,6 +3,7 @@
   width: 100%;
   background-color: royalblue;
   padding: 20px 50px;
+  text-align: left;
 }
 
 .tit a,
@@ -22,7 +23,7 @@ button:hover {
 
 .list_nav {
   display: flex;
-  justify-content: center;
+  justify-content: right;
   align-items: center;
   gap: 24px;
 }
