@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import useAuthContext from '../../hooks/useAuthContext';
 import styles from './Home.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const HomeItemList = ({ items }) => {
+  const { user } = useAuthContext();
+  const navigate = useNavigate();
   const [selectedItem, setSelectedItem] = useState(null);
 
   const openModal = (index) => {
@@ -10,6 +14,14 @@ const HomeItemList = ({ items }) => {
 
   const closeModal = () => {
     setSelectedItem(null);
+  };
+
+  const rentHandler = () => {
+    alert('빌리기 기능 추가');
+  };
+
+  const chatHandler = () => {
+    navigate('/chat');
   };
 
   return (
@@ -31,6 +43,16 @@ const HomeItemList = ({ items }) => {
               <p className={styles.ea}>{selectedItem.ea} 개</p>
               <p className={styles.description}>{selectedItem.description}</p>
             </div>
+            {user && (
+              <>
+                <button className={styles.closeBtn} onClick={chatHandler}>
+                  채팅하기
+                </button>
+                <button className={styles.closeBtn} onClick={rentHandler}>
+                  빌리기
+                </button>
+              </>
+            )}
             <button className={styles.closeBtn} onClick={closeModal}>
               닫기
             </button>

@@ -18,6 +18,6 @@ const appFireStore = getFirestore(app);
 const timestamp = Timestamp;
 
 // export default app;
-export { appAuth, appFireStore, timestamp };
+export { app, appAuth, appFireStore, timestamp };
 
 // export const authService = getAuth();

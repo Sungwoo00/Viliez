@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
 import Home from './pages/home/Home';
 import MyPage from './pages/home/MyPage';
-import Chat from './pages/login/Chat';
+import Chat from './pages/chat/Chat';
 import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
 import Nav from './components/Nav';
@@ -16,7 +16,6 @@ function App() {
       {isAuthReady ? (
         <BrowserRouter>
           <Nav />
-          {/* <Home /> */}
           <Routes>
             <Route path='/' element={<Home />} />
             <Route
