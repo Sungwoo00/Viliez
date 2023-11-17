@@ -1,4 +1,10 @@
-import { collection, addDoc, deleteDoc, doc } from 'firebase/firestore';
+import {
+  collection,
+  addDoc,
+  deleteDoc,
+  updateDoc,
+  doc,
+} from 'firebase/firestore';
 import { useReducer } from 'react';
 import { appFireStore, timestamp } from '../firebase/confing';
 
@@ -28,6 +34,13 @@ const storeReducer = (state, action) => {
         error: action.payload,
       };
     case 'deleteDoc':
+      return {
+        isPending: false,
+        document: action.payload,
+        success: true,
+        error: null,
+      };
+    case 'updateDoc':
       return {
         isPending: false,
         document: action.payload,
@@ -71,7 +84,19 @@ const useFirestore = (transaction) => {
     }
   };
 
-  return { addDocument, deleteDocument, response };
+  // 문서 수정
+  const updateDocument = async (id, updatedData) => {
+    dispatch({ type: 'isPending' });
+
+    try {
+      const docRef = await updateDoc(doc(colRef, id), updatedData);
+      dispatch({ type: 'updateDoc', payload: docRef });
+    } catch (error) {
+      dispatch({ type: 'error', payload: error.message });
+    }
+  };
+
+  return { addDocument, deleteDocument, updateDocument, response };
 };
 
 export default useFirestore;

@@ -63,27 +63,9 @@
   box-shadow: 3px 3px 5px rgba(50, 50, 50, 0.3);
   padding: 30px;
   position: relative;
-  border-left: 4px solid royalblue;
+  border-bottom: 4px solid royalblue;
 }
 
 .content_list li + li {
-  margin: 30px 0;
-}
-
-.content_list .title {
-  font-size: 1.5em;
-}
-
-.content_list .description {
-  font-size: 1.3em;
-}
-
-.content_list button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: teal;
-  border: none;
-  color: #fff;
-  padding: 12px 8px;
+  margin: 20px 0;
 }

@@ -39,6 +39,7 @@ const HomeItemList = ({ items }) => {
         <div className={styles.modalOverlay} onClick={closeModal}>
           <div className={styles.modal}>
             <div>
+              <p className={styles.category}>{selectedItem.category}</p>
               <p className={styles.price}>{selectedItem.price}</p>
               <p className={styles.ea}>{selectedItem.ea} 개</p>
               <p className={styles.description}>{selectedItem.description}</p>

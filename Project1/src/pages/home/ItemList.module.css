@@ -1,0 +1,12 @@
+.btn_container {
+  position: absolute;
+  background-color: purple;
+}
+
+.btn_delete {
+  background-color: red;
+}
+
+.btn_edit {
+  background-color: royalblue;
+}

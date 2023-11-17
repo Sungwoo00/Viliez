@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import useFirestore from '../../hooks/useFirestore';
 
 const ItemForm = ({ uid }) => {
+  const [currentUser, setCurrentUser] = useState(null);
+
   const [title, setTitle] = useState('');
-  const [kategorie, setKategorie] = useState('');
+  const [category, setCategory] = useState('');
   const [price, setPrice] = useState('');
   const [ea, setEa] = useState('');
   const [description, setDescription] = useState('');
@@ -12,8 +15,8 @@ const ItemForm = ({ uid }) => {
   const handleData = (event) => {
     if (event.target.id === 'tit') {
       setTitle(event.target.value);
-    } else if (event.target.id === 'kategorie') {
-      setKategorie(event.target.value);
+    } else if (event.target.id === 'category') {
+      setCategory(event.target.value);
     } else if (event.target.id === 'price') {
       setPrice(event.target.value);
     } else if (event.target.id === 'ea') {
@@ -24,10 +27,18 @@ const ItemForm = ({ uid }) => {
   };
 
   useEffect(() => {
-    console.log(response);
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setCurrentUser(user);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
     if (response.success) {
       setTitle('');
-      setKategorie('');
+      setCategory('');
       setPrice('');
       setEa('');
       setDescription('');
@@ -36,8 +47,20 @@ const ItemForm = ({ uid }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(title, price, ea, description, kategorie);
-    addDocument({ uid, price, ea, title, description, kategorie });
+
+    const dataToSubmit = {
+      uid,
+      price,
+      ea,
+      title,
+      description,
+      category,
+      displayName: currentUser?.displayName,
+    };
+
+    console.log('전송할 데이터:', dataToSubmit);
+
+    addDocument(dataToSubmit);
   };
 
   return (
@@ -54,17 +77,13 @@ const ItemForm = ({ uid }) => {
             required
             onChange={handleData}
           />
-          <label htmlFor='kategorie'>카테고리 : </label>
-          <select
-            id='kategorie'
-            value={kategorie}
-            onChange={handleData}
-            required
-          >
-            <option value='Option 1'>옵션 1</option>
-            <option value='Option 2'>옵션 2</option>
-            <option value='Option 3'>옵션 3</option>
-            <option value='Option 4'>옵션 4</option>
+          <label htmlFor='category'>카테고리 : </label>
+          <select id='category' value={category} onChange={handleData} required>
+            <option>선택해주세요</option>
+            <option value='가전'>가전</option>
+            <option value='여행'>여행</option>
+            <option value='의류'>의류</option>
+            <option value='취미'>취미</option>
           </select>
           <label htmlFor='price'>가격 : </label>
           <input
