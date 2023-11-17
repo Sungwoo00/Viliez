@@ -28,7 +28,6 @@ const ItemList = ({ items }) => {
         items.find((item) => item.id === itemId).description
       );
     } else {
-      // 편집 모드에서 빠져나갈 때 입력 필드 지우기
       setUpdatedTitle('');
       setUpdatedCategory('');
       setUpdatedPrice('');
@@ -42,18 +41,18 @@ const ItemList = ({ items }) => {
       {items.map((item) => {
         return (
           <li key={item.id}>
-            {item.displayName && <p>{item.displayName}님의 물건입니다</p>}
+            {/* {item.displayName && <p>{item.displayName}님의 물건입니다</p>} */}
             {editing[item.id] ? (
               <>
                 <input
                   type='text'
                   placeholder='새로운 제목'
                   value={updatedTitle}
-                  onChange={(e) => setUpdatedTitle(e.target.value)}
+                  onChange={(event) => setUpdatedTitle(event.target.value)}
                 />
                 <select
                   value={updatedCategory}
-                  onChange={(e) => setUpdatedCategory(e.target.value)}
+                  onChange={(event) => setUpdatedCategory(event.target.value)}
                 >
                   <option value='가전'>가전</option>
                   <option value='여행'>여행</option>
@@ -64,7 +63,7 @@ const ItemList = ({ items }) => {
                   type='number'
                   placeholder='새로운 가격'
                   value={updatedPrice}
-                  onChange={(e) => setUpdatedPrice(e.target.value)}
+                  onChange={(event) => setUpdatedPrice(event.target.value)}
                   min='5000'
                   step='1000'
                 />
@@ -72,22 +71,27 @@ const ItemList = ({ items }) => {
                   type='number'
                   placeholder='새로운 수량'
                   value={updatedEa}
-                  onChange={(e) => setUpdatedEa(e.target.value)}
+                  onChange={(event) => setUpdatedEa(event.target.value)}
                   min='1'
                   step='1'
                 />
                 <textarea
                   placeholder='새로운 설명'
                   value={updatedDescription}
-                  onChange={(e) => setUpdatedDescription(e.target.value)}
+                  onChange={(event) =>
+                    setUpdatedDescription(event.target.value)
+                  }
                 />
               </>
             ) : (
               <>
                 <strong className={styles.title}>{item.title}</strong>
-                <p className={styles.Category}>{item.Category}</p>
-                <p className={styles.price}>{item.price}</p>
-                <p className={styles.ea}>{item.ea}</p>
+                {/* <p className={styles.Category}>{item.Category}</p> */}
+                <p className={styles.price}>
+                  {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  원
+                </p>
+                <p className={styles.ea}>{item.ea}개</p>
                 <p className={styles.description}>{item.description}</p>
               </>
             )}
@@ -97,7 +101,6 @@ const ItemList = ({ items }) => {
                 type='button'
                 onClick={() => {
                   if (editing[item.id]) {
-                    // 새로운 값으로 문서를 업데이트
                     const updatedData = {
                       title: updatedTitle || item.title,
                       Category: updatedCategory || item.Category,
@@ -107,7 +110,6 @@ const ItemList = ({ items }) => {
                     };
                     updateDocument(item.id, updatedData);
 
-                    // 업데이트 후 입력 필드 지우기
                     setUpdatedTitle('');
                     setUpdatedCategory('');
                     setUpdatedPrice('');

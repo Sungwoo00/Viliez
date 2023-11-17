@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import useAuthContext from '../../hooks/useAuthContext';
 import {
   collection,
@@ -13,6 +13,7 @@ const Chat = () => {
   const { user } = useAuthContext();
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
+  const messagesContainerRef = useRef(null);
 
   const chatRoomId = 'chat'; // chatRooms/
 
@@ -59,9 +60,15 @@ const Chat = () => {
     }
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      sendMessage();
+    }
+  };
+
   return (
     <div className={styles.container}>
-      <div className={styles.messageList}>
+      <div className={styles.messageList} ref={messagesContainerRef}>
         {messages.map((message) => (
           <div
             key={message.id}
@@ -75,12 +82,14 @@ const Chat = () => {
           </div>
         ))}
       </div>
+
       <div className={styles.inputContainer}>
         <input
           type='text'
           value={newMessage}
           onChange={(event) => setNewMessage(event.target.value)}
           placeholder='메세지를 입력하세요.'
+          onKeyPress={handleKeyPress}
           className={styles.inputMessage}
         />
         <button onClick={sendMessage} className={styles.sendMessageButton}>

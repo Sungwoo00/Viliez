@@ -39,8 +39,16 @@ const HomeItemList = ({ items }) => {
         <div className={styles.modalOverlay} onClick={closeModal}>
           <div className={styles.modal}>
             <div>
-              <p className={styles.category}>{selectedItem.category}</p>
-              <p className={styles.price}>{selectedItem.price}</p>
+              <p>
+                {selectedItem.displayName}님의 {selectedItem.title}
+              </p>
+              {/* <p className={styles.category}>{selectedItem.category}</p> */}
+              <p className={styles.price}>
+                {selectedItem.price
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                원
+              </p>
               <p className={styles.ea}>{selectedItem.ea} 개</p>
               <p className={styles.description}>{selectedItem.description}</p>
             </div>
