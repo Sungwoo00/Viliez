@@ -71,6 +71,7 @@
 
 .closeBtn {
   background-color: royalblue;
+  display: block;
   color: white;
   border: none;
   padding: 8px 12px;

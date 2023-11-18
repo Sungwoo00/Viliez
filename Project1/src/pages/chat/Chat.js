@@ -18,6 +18,13 @@ const Chat = () => {
   const chatRoomId = 'chat'; // chatRooms/
 
   useEffect(() => {
+    if (messagesContainerRef.current) {
+      const { scrollHeight, clientHeight } = messagesContainerRef.current;
+      messagesContainerRef.current.scrollTo(-50, scrollHeight - clientHeight);
+    }
+  }, [messages]);
+
+  useEffect(() => {
     const messagesRef = collection(
       appFireStore,
       'chatRooms',
@@ -68,6 +75,7 @@ const Chat = () => {
 
   return (
     <div className={styles.container}>
+      <p>채팅서비스입니다.</p>
       <div className={styles.messageList} ref={messagesContainerRef}>
         {messages.map((message) => (
           <div

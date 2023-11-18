@@ -1,18 +1,16 @@
-button {
-  background-color: aqua;
-}
-/* Chat.module.css */
-
 .container {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
+  text-align: center;
 }
 
 .messageList {
+  border: 1px solid black;
+  height: 550px;
   list-style: none;
-  padding: 0;
-  margin: 0;
+  padding: 10px;
+  overflow: auto;
 }
 
 .message {
@@ -33,7 +31,7 @@ button {
 }
 
 .sendMessageButton {
-  background-color: #4caf50;
+  background-color: royalblue;
   color: white;
   border: none;
   padding: 10px;
