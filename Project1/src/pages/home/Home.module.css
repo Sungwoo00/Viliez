@@ -83,3 +83,13 @@
 .closeBtn:hover {
   background-color: darkblue;
 }
+
+.loadingContainer {
+  font-size: 20px;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  margin-top: 20px;
+}

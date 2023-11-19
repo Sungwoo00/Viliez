@@ -11,16 +11,18 @@ import { appFireStore } from '../firebase/confing';
 const useCollection = (transaction, myQuery) => {
   const [documents, setDocuments] = useState(null);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false); 
 
   useEffect(() => {
+    setIsLoading(true);
     let q;
     if (myQuery) {
       q = query(
         collection(appFireStore, transaction),
         where(...myQuery),
-        orderBy('createdTime', 'desc') // desc내림차순 asc오름차순
+        orderBy('createdTime', 'desc')
       );
-    } // TODO : 최신순으로 보기 버튼 ?
+    }
 
     const unsubscribe = onSnapshot(
       myQuery ? q : collection(appFireStore, transaction),
@@ -31,16 +33,21 @@ const useCollection = (transaction, myQuery) => {
         });
         setDocuments(result);
         setError(null);
+        setIsLoading(false);
       },
       (error) => {
         setError(error.message);
+        setIsLoading(false); 
       }
     );
 
-    return unsubscribe;
-  }, [collection]);
+    return () => {
+      unsubscribe();
+      setIsLoading(false);
+    }; 
+  }, [transaction, myQuery]);
 
-  return { documents, error };
+  return { documents, error, isLoading };
 };
 
 export default useCollection;
