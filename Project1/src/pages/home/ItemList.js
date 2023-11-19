@@ -44,12 +44,15 @@ const ItemList = ({ items }) => {
             {/* {item.displayName && <p>{item.displayName}님의 물건입니다</p>} */}
             {editing[item.id] ? (
               <>
+                <label htmlFor='editTitle'>제목 : </label>
                 <input
+                  id='editTitle'
                   type='text'
                   placeholder='새로운 제목'
                   value={updatedTitle}
                   onChange={(event) => setUpdatedTitle(event.target.value)}
                 />
+                <label>카테고리 : </label>
                 <select
                   value={updatedCategory}
                   onChange={(event) => setUpdatedCategory(event.target.value)}
@@ -59,7 +62,9 @@ const ItemList = ({ items }) => {
                   <option value='의류'>의류</option>
                   <option value='취미'>취미</option>
                 </select>
+                <label htmlFor='editPrice'>가격 : </label>
                 <input
+                  id='editPrice'
                   type='number'
                   placeholder='새로운 가격'
                   value={updatedPrice}
@@ -67,7 +72,9 @@ const ItemList = ({ items }) => {
                   min='5000'
                   step='1000'
                 />
+                <label htmlFor='editEa'>수량 : </label>
                 <input
+                  id='editEa'
                   type='number'
                   placeholder='새로운 수량'
                   value={updatedEa}
@@ -75,7 +82,9 @@ const ItemList = ({ items }) => {
                   min='1'
                   step='1'
                 />
+                <label htmlFor='editDescription'>설명 : </label>
                 <textarea
+                  id='editDescription'
                   placeholder='새로운 설명'
                   value={updatedDescription}
                   onChange={(event) =>

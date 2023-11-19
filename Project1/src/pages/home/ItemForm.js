@@ -107,7 +107,7 @@ const ItemForm = ({ uid }) => {
             min='1'
             step='1'
           />
-          <label htmlFor='tit'>설명 : </label>
+          <label htmlFor='txt'>설명 : </label>
           <textarea
             placeholder='대여하는 사람을 위해 자세히 적어주세요.'
             id='txt'

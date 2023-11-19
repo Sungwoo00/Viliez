@@ -20,7 +20,7 @@ const Chat = () => {
   useEffect(() => {
     if (messagesContainerRef.current) {
       const { scrollHeight, clientHeight } = messagesContainerRef.current;
-      messagesContainerRef.current.scrollTo(-50, scrollHeight - clientHeight);
+      messagesContainerRef.current.scrollTo(0, scrollHeight - clientHeight);
     }
   }, [messages]);
 
