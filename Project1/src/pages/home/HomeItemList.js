@@ -3,7 +3,7 @@ import useAuthContext from '../../hooks/useAuthContext';
 import styles from './Home.module.css';
 import { useNavigate } from 'react-router-dom';
 
-const HomeItemList = ({ items }) => {
+const HomeItemList = ({ items, updateItem }) => {
   const { user } = useAuthContext();
   const navigate = useNavigate();
   const [selectedItem, setSelectedItem] = useState(null);
@@ -17,15 +17,26 @@ const HomeItemList = ({ items }) => {
   };
 
   const rentHandler = () => {
-    alert('빌리기 기능 구현');
+    const quantityInput = document.getElementById('quantityInput');
+    const quantity = parseInt(quantityInput.value, 10);
+    const rentEa = selectedItem.ea - quantity;
+    setSelectedItem({ ...selectedItem, ea: rentEa }); 
+
+    if (isNaN(quantity) || quantity < 1 || quantity > selectedItem.ea) {
+      alert('Please enter a valid quantity.');
+      return;
+    }
+    
+    if (updateItem) {
+      updateItem({ ...selectedItem, ea: rentEa }); 
+    }
+
+    // Now you can perform the rental logic with the selected quantity
+    alert(`Renting ${rentEa} ${selectedItem.title}(s).`);
   };
 
   const chatHandler = () => {
     navigate('/chat');
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
   };
 
   return (
@@ -58,22 +69,28 @@ const HomeItemList = ({ items }) => {
             </div>
             {user && (
               <>
-                <form onSubmit={handleSubmit}>
-                  <button
-                    type='button'
-                    className={styles.closeBtn}
-                    onClick={chatHandler}
-                  >
-                    채팅하기
-                  </button>
-                  <button
-                    type='button'
-                    className={styles.closeBtn}
-                    onClick={rentHandler}
-                  >
-                    빌리기
-                  </button>
-                </form>
+                <button
+                  type='button'
+                  className={styles.closeBtn}
+                  onClick={chatHandler}
+                >
+                  채팅하기
+                </button>
+                <input
+                  placeholder='개수를 선택해주세요'
+                  id='quantityInput'
+                  type='number'
+                  min='1'
+                  max={selectedItem.ea}
+                  onClick={(e) => e.stopPropagation()}
+                />
+                <button
+                  type='button'
+                  className={styles.closeBtn}
+                  onClick={rentHandler}
+                >
+                  빌리기
+                </button>
               </>
             )}
             <button
