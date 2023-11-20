@@ -9,14 +9,20 @@ const useSignup = () => {
   const [isPending, setIsPending] = useState(false);
   const { dispatch } = useAuthContext();
 
-  const signup = (email, password, displayName) => {
+  const signup = (email, password, displayName, errorCode) => {
     setError(null);
     setIsPending(true);
+
+    if (errorCode === 'password-mismatch') {
+      setError(errorCode);
+      setIsPending(false);
+      return;
+    }
 
     createUserWithEmailAndPassword(appAuth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
+        // console.log(user);
 
         if (!user) {
           throw new Error('회원가입에 실패했습니다.');
@@ -34,7 +40,7 @@ const useSignup = () => {
           });
       })
       .catch((err) => {
-        setError(err.message);
+        setError(err.code);
         setIsPending(false);
       });
   };

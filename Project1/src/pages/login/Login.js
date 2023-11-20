@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import BarLoader from 'react-spinners/BarLoader';
 import styles from './Login.module.css';
 import useLogin from '../../hooks/useLogin';
 
@@ -45,14 +46,28 @@ const Login = () => {
           />
           <label htmlFor='myPassword'>password</label>
         </div>
-        {!isPending && (
-          <button type='submit' className={styles.btn}>
-            {' '}
-            로그인
-          </button>
-        )}
-        {isPending && <strong>로그인 진행중 ... </strong>}
-        {error && <strong>{error}</strong>}
+        <div className={styles.strong_container}>
+          {!isPending && (
+            <button type='submit' className={styles.btn}>
+              {' '}
+              로그인
+            </button>
+          )}
+          {isPending && (
+            <BarLoader
+              color='#136CE1'
+              cssOverride={{}}
+              height={5}
+              speedMultiplier={1}
+              width={360}
+            />
+          )}
+          {error && (
+            <strong className={styles.error}>
+              이메일과 비밀번호를 확인해주세요.
+            </strong>
+          )}
+        </div>
       </fieldset>
     </form>
   );

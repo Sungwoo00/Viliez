@@ -7,7 +7,6 @@ import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
 import Nav from './components/Nav';
 import useAuthContext from './hooks/useAuthContext';
-import SyncLoader from 'react-spinners/SyncLoader';
 
 function App() {
   const { isAuthReady, user } = useAuthContext();

@@ -10,15 +10,12 @@ const HomeItemList = ({ items }) => {
   const { user } = useAuthContext();
   const navigate = useNavigate();
   const [selectedItem, setSelectedItem] = useState(null);
-
   const openModal = (index) => {
     setSelectedItem(items[index]);
   };
-
   const closeModal = () => {
     setSelectedItem(null);
   };
-
   const rentHandler = () => {
     const quantityInput = document.getElementById('quantityInput');
     const quantity = parseInt(quantityInput.value, 10);
@@ -38,14 +35,14 @@ const HomeItemList = ({ items }) => {
   const chatHandler = () => {
     navigate('/chat');
   };
-
   return (
     <>
       {items.map((item, index) => (
         <li key={item.id} className={styles.item}>
           <strong className={styles.title}>{item.title}</strong>
           {item.ea === 0 ? (
-            <h4>이 물건은{user.displayName}님이 예약 중 입니다.</h4>) : (
+            <h4>이 물건은{user.displayName}님이 예약 중 입니다.</h4>
+          ) : (
             <button className={styles.btn} onClick={() => openModal(index)}>
               상세 정보
             </button>
@@ -109,5 +106,4 @@ const HomeItemList = ({ items }) => {
     </>
   );
 };
-
 export default HomeItemList;
