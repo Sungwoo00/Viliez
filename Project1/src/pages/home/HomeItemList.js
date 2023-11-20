@@ -17,20 +17,15 @@ const HomeItemList = ({ items }) => {
   };
 
   const rentHandler = () => {
-    const quantityInput = document.getElementById('quantityInput');
-    const quantity = parseInt(quantityInput.value, 10);
-
-    if (isNaN(quantity) || quantity < 1 || quantity > selectedItem.ea) {
-      alert('Please enter a valid quantity.');
-      return;
-    }
-
-    // Now you can perform the rental logic with the selected quantity
-    alert(`Renting ${quantity} ${selectedItem.title}(s).`);
+    alert('빌리기 기능 구현');
   };
 
   const chatHandler = () => {
     navigate('/chat');
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
   };
 
   return (
@@ -63,26 +58,22 @@ const HomeItemList = ({ items }) => {
             </div>
             {user && (
               <>
-                <button
-                  type='button'
-                  className={styles.closeBtn}
-                  onClick={chatHandler}
-                >
-                  채팅하기
-                </button>
-                <input
-                  id='quantityInput'
-                  type='number'
-                  min='1'
-                  max={selectedItem.ea}
-                />
-                <button
-                  type='button'
-                  className={styles.closeBtn}
-                  onClick={rentHandler}
-                >
-                  빌리기
-                </button>
+                <form onSubmit={handleSubmit}>
+                  <button
+                    type='button'
+                    className={styles.closeBtn}
+                    onClick={chatHandler}
+                  >
+                    채팅하기
+                  </button>
+                  <button
+                    type='button'
+                    className={styles.closeBtn}
+                    onClick={rentHandler}
+                  >
+                    빌리기
+                  </button>
+                </form>
               </>
             )}
             <button

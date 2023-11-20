@@ -58,7 +58,7 @@ const ItemForm = ({ uid }) => {
       displayName: currentUser?.displayName,
     };
 
-    console.log('전송할 데이터:', dataToSubmit);
+    // console.log('전송할 데이터:', dataToSubmit);
 
     addDocument(dataToSubmit);
   };
