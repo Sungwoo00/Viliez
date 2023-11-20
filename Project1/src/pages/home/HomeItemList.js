@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import useAuthContext from '../../hooks/useAuthContext';
+import useFirestore from '../../hooks/useFirestore';
 import styles from './Home.module.css';
 import { useNavigate } from 'react-router-dom';
 
-const HomeItemList = ({ items, updateItem }) => {
+const HomeItemList = ({ items }) => {
+  const { updateDocument } = useFirestore('Sharemarket');
+
   const { user } = useAuthContext();
   const navigate = useNavigate();
   const [selectedItem, setSelectedItem] = useState(null);
@@ -20,18 +23,15 @@ const HomeItemList = ({ items, updateItem }) => {
     const quantityInput = document.getElementById('quantityInput');
     const quantity = parseInt(quantityInput.value, 10);
     const rentEa = selectedItem.ea - quantity;
-    setSelectedItem({ ...selectedItem, ea: rentEa }); 
 
     if (isNaN(quantity) || quantity < 1 || quantity > selectedItem.ea) {
       alert('Please enter a valid quantity.');
       return;
     }
-    
-    if (updateItem) {
-      updateItem({ ...selectedItem, ea: rentEa }); 
-    }
 
-    // Now you can perform the rental logic with the selected quantity
+    setSelectedItem({ ...selectedItem, ea: rentEa });
+    updateDocument(selectedItem.id, { ea: rentEa });
+
     alert(`Renting ${rentEa} ${selectedItem.title}(s).`);
   };
 
@@ -44,9 +44,12 @@ const HomeItemList = ({ items, updateItem }) => {
       {items.map((item, index) => (
         <li key={item.id} className={styles.item}>
           <strong className={styles.title}>{item.title}</strong>
-          <button className={styles.btn} onClick={() => openModal(index)}>
-            상세정보
-          </button>
+          {item.ea === 0 ? (
+            <h4>이 물건은{user.displayName}님이 예약 중 입니다.</h4>) : (
+            <button className={styles.btn} onClick={() => openModal(index)}>
+              상세 정보
+            </button>
+          )}
         </li>
       ))}
 
