@@ -11,6 +11,7 @@ const ItemList = ({ items }) => {
   const [updatedCategory, setUpdatedCategory] = useState('');
   const [updatedPrice, setUpdatedPrice] = useState('');
   const [updatedEa, setUpdatedEa] = useState('');
+  const [updaterentuser, setUpdateRentUser] = useState('')
   const [updatedDescription, setUpdatedDescription] = useState('');
 
   const toggleEditing = (itemId) => {
@@ -27,12 +28,14 @@ const ItemList = ({ items }) => {
       setUpdatedDescription(
         items.find((item) => item.id === itemId).description
       );
+      setUpdateRentUser(items.find((item) => item.id === itemId).rentuser)
     } else {
       setUpdatedTitle('');
       setUpdatedCategory('');
       setUpdatedPrice('');
       setUpdatedEa('');
       setUpdatedDescription('');
+      setUpdateRentUser('');
     }
   };
 
@@ -94,6 +97,10 @@ const ItemList = ({ items }) => {
               </>
             ) : (
               <>
+                {item.rentuser ?
+                  <p>이 물품은 {item.rentuser}님이 예약 중입니다.</p> :
+                  <p>이 물품을 예약한 사람이 없습니다.</p>
+                }
                 <strong className={styles.title}>{item.title}</strong>
                 {/* <p className={styles.Category}>{item.Category}</p> */}
                 <p className={styles.price}>

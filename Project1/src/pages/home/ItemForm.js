@@ -10,6 +10,7 @@ const ItemForm = ({ uid }) => {
   const [price, setPrice] = useState('');
   const [ea, setEa] = useState('');
   const [description, setDescription] = useState('');
+  const [rentuser, setRentUser] = useState('');
   const { addDocument, response } = useFirestore('Sharemarket');
 
   const handleData = (event) => {
@@ -23,6 +24,8 @@ const ItemForm = ({ uid }) => {
       setEa(event.target.value);
     } else if (event.target.id === 'txt') {
       setDescription(event.target.value);
+    } else if (event.target.id === 'rentuser') {
+      setRentUser(event.target.value);
     }
   };
 
@@ -42,6 +45,7 @@ const ItemForm = ({ uid }) => {
       setPrice('');
       setEa('');
       setDescription('');
+      setRentUser('')
     }
   }, [response]);
 
@@ -55,6 +59,7 @@ const ItemForm = ({ uid }) => {
       title,
       description,
       category,
+      rentuser,
       displayName: currentUser?.displayName,
     };
 
