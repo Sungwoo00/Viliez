@@ -5,7 +5,7 @@ import useAuthContext from '../hooks/useAuthContext.js';
 import styles from './Nav.module.css';
 
 const Nav = () => {
-  const { logout } = useLogout();
+  const { logout, userDelete } = useLogout();
   const { user } = useAuthContext();
 
   return (
@@ -30,16 +30,20 @@ const Nav = () => {
           )}
           {user && (
             <>
-              {/* <strong>{user.displayName}님 환영합니다 !</strong> */}
               <li>
                 <Link to='/chat'>채팅</Link>
               </li>
               <li>
-                <Link to='/mypage'>마이페이지</Link>
+                <Link to='/myitem'>나의 상품</Link>
               </li>
               <li>
                 <button type='button' onClick={logout}>
                   로그아웃
+                </button>
+              </li>
+              <li>
+                <button type='button' onClick={userDelete}>
+                  회원탈퇴
                 </button>
               </li>
             </>

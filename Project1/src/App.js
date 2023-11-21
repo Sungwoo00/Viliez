@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
 import Home from './pages/home/Home';
-import MyPage from './pages/home/MyPage';
+import MyItem from './pages/home/MyItem';
 import Chat from './pages/chat/Chat';
 import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
@@ -19,9 +19,9 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route
-              path='/mypage'
+              path='/myitem'
               element={
-                user ? <MyPage /> : <Navigate replace={true} to='/login' />
+                user ? <MyItem /> : <Navigate replace={true} to='/login' />
               }
             />
             <Route

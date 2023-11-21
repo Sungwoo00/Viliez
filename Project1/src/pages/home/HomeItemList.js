@@ -29,7 +29,11 @@ const HomeItemList = ({ items }) => {
       return;
     }
 
-    setSelectedItem({ ...selectedItem, ea: rentEa, rentuser: user.displayName });
+    setSelectedItem({
+      ...selectedItem,
+      ea: rentEa,
+      rentuser: user.displayName,
+    });
     updateDocument(selectedItem.id, { ea: rentEa, rentuser: user.displayName });
 
     alert(`Renting ${rentEa} ${selectedItem.title}(s).`);
@@ -45,7 +49,8 @@ const HomeItemList = ({ items }) => {
         <li key={item.id} className={styles.item}>
           <strong className={styles.title}>{item.title}</strong>
           {item.ea === 0 ? (
-            <h4>이 물건은{item.rentuser} 님이 예약 중 입니다.</h4>) : (
+            <h4>이 물건은{item.rentuser} 님이 예약 중 입니다.</h4>
+          ) : (
             <button className={styles.btn} onClick={() => openModal(index)}>
               상세 정보
             </button>
