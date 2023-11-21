@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import useFirestore from '../../hooks/useFirestore';
+import ReactDatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { ko } from 'date-fns/esm/locale';
 
 const ItemForm = ({ uid }) => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -11,6 +14,8 @@ const ItemForm = ({ uid }) => {
   const [ea, setEa] = useState('');
   const [description, setDescription] = useState('');
   const [rentuser, setRentUser] = useState('');
+
+  const [rentalPeriod, setRentalPeriod] = useState({ startDate: new Date(), endDate: null });
   const { addDocument, response } = useFirestore('Sharemarket');
 
   const handleData = (event) => {
@@ -27,6 +32,11 @@ const ItemForm = ({ uid }) => {
     } else if (event.target.id === 'rentuser') {
       setRentUser(event.target.value);
     }
+  };
+  
+  const handleDateChange = (dates) => {
+    const [start, end] = dates;
+    setRentalPeriod({ startDate: start, endDate: end });
   };
 
   useEffect(() => {
@@ -45,7 +55,8 @@ const ItemForm = ({ uid }) => {
       setPrice('');
       setEa('');
       setDescription('');
-      setRentUser('')
+      setRentUser('');
+      setRentalPeriod({ startDate: new Date(), endDate: null });
     }
   }, [response]);
 
@@ -60,6 +71,7 @@ const ItemForm = ({ uid }) => {
       description,
       category,
       rentuser,
+      rentalPeriod,
       displayName: currentUser?.displayName,
     };
 
@@ -73,6 +85,20 @@ const ItemForm = ({ uid }) => {
       <form onSubmit={handleSubmit}>
         <fieldset>
           <legend>상품 등록</legend>
+          <label htmlFor='rentalperiod'>대여 기간 : </label>
+          <ReactDatePicker
+            id='rentalperiod'
+            locale="ko"
+            // selected={rentalPeriod.startDate}
+            startDate={rentalPeriod.startDate}
+            endDate={rentalPeriod.endDate}
+            selectsRange
+            shouldCloseOnSelect={false}
+            monthsShown={2}
+            minDate={new Date()}
+            dateFormat="yyyy.MM.dd(eee)"
+            onChange={handleDateChange}
+          />
           <label htmlFor='tit'>제목 : </label>
           <input
             placeholder='제목'
