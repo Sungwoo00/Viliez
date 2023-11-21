@@ -25,7 +25,7 @@ function App() {
               }
             />
             <Route
-              path='/chat'
+              path='/chat/:chatRoomId'
               element={
                 user ? <Chat /> : <Navigate replace={true} to='/login' />
               }

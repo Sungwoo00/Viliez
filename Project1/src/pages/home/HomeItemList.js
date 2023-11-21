@@ -6,13 +6,16 @@ import { useNavigate } from 'react-router-dom';
 
 const HomeItemList = ({ items }) => {
   const { updateDocument } = useFirestore('Sharemarket');
-
   const { user } = useAuthContext();
   const navigate = useNavigate();
   const [selectedItem, setSelectedItem] = useState(null);
 
   const openModal = (index) => {
     setSelectedItem(items[index]);
+  };
+
+  const openChat = (item) => {
+    setSelectedItem(item);
   };
 
   const closeModal = () => {
@@ -29,14 +32,19 @@ const HomeItemList = ({ items }) => {
       return;
     }
 
-    setSelectedItem({ ...selectedItem, ea: rentEa, rentuser: user.displayName });
+    setSelectedItem({
+      ...selectedItem,
+      ea: rentEa,
+      rentuser: user.displayName,
+    });
     updateDocument(selectedItem.id, { ea: rentEa, rentuser: user.displayName });
 
     alert(`Renting ${rentEa} ${selectedItem.title}(s).`);
   };
 
-  const chatHandler = () => {
-    navigate('/chat');
+  const chatHandler = (item) => {
+    openChat(item);
+    navigate(`/chat/${item.id}`);
   };
 
   return (
@@ -45,11 +53,19 @@ const HomeItemList = ({ items }) => {
         <li key={item.id} className={styles.item}>
           <strong className={styles.title}>{item.title}</strong>
           {item.ea === 0 ? (
-            <h4>이 물건은[ {item.rentuser} ]님이 예약 중 입니다.</h4>) : (
+            <h4>이 물건은[ {item.rentuser} ]님이 예약 중 입니다.</h4>
+          ) : (
             <button className={styles.btn} onClick={() => openModal(index)}>
-              상세 정보 
+              상세 정보
             </button>
           )}
+          <button
+            type='button'
+            className={styles.btn}
+            onClick={() => chatHandler(item)}
+          >
+            채팅하기
+          </button>
         </li>
       ))}
 

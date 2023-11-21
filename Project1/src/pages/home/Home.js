@@ -13,7 +13,7 @@ const Home = () => {
         <div className={styles.loadingContainer}>
           <h2>물건을 가져오는 중..</h2>
           <SyncLoader
-            color='#136CE1  '
+            color='#136CE1'
             margin='2'
             loading={isLoading}
             size={17}

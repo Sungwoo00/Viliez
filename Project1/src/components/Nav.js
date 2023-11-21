@@ -42,7 +42,11 @@ const Nav = () => {
                 </button>
               </li>
               <li>
-                <button type='button' onClick={userDelete}>
+                <button
+                  type='button'
+                  className={styles.user_delete_btn}
+                  onClick={userDelete}
+                >
                   회원탈퇴
                 </button>
               </li>
