@@ -1,5 +1,5 @@
 .signup_form {
-  max-width: 360px;
+  max-width: 380px;
   margin: 40px auto;
 }
 
@@ -7,6 +7,27 @@
   font-size: 1.5em;
   padding: 10px;
   color: royalblue;
+}
+
+.strong_container {
+  width: 100%;
+  text-align: center;
+}
+
+.loading,
+.error {
+  display: block;
+  padding: 0 40px;
+}
+
+.loading {
+  color: black;
+  font-weight: bold;
+}
+.error {
+  color: red;
+  display: block;
+  font-size: 15px;
 }
 
 .input_box {
@@ -87,7 +108,7 @@
 }
 .input_box input:focus,
 .input_box input:valid {
-  border: 1.8px solid royalblue;
+  border: 1.8px solid blue;
 }
 
 .btn {
