@@ -99,8 +99,8 @@ const ItemForm = ({ uid }) => {
           <label htmlFor='rentalperiod'>대여 기간 : </label>
           <ReactDatePicker
             id='rentalperiod'
-            locale="ko"
-            // selected={rentalPeriod.startDate}
+            locale={ko}
+            //placeholderText="대여 가능 날짜 선택"
             startDate={rentalPeriod.startDate}
             endDate={rentalPeriod.endDate}
             selectsRange
