@@ -6,7 +6,7 @@ import {
   serverTimestamp,
   onSnapshot,
 } from 'firebase/firestore';
-import { useParams } from 'react-router-dom'; // Import useParams
+import { useParams } from 'react-router-dom';
 import { appFireStore } from '../../firebase/confing';
 import styles from './Chat.module.css';
 
@@ -16,7 +16,6 @@ const Chat = () => {
   const [newMessage, setNewMessage] = useState('');
   const messagesContainerRef = useRef(null);
 
-  // Use useParams to get the chatRoomId from the URL
   const { chatRoomId } = useParams();
 
   useEffect(() => {
@@ -76,7 +75,6 @@ const Chat = () => {
 
   return (
     <div className={styles.container}>
-      <p>1:1 채팅방입니다.</p>
       <div className={styles.messageList} ref={messagesContainerRef}>
         {messages.map((message) => (
           <div

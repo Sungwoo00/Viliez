@@ -1,45 +1,41 @@
 .select {
   display: flex;
-  align-items: center;
   transition: backgrond 0.3s;
+}
+.selected {
+  font-size: 22px;
 }
 
 .caret {
-  width: 0;
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-top: 6px solid black;
-  transition: 0.3;
 }
-.caret-rotate {
-  transform: rotate(180deg);
-}
+
 .caretAnimation {
   animation: rotateCaret 0.3s linear;
 }
 
 @keyframes rotateCaret {
   from {
-    transform: rotate(0deg);
+    transform: scale(1);
   }
   to {
-    transform: rotate(180deg);
+    transform: scale(1.7);
   }
 }
 .caret:hover {
-  color: red;
   cursor: pointer;
 }
 .menu {
+  text-align: center;
+  width: 25%;
   padding: 0.2em 0.5em;
   border: 1px #363a43 solid;
-  opacity: 0;
+  border-radius: 5px;
+
   display: none;
-  transition: 0.2s;
-  z-index: 1;
-  overflow: hidden;
-  transition: opacity 0.3s, max-height 0.3s;
 }
 .menuOpen {
   display: block;
@@ -52,12 +48,12 @@
 
 @keyframes fadeIn {
   from {
-    opacity: 0;
+    opacity: 0.5;
     max-height: 0;
   }
   to {
     opacity: 1;
-    max-height: 200px; /* Adjust this value based on your content height */
+    max-height: 200px;
   }
 }
 .menu li {

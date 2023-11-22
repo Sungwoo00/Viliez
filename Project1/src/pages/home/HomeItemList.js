@@ -52,6 +52,11 @@ const HomeItemList = ({ items }) => {
       {items.map((item, index) => (
         <li key={item.id} className={styles.item}>
           <strong className={styles.title}>{item.title}</strong>
+          <p>
+            {'가격 : ' +
+              item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') +
+              '원'}
+          </p>
           {item.ea === 0 ? (
             <h4>이 물건은[ {item.rentuser} ]님이 예약 중 입니다.</h4>
           ) : (

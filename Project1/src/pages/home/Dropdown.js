@@ -17,7 +17,6 @@ const Dropdown = () => {
 
   return (
     <>
-      {' '}
       <div className={styles.select} onClick={toggleDropdown}>
         <span className={styles.selected}>{selectedOption}</span>
         <div

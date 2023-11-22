@@ -61,14 +61,12 @@ const ChatRoom = () => {
 
   return (
     <div>
-      {/* 채팅 메시지 출력 부분 */}
       {messages.map((message) => (
         <div key={message.id}>
           <p>{message.text}</p>
         </div>
       ))}
 
-      {/* 메시지 입력 부분 */}
       <input
         type='text'
         value={newMessage}
