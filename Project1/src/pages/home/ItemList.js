@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import useFirestore from '../../hooks/useFirestore';
 // import styles from './MyPage.module.css';
 import styles from './ItemList.module.css';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const ItemList = ({ items }) => {
   const { deleteDocument, updateDocument } = useFirestore('Sharemarket');
@@ -12,6 +14,7 @@ const ItemList = ({ items }) => {
   const [updatedPrice, setUpdatedPrice] = useState('');
   const [updatedEa, setUpdatedEa] = useState('');
   const [updaterentuser, setUpdateRentUser] = useState('')
+  const [updaterentalperiod, setRentalPeriod] = useState('');
   const [updatedDescription, setUpdatedDescription] = useState('');
 
   const toggleEditing = (itemId) => {
@@ -25,10 +28,9 @@ const ItemList = ({ items }) => {
       setUpdatedCategory(items.find((item) => item.id === itemId).Category);
       setUpdatedPrice(items.find((item) => item.id === itemId).price);
       setUpdatedEa(items.find((item) => item.id === itemId).ea);
-      setUpdatedDescription(
-        items.find((item) => item.id === itemId).description
-      );
+      setUpdatedDescription(items.find((item) => item.id === itemId).description);
       setUpdateRentUser(items.find((item) => item.id === itemId).rentuser)
+      setRentalPeriod(items.find((item) => item.id === itemId).rentalperiod)
     } else {
       setUpdatedTitle('');
       setUpdatedCategory('');
@@ -36,6 +38,7 @@ const ItemList = ({ items }) => {
       setUpdatedEa('');
       setUpdatedDescription('');
       setUpdateRentUser('');
+      setRentalPeriod('');
     }
   };
 
@@ -101,6 +104,11 @@ const ItemList = ({ items }) => {
                   <p>이 물품은 {item.rentuser}님이 예약 중입니다.</p> :
                   <p>이 물품을 예약한 사람이 없습니다.</p>
                 }
+                {item.rentalPeriod && (
+                  <p>
+                    대여 가능 기간: {item.rentalPeriod.startDate.toDate().toLocaleDateString('ko-KR') || '시작 날짜 정보 없음'}부터 {item.rentalPeriod.endDate.toDate().toLocaleDateString('ko-KR') || '종료 날짜 정보 없음'}까지
+                  </p>
+                )}
                 <strong className={styles.title}>{item.title}</strong>
                 {/* <p className={styles.Category}>{item.Category}</p> */}
                 <p className={styles.price}>

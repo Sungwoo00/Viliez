@@ -14,7 +14,9 @@ const ItemForm = ({ uid }) => {
   const [ea, setEa] = useState('');
   const [description, setDescription] = useState('');
   const [rentuser, setRentUser] = useState('');
-
+  const [startDateString, setStartDateString] = useState('');
+  const [endDateString, setEndDateString] = useState('');
+  const [openDatePicker, setOpenDatePicker] = useState(false);
   const [rentalPeriod, setRentalPeriod] = useState({ startDate: new Date(), endDate: null });
   const { addDocument, response } = useFirestore('Sharemarket');
 
@@ -37,8 +39,17 @@ const ItemForm = ({ uid }) => {
   const handleDateChange = (dates) => {
     const [start, end] = dates;
     setRentalPeriod({ startDate: start, endDate: end });
-  };
 
+    if (start) {
+      setStartDateString(start.toISOString().split('T')[0]); 
+    }
+    if (end) {
+      setEndDateString(end.toISOString().split('T')[0]);
+    }
+    if (start && end) {
+      setOpenDatePicker(false);
+    }
+  };
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
@@ -96,8 +107,10 @@ const ItemForm = ({ uid }) => {
             shouldCloseOnSelect={false}
             monthsShown={2}
             minDate={new Date()}
-            dateFormat="yyyy.MM.dd(eee)"
+            dateFormat="yyyy년 MM월 dd일"
             onChange={handleDateChange}
+            open={openDatePicker}
+            onInputClick={() => setOpenDatePicker(true)}
           />
           <label htmlFor='tit'>제목 : </label>
           <input
