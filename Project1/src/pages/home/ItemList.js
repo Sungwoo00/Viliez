@@ -57,7 +57,9 @@ const ItemList = ({ items }) => {
           {editing[item.id] ? (
             <EditItemForm
               item={updatedItems[item.id]}
-              handleChange={(field, value) => handleChange(item.id, field, value)}
+              handleChange={(field, value) =>
+                handleChange(item.id, field, value)
+              }
               handleUpdate={() => handleUpdate(item.id)}
               cancelEditing={() => cancelEditing(item.id)}
             />
@@ -127,8 +129,12 @@ const EditItemForm = ({ item, handleChange, handleUpdate, cancelEditing }) => {
         onChange={(e) => handleChange('description', e.target.value)}
       />
 
-      <button className={styles.btn_edit} onClick={handleUpdate}>확인</button>
-      <button className={styles.btn_delete} onClick={cancelEditing}>취소</button>
+      <button className={styles.btn_edit} onClick={handleUpdate}>
+        확인
+      </button>
+      <button className={styles.btn_delete} onClick={cancelEditing}>
+        취소
+      </button>
     </>
   );
 };
@@ -142,19 +148,27 @@ const ViewItem = ({ item, startEditing, deleteItem }) => {
       )}
       {item.rentalPeriod && (
         <p>
-          대여 가능 기간 : 
-          {item.rentalPeriod.startDate.toDate().toLocaleDateString('ko-KR') || '시작 날짜 정보가 없습니다.'} ~ 
-          {item.rentalPeriod.endDate.toDate().toLocaleDateString('ko-KR') || '종료 날짜 정보가 없습니다.'}
+          대여 가능 기간 :
+          {item.rentalPeriod.startDate?.toDate()?.toLocaleDateString('ko-KR') ||
+            '시작 날짜 정보가 없습니다.'}{' '}
+          ~
+          {item.rentalPeriod.endDate?.toDate()?.toLocaleDateString('ko-KR') ||
+            '종료 날짜 정보가 없습니다.'}
         </p>
       )}
+
       <strong className={styles.title}>{item.title}</strong>
       <p className={styles.price}>
         {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
       </p>
       <p className={styles.ea}>{item.ea}개</p>
       <p className={styles.description}>{item.description}</p>
-      <button className={styles.btn_edit} onClick={startEditing}>수정</button>
-      <button className={styles.btn_delete} onClick={deleteItem}>삭제</button>
+      <button className={styles.btn_edit} onClick={startEditing}>
+        수정
+      </button>
+      <button className={styles.btn_delete} onClick={deleteItem}>
+        삭제
+      </button>
     </>
   );
 };

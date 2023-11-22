@@ -99,11 +99,10 @@ const ItemForm = ({ uid }) => {
       <form onSubmit={handleSubmit}>
         <fieldset>
           <legend>상품 등록</legend>
-          <label htmlFor='rentalperiod'>대여 기간 : </label>
           <ReactDatePicker
             id='rentalperiod'
-            locale={ko}
-            //placeholderText="대여 가능 날짜 선택"
+            locale='ko'
+            // selected={rentalPeriod.startDate}
             startDate={rentalPeriod.startDate}
             endDate={rentalPeriod.endDate}
             selectsRange
@@ -115,7 +114,6 @@ const ItemForm = ({ uid }) => {
             open={openDatePicker}
             onInputClick={() => setOpenDatePicker(true)}
           />
-          <label htmlFor='tit'>제목 : </label>
           <input
             placeholder='제목'
             id='tit'
@@ -124,15 +122,13 @@ const ItemForm = ({ uid }) => {
             required
             onChange={handleData}
           />
-          <label htmlFor='category'>카테고리 : </label>
           <select id='category' value={category} onChange={handleData} required>
-            <option>선택해주세요</option>
+            <option>카테고리</option>
             <option value='가전'>가전</option>
             <option value='여행'>여행</option>
             <option value='의류'>의류</option>
             <option value='취미'>취미</option>
           </select>
-          <label htmlFor='price'>가격 : </label>
           <input
             placeholder='가격'
             id='price'
@@ -143,7 +139,6 @@ const ItemForm = ({ uid }) => {
             min='5000'
             step='1000'
           />
-          <label htmlFor='ea'>수량 : </label>
           <input
             placeholder='수량'
             id='ea'
@@ -154,7 +149,6 @@ const ItemForm = ({ uid }) => {
             min='1'
             step='1'
           />
-          <label htmlFor='txt'>설명 : </label>
           <textarea
             placeholder='대여하는 사람을 위해 자세히 적어주세요.'
             id='txt'
