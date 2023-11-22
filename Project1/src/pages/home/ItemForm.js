@@ -17,7 +17,10 @@ const ItemForm = ({ uid }) => {
   const [startDateString, setStartDateString] = useState('');
   const [endDateString, setEndDateString] = useState('');
   const [openDatePicker, setOpenDatePicker] = useState(false);
-  const [rentalPeriod, setRentalPeriod] = useState({ startDate: new Date(), endDate: null });
+  const [rentalPeriod, setRentalPeriod] = useState({
+    startDate: new Date(),
+    endDate: null,
+  });
   const { addDocument, response } = useFirestore('Sharemarket');
 
   const handleData = (event) => {
@@ -35,13 +38,13 @@ const ItemForm = ({ uid }) => {
       setRentUser(event.target.value);
     }
   };
-  
+
   const handleDateChange = (dates) => {
     const [start, end] = dates;
     setRentalPeriod({ startDate: start, endDate: end });
 
     if (start) {
-      setStartDateString(start.toISOString().split('T')[0]); 
+      setStartDateString(start.toISOString().split('T')[0]);
     }
     if (end) {
       setEndDateString(end.toISOString().split('T')[0]);
@@ -99,15 +102,15 @@ const ItemForm = ({ uid }) => {
           <label htmlFor='rentalperiod'>대여 기간 : </label>
           <ReactDatePicker
             id='rentalperiod'
-            locale="ko"
-            // selected={rentalPeriod.startDate}
+            locale={ko}
+            //placeholderText="대여 가능 날짜 선택"
             startDate={rentalPeriod.startDate}
             endDate={rentalPeriod.endDate}
             selectsRange
             shouldCloseOnSelect={false}
             monthsShown={2}
             minDate={new Date()}
-            dateFormat="yyyy년 MM월 dd일"
+            dateFormat='yyyy년 MM월 dd일'
             onChange={handleDateChange}
             open={openDatePicker}
             onInputClick={() => setOpenDatePicker(true)}
