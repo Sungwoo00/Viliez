@@ -3,6 +3,8 @@ import useAuthContext from '../../hooks/useAuthContext';
 import useFirestore from '../../hooks/useFirestore';
 import styles from './Home.module.css';
 import { useNavigate } from 'react-router-dom';
+import ReactDatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const HomeItemList = ({ items }) => {
   const { updateDocument } = useFirestore('Sharemarket');
@@ -26,6 +28,7 @@ const HomeItemList = ({ items }) => {
     const quantityInput = document.getElementById('quantityInput');
     const quantity = parseInt(quantityInput.value, 10);
     const rentEa = selectedItem.ea - quantity;
+    const totalRentEa = (selectedItem.curRentInfo || []).reduce((sum, rentInfo) => sum + rentInfo.curRentEa, 0) + quantity;
 
     if (isNaN(quantity) || quantity < 1 || quantity > selectedItem.ea) {
       alert('Please enter a valid quantity.');
@@ -34,10 +37,18 @@ const HomeItemList = ({ items }) => {
 
     setSelectedItem({
       ...selectedItem,
+      ea: selectedItem.ea - quantity,
+      rentuser: user.displayName,
+      totalRentEa: totalRentEa,
+      curRentInfo: [...(selectedItem.curRentInfo || []), { rentuser: user.displayName, curRentEa: quantity }]
+    });
+
+    updateDocument(selectedItem.id, {
       ea: rentEa,
       rentuser: user.displayName,
+      totalRentEa: totalRentEa,
+      curRentInfo: [...(selectedItem.curRentInfo || []), { rentuser: user.displayName, curRentEa: quantity }]
     });
-    updateDocument(selectedItem.id, { ea: rentEa, rentuser: user.displayName });
 
     alert(`Renting ${rentEa} ${selectedItem.title}(s).`);
   };
@@ -52,18 +63,26 @@ const HomeItemList = ({ items }) => {
       {items.map((item, index) => (
         <li key={item.id} className={styles.item}>
           <strong className={styles.title}>{item.title}</strong>
-          <p>
-            {'가격 : ' +
-              item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') +
-              '원'}
-          </p>
-          {item.ea === 0 ? (
-            <h4>이 물건은[ {item.rentuser} ]님이 예약 중 입니다.</h4>
+          {item.ea !== 0 ? (
+            <p>대여 가능</p>
           ) : (
+            <p>모두 대여 중</p>
+          )}
+          <p>
+            {'가격: ' + item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') +'원'}
+          </p>
+          {item.curRentInfo && item.curRentInfo.length > 0 && item.curRentInfo.map((rentInfo, rentIndex) => (
+            <h4 key={rentIndex}>
+              이 물건은 [{rentInfo.rentuser}]님이 [{rentInfo.curRentEa}]개 대여 중입니다.
+            </h4>
+          ))}
+
+          {item.ea > 0 && (
             <button className={styles.btn} onClick={() => openModal(index)}>
               상세 정보
             </button>
           )}
+
           <button
             type='button'
             className={styles.btn}
@@ -108,6 +127,7 @@ const HomeItemList = ({ items }) => {
                   max={selectedItem.ea}
                   onClick={(e) => e.stopPropagation()}
                 />
+                {/* 달력 추가 */}
                 <button
                   type='button'
                   className={styles.closeBtn}
