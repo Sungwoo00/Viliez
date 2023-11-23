@@ -138,6 +138,7 @@ const EditItemForm = ({ item, handleChange, handleUpdate, cancelEditing }) => {
     </>
   );
 };
+
 const ViewItem = ({ item, startEditing, deleteItem }) => {
   return (
     <>
@@ -156,6 +157,8 @@ const ViewItem = ({ item, startEditing, deleteItem }) => {
             '종료 날짜 정보가 없습니다.'}
         </p>
       )}
+
+      {item.photoURL && <img src={item.photoURL} alt='Product' />}
 
       <strong className={styles.title}>{item.title}</strong>
       <p className={styles.price}>

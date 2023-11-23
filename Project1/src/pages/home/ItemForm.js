@@ -3,9 +3,9 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import useFirestore from '../../hooks/useFirestore';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-// import { ko } from 'date-fns/esm/locale';
+import { ko } from 'date-fns/esm/locale';
 import { appStorage } from '../../firebase/confing';
-import { ref, uploadBytes } from 'firebase/storage';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 const ItemForm = ({ uid }) => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -88,12 +88,16 @@ const ItemForm = ({ uid }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    let photoURL = null;
+
     if (selectedImage) {
       const storageRef = ref(appStorage, `images/${uid}/${selectedImage.name}`);
 
       try {
         await uploadBytes(storageRef, selectedImage);
         alert('image upload success');
+        photoURL = await getDownloadURL(storageRef);
+        console.log('Download URL:', photoURL);
       } catch (error) {
         alert('image upload ');
         return;
@@ -110,14 +114,22 @@ const ItemForm = ({ uid }) => {
       rentuser,
       rentalPeriod,
       displayName: currentUser?.displayName,
-      photoURL: selectedImage ? `images/${uid}/${selectedImage.name}` : null,
+      photoURL: photoURL,
     };
-
     // console.log('전송할 데이터:', dataToSubmit);
+    console.log(dataToSubmit.photoURL);
+
+    setTitle('');
+    setCategory('');
+    setPrice('');
+    setEa('');
+    setDescription('');
+    setRentUser('');
+    setSelectedImage(null);
+    setRentalPeriod({ startDate: new Date(), endDate: null });
 
     addDocument(dataToSubmit);
   };
-
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -125,7 +137,7 @@ const ItemForm = ({ uid }) => {
           <legend>상품 등록</legend>
           <ReactDatePicker
             id='rentalperiod'
-            locale='ko'
+            // locale='ko'
             // selected={rentalPeriod.startDate}
             startDate={rentalPeriod.startDate}
             endDate={rentalPeriod.endDate}
