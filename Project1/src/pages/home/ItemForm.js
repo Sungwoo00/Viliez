@@ -3,7 +3,9 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import useFirestore from '../../hooks/useFirestore';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { ko } from 'date-fns/esm/locale';
+// import { ko } from 'date-fns/esm/locale';
+import { appStorage } from '../../firebase/confing';
+import { ref, uploadBytes } from 'firebase/storage';
 
 const ItemForm = ({ uid }) => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -21,6 +23,8 @@ const ItemForm = ({ uid }) => {
     startDate: new Date(),
     endDate: null,
   });
+
+  const [selectedImage, setSelectedImage] = useState(null);
   const { addDocument, response } = useFirestore('Sharemarket');
 
   const handleData = (event) => {
@@ -70,12 +74,31 @@ const ItemForm = ({ uid }) => {
       setEa('');
       setDescription('');
       setRentUser('');
+      setSelectedImage(null);
       setRentalPeriod({ startDate: new Date(), endDate: null });
     }
   }, [response]);
 
-  const handleSubmit = (event) => {
+  const handleImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setSelectedImage(event.target.files[0]);
+    }
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (selectedImage) {
+      const storageRef = ref(appStorage, `images/${uid}/${selectedImage.name}`);
+
+      try {
+        await uploadBytes(storageRef, selectedImage);
+        alert('image upload success');
+      } catch (error) {
+        alert('image upload ');
+        return;
+      }
+    }
 
     const dataToSubmit = {
       uid,
@@ -87,6 +110,7 @@ const ItemForm = ({ uid }) => {
       rentuser,
       rentalPeriod,
       displayName: currentUser?.displayName,
+      photoURL: selectedImage ? `images/${uid}/${selectedImage.name}` : null,
     };
 
     // console.log('전송할 데이터:', dataToSubmit);
@@ -113,6 +137,12 @@ const ItemForm = ({ uid }) => {
             onChange={handleDateChange}
             open={openDatePicker}
             onInputClick={() => setOpenDatePicker(true)}
+          />
+          <input
+            type='file'
+            id='imageInput'
+            accept='image/*'
+            onChange={handleImageChange}
           />
           <input
             placeholder='제목'
