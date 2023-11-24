@@ -28,7 +28,11 @@ const HomeItemList = ({ items }) => {
     const quantityInput = document.getElementById('quantityInput');
     const quantity = parseInt(quantityInput.value, 10);
     const rentEa = selectedItem.ea - quantity;
-    const totalRentEa = (selectedItem.curRentInfo || []).reduce((sum, rentInfo) => sum + rentInfo.curRentEa, 0) + quantity;
+    const totalRentEa =
+      (selectedItem.curRentInfo || []).reduce(
+        (sum, rentInfo) => sum + rentInfo.curRentEa,
+        0
+      ) + quantity;
 
     if (isNaN(quantity) || quantity < 1 || quantity > selectedItem.ea) {
       alert('Please enter a valid quantity.');
@@ -40,14 +44,20 @@ const HomeItemList = ({ items }) => {
       ea: selectedItem.ea - quantity,
       rentuser: user.displayName,
       totalRentEa: totalRentEa,
-      curRentInfo: [...(selectedItem.curRentInfo || []), { rentuser: user.displayName, curRentEa: quantity }]
+      curRentInfo: [
+        ...(selectedItem.curRentInfo || []),
+        { rentuser: user.displayName, curRentEa: quantity },
+      ],
     });
 
     updateDocument(selectedItem.id, {
       ea: rentEa,
       rentuser: user.displayName,
       totalRentEa: totalRentEa,
-      curRentInfo: [...(selectedItem.curRentInfo || []), { rentuser: user.displayName, curRentEa: quantity }]
+      curRentInfo: [
+        ...(selectedItem.curRentInfo || []),
+        { rentuser: user.displayName, curRentEa: quantity },
+      ],
     });
 
     alert(`Renting ${rentEa} ${selectedItem.title}(s).`);
@@ -63,20 +73,21 @@ const HomeItemList = ({ items }) => {
       {items.map((item, index) => (
         <li key={item.id} className={styles.item}>
           <strong className={styles.title}>{item.title}</strong>
-          {item.ea !== 0 ? (
-            <p>대여 가능</p>
-          ) : (
-            <p>모두 대여 중</p>
-          )}
+          {item.ea !== 0 ? <p>대여 가능</p> : <p>모두 대여 중</p>}
           <p>
-            {'가격: ' + item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') +'원'}
+            {'가격: ' +
+              item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') +
+              '원'}
           </p>
-          {item.curRentInfo && item.curRentInfo.length > 0 && item.curRentInfo.map((rentInfo, rentIndex) => (
-            <h4 key={rentIndex}>
-              이 물건은 [{rentInfo.rentuser}]님이 [{rentInfo.curRentEa}]개 대여 중입니다.
-            </h4>
-          ))}
-
+          {item.curRentInfo &&
+            item.curRentInfo.length > 0 &&
+            item.curRentInfo.map((rentInfo, rentIndex) => (
+              <h4 key={rentIndex}>
+                이 물건은 [{rentInfo.rentuser}]님이 [{rentInfo.curRentEa}]개
+                대여 중입니다.
+              </h4>
+            ))}
+          <img src={item.photoURL}></img>
           {item.ea > 0 && (
             <button className={styles.btn} onClick={() => openModal(index)}>
               상세 정보
