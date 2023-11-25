@@ -14,15 +14,15 @@
 }
 
 .caretAnimation {
-  animation: rotateCaret 0.3s linear;
+  animation: scaleCaret 0.3s linear;
 }
 
-@keyframes rotateCaret {
+@keyframes scaleCaret {
   from {
     transform: scale(1);
   }
   to {
-    transform: scale(1.7);
+    transform: scale(2);
   }
 }
 .caret:hover {
