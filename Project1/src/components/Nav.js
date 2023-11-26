@@ -43,8 +43,11 @@ const Nav = () => {
           )}
           {user && (
             <>
-              <li>
+              {/* <li>
                 <Link to='/chat'>Chat</Link>
+              </li> */}
+              <li>
+                <Link to='/chatlist'>ChatList</Link>
               </li>
               <li>
                 <Link to='/myitem'>My Item</Link>

@@ -7,8 +7,10 @@ import {
   onSnapshot,
 } from 'firebase/firestore';
 import { appFirestore } from './firebase/config';
+import useAuthContext from '../../hooks/useAuthContext';
 
 const ChatRoom = () => {
+  const { user } = useAuthContext();
   const { roomId } = useParams();
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');

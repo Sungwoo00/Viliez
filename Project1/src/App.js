@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Home from './pages/home/Home';
 import MyItem from './pages/home/MyItem';
 import Chat from './pages/chat/Chat';
+import ChatList from './pages/chat/chatList';
 import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
 import Nav from './components/Nav';
@@ -28,6 +29,12 @@ function App() {
               path='/chat/:chatRoomId'
               element={
                 user ? <Chat /> : <Navigate replace={true} to='/login' />
+              }
+            />
+            <Route
+              path='/chatlist'
+              element={
+                user ? <ChatList /> : <Navigate replace={true} to='/login' />
               }
             />
             <Route

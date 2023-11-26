@@ -51,12 +51,12 @@
 }
 
 .menuAnimation {
-  animation: slideIn 0.3s forwards;
+  animation: slideIn 1s forwards;
 }
 
 @keyframes slideIn {
   from {
-    transform: translateX(-100%);
+    transform: translateX(100%);
   }
   to {
     transform: translateX(0);
@@ -70,8 +70,8 @@
   cursor: pointer;
 }
 .menu li:hover {
-  background: wheat;
+  text-decoration-line: underline;
 }
 .active {
-  background-color: grey;
+  background: rgb(229, 226, 226);
 }

@@ -28,7 +28,7 @@ button:hover {
   display: flex;
   justify-content: right;
   align-items: center;
-  gap: 24px;
+  gap: 16px;
 }
 
 .list_nav a {

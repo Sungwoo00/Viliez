@@ -10,6 +10,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
   const { updateDocument } = useFirestore('Sharemarket');
   const { user } = useAuthContext();
   const navigate = useNavigate();
+
   const [selectedItem, setSelectedItem] = useState(null);
   const [isDatePickerOpen, setDatePickerOpen] = useState(false);
   const [rentalPeriod, setRentalPeriod] = useState({
@@ -75,8 +76,9 @@ const HomeItemList = ({ items, selectedCategory }) => {
   };
 
   const chatHandler = (item) => {
+    const chatRoomId = `${item.uid}-${user.uid}`;
     openChat(item);
-    navigate(`/chat/${item.id}`);
+    navigate(`/chat/${chatRoomId}`);
   };
 
   const renderListItem = (item, index) => {
