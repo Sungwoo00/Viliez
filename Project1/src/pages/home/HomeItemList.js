@@ -41,7 +41,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
       10
     );
     if (isNaN(quantity) || quantity < 1 || quantity > selectedItem.ea) {
-      alert('Please enter a valid quantity.');
+      alert('유효한 값을 입력하세요.');
       return;
     }
 
@@ -71,7 +71,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
 
     setSelectedItem(updatedItem);
     updateDocument(selectedItem.id, updatedItem);
-    alert(`Renting ${updatedItem.ea} ${selectedItem.title}(s).`);
+    alert(`${selectedItem.title}을 성공적으로 빌리셨습니다.`);
   };
 
   const chatHandler = (item) => {
@@ -84,7 +84,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
       selectedCategory !== 'All Items' &&
       item.category !== selectedCategory
     ) {
-      return null; // 선택된 카테고리와 항목의 카테고리가 일치하지 않으면 렌더링하지 않음
+      return null;
     }
 
     return (

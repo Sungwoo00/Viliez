@@ -8,7 +8,7 @@
 
 .side_menu form {
   padding: 20px;
-  background-color: teal;
+  background-color: #3498db;
   border-radius: 10px;
 }
 
@@ -23,17 +23,15 @@
   color: #fff;
 }
 
-.side_menu input {
+.side_menu input,
+.side_menu select,
+.side_menu textarea {
   display: block;
   width: 100%;
   padding: 10px;
   border: none;
   border-radius: 5px;
   margin-top: 10px;
-}
-.side_menu select {
-  margin-top: 10px;
-  border-radius: 5px;
 }
 
 .side_menu label {
@@ -44,9 +42,6 @@
 
 .side_menu textarea {
   height: 200px;
-  width: 100%;
-  border-radius: 5px;
-  margin-top: 10px;
 }
 
 .side_menu button {
@@ -58,6 +53,12 @@
   background-color: transparent;
   border: 2px solid white;
   color: #fff;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.side_menu button:hover {
+  background-color: white;
+  color: #3498db;
 }
 
 .content_list {

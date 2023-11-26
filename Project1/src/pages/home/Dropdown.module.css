@@ -1,5 +1,11 @@
+.container {
+  justify-content: space-between;
+  display: flex;
+}
+
 .select {
   display: flex;
+  margin: auto;
   transition: backgrond 0.3s;
 }
 .selected {
@@ -11,6 +17,7 @@
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-top: 6px solid black;
+  rotate: 270deg;
 }
 
 .caretAnimation {
@@ -29,34 +36,34 @@
   cursor: pointer;
 }
 .menu {
+  display: none;
+  justify-content: space-between;
   text-align: center;
-  width: 25%;
+  width: 80%;
   padding: 0.2em 0.5em;
   border: 1px #363a43 solid;
   border-radius: 5px;
-
-  display: none;
 }
+
 .menuOpen {
-  display: block;
+  display: flex;
   opacity: 1;
 }
 
 .menuAnimation {
-  animation: fadeIn 0.3s ease-in-out;
+  animation: slideIn 0.3s forwards;
 }
 
-@keyframes fadeIn {
+@keyframes slideIn {
   from {
-    opacity: 0.5;
-    max-height: 0;
+    transform: translateX(-100%);
   }
   to {
-    opacity: 1;
-    max-height: 200px;
+    transform: translateX(0);
   }
 }
 .menu li {
+  display: inline-block;
   padding: 0.6em 0.5em;
   margin: 0.3em 0;
   border-radius: 0.4em;

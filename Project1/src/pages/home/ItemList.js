@@ -50,6 +50,13 @@ const ItemList = ({ items }) => {
     }));
   };
 
+  const handleDelete = (itemId) => {
+    const confirmed = window.confirm('정말 삭제하시겠습니까 ?');
+    if (confirmed) {
+      deleteDocument(itemId);
+    }
+  };
+
   return (
     <>
       {items.map((item) => (
@@ -67,7 +74,7 @@ const ItemList = ({ items }) => {
             <ViewItem
               item={item}
               startEditing={() => toggleEditing(item.id)}
-              deleteItem={() => deleteDocument(item.id)}
+              deleteItem={() => handleDelete(item.id)}
             />
           )}
         </li>
