@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import useLogout from '../hooks/useLogout';
 import useAuthContext from '../hooks/useAuthContext.js';
@@ -8,6 +9,18 @@ const Nav = () => {
   const { logout, userDelete } = useLogout();
   const { user } = useAuthContext();
 
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [, setSelectedOption] = useState('My Page');
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleOptionClick = (option) => {
+    setSelectedOption(option);
+    setIsDropdownOpen(false);
+  };
+
   return (
     <body>
       <nav className={styles.nav}>
@@ -16,40 +29,54 @@ const Nav = () => {
         </h1>
         <ul className={styles.list_nav}>
           <li>
-            <Link to='/'>홈</Link>
+            <Link to='/'>Home</Link>
           </li>
           {!user && (
             <>
               <li>
-                <Link to='/login'>로그인</Link>
+                <Link to='/login'>Login</Link>
               </li>
               <li>
-                <Link to='/signup'>가입하기</Link>
+                <Link to='/signup'>Sign</Link>
               </li>
             </>
           )}
           {user && (
             <>
               <li>
-                <Link to='/chat'>채팅</Link>
+                <Link to='/chat'>Chat</Link>
               </li>
               <li>
-                <Link to='/myitem'>나의 상품</Link>
+                <Link to='/myitem'>My Item</Link>
               </li>
-              <li>
-                <button type='button' onClick={logout}>
-                  로그아웃
-                </button>
-              </li>
-              <li>
-                <button
-                  type='button'
-                  className={styles.user_delete_btn}
-                  onClick={userDelete}
+
+              <div className={styles.select} onClick={toggleDropdown}>
+                <span className={styles.selected} onClick={toggleDropdown}>
+                  My Page
+                </span>
+                <ul
+                  className={`${styles.menu} ${
+                    isDropdownOpen
+                      ? `${styles.menuOpen} ${styles.menuAnimation}`
+                      : ''
+                  }`}
                 >
-                  회원탈퇴
-                </button>
-              </li>
+                  <li onClick={() => handleOptionClick('로그아웃')}>
+                    <button type='button' onClick={logout}>
+                      로그아웃
+                    </button>
+                  </li>
+                  <li onClick={() => handleOptionClick('회원탈퇴')}>
+                    <button
+                      type='button'
+                      className={styles.user_delete_btn}
+                      onClick={userDelete}
+                    >
+                      회원탈퇴
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </>
           )}
         </ul>
@@ -57,5 +84,4 @@ const Nav = () => {
     </body>
   );
 };
-
 export default Nav;

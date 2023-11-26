@@ -34,6 +34,7 @@ button:hover {
 .list_nav a {
   padding: 10px 15px;
   border-radius: 10px;
+  text-decoration-line: overline;
 }
 
 button {
@@ -41,4 +42,57 @@ button {
   border-radius: 10px;
   background-color: transparent;
   border: none;
+}
+
+.select {
+  display: flex;
+  transition: backgrond 0.3s;
+}
+.selected {
+  cursor: pointer;
+  color: white;
+  font-size: 16px;
+  margin-bottom: 22px;
+  transition: 0.3s;
+}
+.selected:hover {
+  color: black;
+}
+
+.menu {
+  display: none;
+  position: absolute;
+  top: 70%;
+  right: 3%;
+  text-align: center;
+  width: auto;
+  padding: 0.2em 0.5em;
+  border: 1px black solid;
+  border-radius: 8px;
+  z-index: 1;
+}
+.menuOpen {
+  display: block;
+}
+.menu button {
+  color: black;
+}
+
+.menuAnimation {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    max-height: 0;
+  }
+  to {
+    max-height: 200px;
+  }
+}
+.menu li {
+  padding: 0.6em 0.5em;
+  margin: 0.3em 0;
+  border-radius: 0.4em;
+  cursor: pointer;
 }

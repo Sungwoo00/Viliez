@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const HomeItemList = ({ items }) => {
+const HomeItemList = ({ items, selectedCategory }) => {
   const { updateDocument } = useFirestore('Sharemarket');
   const { user } = useAuthContext();
   const navigate = useNavigate();
@@ -79,36 +79,46 @@ const HomeItemList = ({ items }) => {
     navigate(`/chat/${item.id}`);
   };
 
-  const renderListItem = (item, index) => (
-    <li key={item.id} className={styles.item}>
-      <strong className={styles.title}>{item.title}</strong>
-      <p>
-        남은 수량: {item.ea} 개 ({item.ea !== 0 ? '대여 가능' : '모두 대여 중'})
-      </p>
-      <p>{`가격: ${item.price
-        .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}</p>
-      {item.curRentInfo?.length > 0 &&
-        item.curRentInfo.map((rentInfo, rentIndex) => (
-          <h4 key={rentIndex}>
-            {`이 물건은 [${rentInfo.rentuser}]님이 [${rentInfo.curRentEa}]개 대여 중입니다.`}
-          </h4>
-        ))}
-      <div className={styles.home_btn_container}>
-        <img src={item.photoURL}></img>
-        <button className={styles.btn} onClick={() => openModal(index)}>
-          상세 정보
-        </button>
-        <button
-          type='button'
-          className={styles.btn}
-          onClick={() => chatHandler(item)}
-        >
-          채팅하기
-        </button>
-      </div>
-    </li>
-  );
+  const renderListItem = (item, index) => {
+    if (
+      selectedCategory !== 'All Items' &&
+      item.category !== selectedCategory
+    ) {
+      return null; // 선택된 카테고리와 항목의 카테고리가 일치하지 않으면 렌더링하지 않음
+    }
+
+    return (
+      <li key={item.id} className={styles.item}>
+        <strong className={styles.title}>{item.title}</strong>
+        <p>
+          남은 수량: {item.ea} 개 (
+          {item.ea !== 0 ? '대여 가능' : '모두 대여 중'})
+        </p>
+        <p>{`가격: ${item.price
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}</p>
+        {item.curRentInfo?.length > 0 &&
+          item.curRentInfo.map((rentInfo, rentIndex) => (
+            <h4 key={rentIndex}>
+              {`이 물건은 [${rentInfo.rentuser}]님이 [${rentInfo.curRentEa}]개 대여 중입니다.`}
+            </h4>
+          ))}
+        <div className={styles.home_btn_container}>
+          <img src={item.photoURL}></img>
+          <button className={styles.btn} onClick={() => openModal(index)}>
+            상세 정보
+          </button>
+          <button
+            type='button'
+            className={styles.btn}
+            onClick={() => chatHandler(item)}
+          >
+            채팅하기
+          </button>
+        </div>
+      </li>
+    );
+  };
 
   const renderModal = () => (
     <div className={styles.modalOverlay} onClick={closeModal}>

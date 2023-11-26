@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import styles from './Dropdown.module.css';
 
-const Dropdown = () => {
+const Dropdown = ({ onCategoryChange }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('All Items');
 
@@ -13,6 +13,7 @@ const Dropdown = () => {
   const handleOptionClick = (option) => {
     setSelectedOption(option);
     setIsDropdownOpen(false);
+    onCategoryChange(option);
   };
 
   return (
@@ -39,28 +40,28 @@ const Dropdown = () => {
           All Items
         </li>
         <li
-          onClick={() => handleOptionClick('Option 1')}
-          className={selectedOption === 'Option 1' ? styles.active : ''}
+          onClick={() => handleOptionClick('가전')}
+          className={selectedOption === '가전' ? styles.active : ''}
         >
-          Option 1
+          가전
         </li>
         <li
-          onClick={() => handleOptionClick('Option 2')}
-          className={selectedOption === 'Option 2' ? styles.active : ''}
+          onClick={() => handleOptionClick('여행')}
+          className={selectedOption === '여행' ? styles.active : ''}
         >
-          Option 2
+          여행
         </li>
         <li
-          onClick={() => handleOptionClick('Option 3')}
-          className={selectedOption === 'Option 3' ? styles.active : ''}
+          onClick={() => handleOptionClick('의류')}
+          className={selectedOption === '의류' ? styles.active : ''}
         >
-          Option 3
+          의류
         </li>
         <li
-          onClick={() => handleOptionClick('Option 4')}
-          className={selectedOption === 'Option 4' ? styles.active : ''}
+          onClick={() => handleOptionClick('취미')}
+          className={selectedOption === '취미' ? styles.active : ''}
         >
-          Option 4
+          취미
         </li>
       </ul>
     </>

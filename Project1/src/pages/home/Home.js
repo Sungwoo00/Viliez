@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import HomeItemList from './HomeItemList';
 import styles from './Home.module.css';
 import useCollection from '../../hooks/useCollection';
@@ -6,10 +7,11 @@ import Dropdown from './Dropdown';
 
 const Home = () => {
   const { documents, error, isLoading } = useCollection('Sharemarket');
+  const [selectedCategory, setSelectedCategory] = useState('All Items');
 
   return (
     <div className={styles.container}>
-      <Dropdown />
+      <Dropdown onCategoryChange={setSelectedCategory} />
       {isLoading && (
         <div className={styles.loadingContainer}>
           <h2>물건을 가져오는 중..</h2>
@@ -24,7 +26,12 @@ const Home = () => {
 
       <ul className={styles.content_list}>
         {error && <strong>{error}</strong>}
-        {documents && <HomeItemList items={documents}></HomeItemList>}
+        {documents && (
+          <HomeItemList
+            items={documents}
+            selectedCategory={selectedCategory}
+          ></HomeItemList>
+        )}
       </ul>
     </div>
   );
