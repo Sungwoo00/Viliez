@@ -3,11 +3,11 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Home from './pages/home/Home';
 import MyItem from './pages/home/MyItem';
 import Chat from './pages/chat/Chat';
-import ChatList from './pages/chat/chatList';
 import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
 import Nav from './components/Nav';
 import useAuthContext from './hooks/useAuthContext';
+import ChatList from './pages/chat/chatList';
 
 function App() {
   const { isAuthReady, user } = useAuthContext();
