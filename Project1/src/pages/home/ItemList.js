@@ -148,10 +148,12 @@ const EditItemForm = ({ item, handleChange, handleUpdate, cancelEditing }) => {
 
 const ViewItem = ({ item, startEditing, deleteItem }) => {
   const rentusers = [];
-  for (let i = 0; item.curRentInfo[i] !== undefined; i++) {
-    const rentuser = item.curRentInfo[i].rentuser;
-    if (rentuser) {
-      rentusers.push(rentuser);
+  if (item.curRentInfo) {
+    for (let i = 0; i < item.curRentInfo.length; i++) {
+      const rentInfo = item.curRentInfo[i];
+      if (rentInfo && rentInfo.rentuser) {
+        rentusers.push(rentInfo.rentuser);
+      }
     }
   }
 
