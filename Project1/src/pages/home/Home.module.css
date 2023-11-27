@@ -121,3 +121,7 @@ img {
   margin: 0 auto;
   display: block;
 }
+
+.ReactDatePicker{
+  width: 300px;
+}

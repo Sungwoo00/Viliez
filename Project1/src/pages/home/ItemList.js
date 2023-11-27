@@ -147,10 +147,18 @@ const EditItemForm = ({ item, handleChange, handleUpdate, cancelEditing }) => {
 };
 
 const ViewItem = ({ item, startEditing, deleteItem }) => {
+  const rentusers = [];
+  for (let i = 0; item.curRentInfo[i] !== undefined; i++) {
+    const rentuser = item.curRentInfo[i].rentuser;
+    if (rentuser) {
+      rentusers.push(rentuser);
+    }
+  }
+
   return (
     <>
       {item.rentuser ? (
-        <p>이 물품은 {item.rentuser}님이 예약 중입니다.</p>
+        <p>이 물품은 {rentusers.join(', ')}님이 예약 중입니다.</p>
       ) : (
         <p>현재 예약 중인 사람이 없습니다.</p>
       )}

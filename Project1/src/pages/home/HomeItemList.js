@@ -76,9 +76,13 @@ const HomeItemList = ({ items, selectedCategory }) => {
   };
 
   const chatHandler = (item) => {
-    const chatRoomId = `${item.uid}-${user.uid}`;
-    openChat(item);
-    navigate(`/chat/${chatRoomId}`);
+    if (!user) {
+      navigate('/login');
+    } else {
+      const chatRoomId = `${item.uid}-${user.uid}`;
+      openChat(item);
+      navigate(`/chat/${chatRoomId}`);
+    }
   };
 
   const renderListItem = (item, index) => {
@@ -89,6 +93,20 @@ const HomeItemList = ({ items, selectedCategory }) => {
       return null;
     }
 
+    const nearestEndDate = item.curRentInfo ? item.curRentInfo.reduce((nearestDate, rentInfo) => {
+      if (!nearestDate) return rentInfo.endDate;
+      const currentDate = new Date();
+      const nearestDateDiff = Math.abs(
+        new Date(nearestDate) - currentDate
+      );
+      const rentInfoDateDiff = Math.abs(
+        new Date(rentInfo.endDate) - currentDate
+      );
+      return rentInfoDateDiff < nearestDateDiff
+        ? rentInfo.endDate
+        : nearestDate;
+    }, null) : null;
+  
     return (
       <li key={item.id} className={styles.item}>
         <strong className={styles.title}>{item.title}</strong>
@@ -96,15 +114,20 @@ const HomeItemList = ({ items, selectedCategory }) => {
           남은 수량: {item.ea} 개 (
           {item.ea !== 0 ? '대여 가능' : '모두 대여 중'})
         </p>
+        {nearestEndDate ? (
+          <p>{`가장 가까운 예약 가능일: ${nearestEndDate}`}</p>
+        ) : (
+          <p>예약 가능한 날짜 정보가 없습니다.</p>
+        )}
         <p>{`가격: ${item.price
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}</p>
-        {item.curRentInfo?.length > 0 &&
+        {/* {item.curRentInfo?.length > 0 &&
           item.curRentInfo.map((rentInfo, rentIndex) => (
             <h4 key={rentIndex}>
               {`이 물건은 [${rentInfo.rentuser}]님이 [${rentInfo.curRentEa}]개 대여 중입니다.`}
             </h4>
-          ))}
+          ))} */}
         <div className={styles.home_btn_container}>
           <img src={item.photoURL}></img>
           <button className={styles.btn} onClick={() => openModal(index)}>
@@ -140,26 +163,35 @@ const HomeItemList = ({ items, selectedCategory }) => {
               >
                 채팅하기
               </button> */}
-            <ReactDatePicker
-              selectsRange
-              startDate={rentalPeriod.startDate}
-              endDate={rentalPeriod.endDate}
-              onChange={handleDateChange}
-              shouldCloseOnSelect={false}
-              monthsShown={2}
-              dateFormat='yyyy년 MM월 dd일'
-              minDate={new Date()}
-              open={isDatePickerOpen}
-              onInputClick={openDatePicker}
-            />
-            <input
-              laceholder='개수를 선택해주세요'
-              id='quantityInput'
-              type='number'
-              min='1'
-              max={selectedItem.ea}
-              onClick={(e) => e.stopPropagation()}
-            />
+            <div className="calendar-container">
+              <div className="calendar-box">
+                {/* <div className="date">날짜 선택</div> */}
+                <div className='ReactDatePicker'>
+                  <ReactDatePicker
+                    selectsRange
+                    startDate={rentalPeriod.startDate}
+                    endDate={rentalPeriod.endDate}
+                    onChange={handleDateChange}
+                    shouldCloseOnSelect={false}
+                    monthsShown={2}
+                    dateFormat='yy년 MM월 dd일'
+                    minDate={new Date()}
+                    open={isDatePickerOpen}
+                    onInputClick={openDatePicker}
+                    isClearable
+                  />
+                </div>
+                <input
+                  className='Eainput'
+                  laceholder='0'
+                  id='quantityInput'
+                  type='number'
+                  min='1'
+                  max={selectedItem.ea}
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </div>
+            </div>
             <button
               type='button'
               className={styles.rentBtn}
