@@ -9,8 +9,21 @@
   list-style: none;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+}
+
+@media all and (max-width: 800px) {
+  .content_list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+}
+@media all and (max-width: 600px) {
+  .content_list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
 }
 
 .content_list strong {
@@ -76,7 +89,7 @@
 }
 .modal input {
   width: auto;
-  margin-left: 10px;
+  margin: 5px;
 }
 .modal .rentBtn {
   background-color: royalblue;
@@ -122,6 +135,6 @@ img {
   display: block;
 }
 
-.ReactDatePicker{
+.ReactDatePicker {
   width: 300px;
 }
