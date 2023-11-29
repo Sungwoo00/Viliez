@@ -1,0 +1,22 @@
+.container {
+  display: grid;
+  max-width: 960px;
+  margin: 50px auto;
+  padding: 0 30px;
+}
+
+.content_list {
+  margin: 0;
+}
+
+.content_list li {
+  border: 1px solid #f2f2f2;
+  box-shadow: 3px 3px 5px rgba(50, 50, 50, 0.3);
+  padding: 30px;
+  position: relative;
+  border-bottom: 4px solid royalblue;
+}
+
+.content_list li + li {
+  margin: 20px 0;
+}

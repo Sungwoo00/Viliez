@@ -179,10 +179,12 @@ const ViewItem = ({ item, startEditing, deleteItem }) => {
 
       <strong className={styles.title}>{item.title}</strong>
       <p className={styles.price}>
-        {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
+        가격 : {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
       </p>
-      <p className={styles.ea}>{item.ea}개</p>
-      <p className={styles.description}>{item.description}</p>
+      <p className={styles.ea}>수량 : {item.ea}개</p>
+      <fieldset>
+        <p className={styles.description}>{item.description}</p>
+      </fieldset>
       <button className={styles.btn_edit} onClick={startEditing}>
         수정
       </button>
