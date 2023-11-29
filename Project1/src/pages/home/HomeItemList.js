@@ -3,8 +3,8 @@ import useAuthContext from '../../hooks/useAuthContext';
 import useFirestore from '../../hooks/useFirestore';
 import styles from './Home.module.css';
 import { useNavigate } from 'react-router-dom';
-import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import CustomDatePicker from './CustomDatePicker';
 
 const HomeItemList = ({ items, selectedCategory }) => {
   const { updateDocument } = useFirestore('Sharemarket');
@@ -14,17 +14,14 @@ const HomeItemList = ({ items, selectedCategory }) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [isDatePickerOpen, setDatePickerOpen] = useState(false);
   const [rentalPeriod, setRentalPeriod] = useState({
-    startDate: new Date(),
+    startDate: null,
     endDate: null,
   });
 
   const openModal = (index) => setSelectedItem(items[index]);
   const openChat = (item) => setSelectedItem(item);
-  const closeModal = () => {
-    if (!isDatePickerOpen) {
-      setSelectedItem(null);
-    }
-  };
+  const closeModal = () => setSelectedItem(null);
+
   const openDatePicker = () => setDatePickerOpen(true);
 
   const handleDateChange = (dates) => {
@@ -73,6 +70,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
     setSelectedItem(updatedItem);
     updateDocument(selectedItem.id, updatedItem);
     alert(`${selectedItem.title}을 성공적으로 빌리셨습니다.`);
+    closeModal();
   };
 
   const chatHandler = (item) => {
@@ -82,6 +80,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
       const chatRoomId = `${item.uid}-${user.uid}`;
       openChat(item);
       navigate(`/chat/${chatRoomId}`);
+      closeModal();
     }
   };
 
@@ -106,7 +105,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
         ? rentInfo.endDate
         : nearestDate;
     }, null) : null;
-  
+
     return (
       <li key={item.id} className={styles.item}>
         <strong className={styles.title}>{item.title}</strong>
@@ -115,7 +114,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
           {item.ea !== 0 ? '대여 가능' : '모두 대여 중'})
         </p>
         {nearestEndDate ? (
-          <p>{`가장 가까운 예약 가능일: ${nearestEndDate}`}</p>
+          <p>{`가장 빠른 예약 가능 날짜:${nearestEndDate}`}</p>
         ) : (
           <p>예약 가능한 날짜 정보가 없습니다.</p>
         )}
@@ -147,7 +146,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
 
   const renderModal = () => (
     <div className={styles.modalOverlay} onClick={closeModal}>
-      <div className={styles.modal}>
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <p>{`[${selectedItem.displayName}]님의 ${selectedItem.title}`}</p>
         <p>{`가격: ${selectedItem.price
           .toString()
@@ -167,38 +166,34 @@ const HomeItemList = ({ items, selectedCategory }) => {
               <div className="calendar-box">
                 {/* <div className="date">날짜 선택</div> */}
                 <div className='ReactDatePicker'>
-                  <ReactDatePicker
-                    selectsRange
+                  <CustomDatePicker
                     startDate={rentalPeriod.startDate}
                     endDate={rentalPeriod.endDate}
-                    onChange={handleDateChange}
-                    shouldCloseOnSelect={false}
-                    monthsShown={2}
-                    dateFormat='yy년 MM월 dd일'
-                    minDate={new Date()}
-                    open={isDatePickerOpen}
-                    onInputClick={openDatePicker}
-                    isClearable
+                    handleDateChange={handleDateChange}
+                    isDatePickerOpen={isDatePickerOpen}
+                    openDatePicker={openDatePicker}
                   />
                 </div>
-                <input
-                  className='Eainput'
-                  laceholder='0'
-                  id='quantityInput'
-                  type='number'
-                  min='1'
-                  max={selectedItem.ea}
-                  onClick={(e) => e.stopPropagation()}
-                />
               </div>
             </div>
-            <button
-              type='button'
-              className={styles.rentBtn}
-              onClick={rentHandler}
-            >
-              빌리기
-            </button>
+            <input
+              // className='Eainput'
+              laceholder='0'
+              id='quantityInput'
+              type='number'
+              min='1'
+              max={selectedItem.ea}
+              onClick={(e) => e.stopPropagation()}
+            />
+            <div>
+              <button
+                type='button'
+                className={styles.rentBtn}
+                onClick={rentHandler}
+              >
+                빌리기
+              </button>
+            </div>
           </>
         )}
         <button type='button' className={styles.closeBtn} onClick={closeModal}>

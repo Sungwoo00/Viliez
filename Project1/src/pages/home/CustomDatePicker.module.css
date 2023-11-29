@@ -1,0 +1,12 @@
+:global(.react-datepicker) {
+  background-color: #FCFCFC !important;
+  color: #333 !important; 
+}
+
+:global(.react-datepicker__header) {
+  background-color: #FCFCFC !important; 
+}
+
+:global(.react-datepicker__day--in-range) {
+  background-color: #4A7B91 !important;
+}
