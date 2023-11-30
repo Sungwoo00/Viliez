@@ -7,8 +7,9 @@ import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
 import Nav from './components/Nav';
 import useAuthContext from './hooks/useAuthContext';
-import ChatList from './pages/chat/ChatList';
+import ChatList from './pages/chat/chatList';
 import MyItem from './pages/mypage/MyItem';
+import RentedItem from './pages/mypage/RentedItem';
 
 function App() {
   const { isAuthReady, user } = useAuthContext();
@@ -21,7 +22,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route
-              path='/register'
+              path='/Register'
               element={
                 user ? <Register /> : <Navigate replace={true} to='/login' />
               }
@@ -33,7 +34,7 @@ function App() {
               }
             />
             <Route
-              path='/chatlist'
+              path='/ChatList'
               element={
                 user ? <ChatList /> : <Navigate replace={true} to='/login' />
               }
@@ -42,6 +43,12 @@ function App() {
               path='/myitem'
               element={
                 user ? <MyItem /> : <Navigate replace={true} to='/login' />
+              }
+            />
+            <Route
+              path='/renteditem'
+              element={
+                user ? <RentedItem /> : <Navigate replace={true} to='/login' />
               }
             />
             <Route

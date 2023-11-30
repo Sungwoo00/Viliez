@@ -9,10 +9,10 @@
 .tit a,
 .list_nav a,
 button {
-  color: #fff;
+  color: rgba(0, 0, 0, 0.644);
   text-decoration: none;
   cursor: pointer;
-  transition: 0.5s ease;
+  transition: font-weight 0.5s ease, font-size 0.5s ease; 
 }
 .user_delete_btn:hover {
   color: red;
@@ -21,7 +21,8 @@ button {
 .tit a:hover,
 .list_nav a:hover,
 button:hover {
-  color: black;
+  font-weight: bold;
+  font-size: calc(100% + 1px);
 }
 
 .list_nav {
@@ -49,7 +50,7 @@ button {
 }
 .selected {
   cursor: pointer;
-  color: white;
+  color: rgba(0, 0, 0, 0.644);
   font-size: 16px;
   margin-left: 11px;
   margin-bottom: 22px;

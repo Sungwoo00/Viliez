@@ -67,6 +67,9 @@ const Nav = () => {
                   <li>
                     <Link to='/myitem'>My Item</Link>
                   </li>
+                  <li>
+                    <Link to='/renteditem'>Rented Item</Link>
+                  </li>
                   <li onClick={() => handleOptionClick('로그아웃')}>
                     <button type='button' onClick={logout}>
                       로그아웃
