@@ -1,10 +1,10 @@
 import useAuthContext from '../../hooks/useAuthContext';
 
 import ItemList from '../home/ItemList';
-import styles from './MyItem2.module.css';
+import styles from './MyItem.module.css';
 import useCollection from '../../hooks/useCollection';
 
-const MyItem2 = () => {
+const MyItem = () => {
   const { user } = useAuthContext();
   const { documents, error } = useCollection('Sharemarket', [
     'uid',
@@ -23,4 +23,4 @@ const MyItem2 = () => {
   );
 };
 
-export default MyItem2;
+export default MyItem;

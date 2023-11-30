@@ -50,7 +50,7 @@ const Nav = () => {
                 <Link to='/chatlist'>ChatList</Link>
               </li>
               <li>
-                <Link to='/myitem'>Register</Link>
+                <Link to='/register'>Register</Link>
               </li>
 
               <div className={styles.select} onClick={toggleDropdown}>
@@ -65,7 +65,7 @@ const Nav = () => {
                   }`}
                 >
                   <li>
-                    <Link to='/myitem2'>My Item</Link>
+                    <Link to='/myitem'>My Item</Link>
                   </li>
                   <li onClick={() => handleOptionClick('로그아웃')}>
                     <button type='button' onClick={logout}>

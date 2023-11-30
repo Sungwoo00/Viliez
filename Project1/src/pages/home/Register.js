@@ -2,10 +2,10 @@ import ItemForm from './ItemForm';
 import useAuthContext from '../../hooks/useAuthContext';
 
 // import ItemList from './ItemList';
-import styles from './MyItem.module.css';
+import styles from './Register.module.css';
 // import useCollection from '../../hooks/useCollection';
 
-const MyItem = () => {
+const Register = () => {
   const { user } = useAuthContext();
   // const { documents, error } = useCollection('Sharemarket', [
   //   'uid',
@@ -27,4 +27,4 @@ const MyItem = () => {
   );
 };
 
-export default MyItem;
+export default Register;

@@ -1,14 +1,14 @@
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
 import Home from './pages/home/Home';
-import MyItem from './pages/home/MyItem';
+import Register from './pages/home/Register';
 import Chat from './pages/chat/Chat';
 import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
 import Nav from './components/Nav';
 import useAuthContext from './hooks/useAuthContext';
-import ChatList from './pages/chat/chatList';
-import MyItem2 from './pages/mypage/MyItem2';
+import ChatList from './pages/chat/ChatList';
+import MyItem from './pages/mypage/MyItem';
 
 function App() {
   const { isAuthReady, user } = useAuthContext();
@@ -21,9 +21,9 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route
-              path='/myitem'
+              path='/register'
               element={
-                user ? <MyItem /> : <Navigate replace={true} to='/login' />
+                user ? <Register /> : <Navigate replace={true} to='/login' />
               }
             />
             <Route
@@ -39,9 +39,9 @@ function App() {
               }
             />
             <Route
-              path='/myitem2'
+              path='/myitem'
               element={
-                user ? <MyItem2 /> : <Navigate replace={true} to='/login' />
+                user ? <MyItem /> : <Navigate replace={true} to='/login' />
               }
             />
             <Route
