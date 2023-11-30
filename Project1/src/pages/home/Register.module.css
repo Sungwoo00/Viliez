@@ -1,26 +1,85 @@
 .container {
-  /* background-color: #e8f5f8; */
-  min-height: 100vh;
-  padding: 50px 0;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  max-width: 960px;
+  margin: 50px auto;
+  padding: 0 30px;
 }
 
-.side_menu {
-  width: 40%;
-  margin: 0 auto;
-  background-color: royalblue;
-  border-radius: 10px;
+.side_menu form {
   padding: 20px;
-  box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.1);
-  animation: sideMenuAnimation 1s ease-in-out forwards;
+  background-color: #3498db;
+  border-radius: 10px;
 }
 
-@keyframes sideMenuAnimation {
-  0% {
-    transform: translateX(-50px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
+.side_menu fieldset {
+  border: none;
+}
+.side_menu .custom-file-input {
+  display: none; 
+}
+
+.side_menu .custom-file-label {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #f0f0f0;
+  border: 1px solid #d1d1d1;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.side_menu .custom-file-label:hover {
+  background-color: #e0e0e0;
+}
+.side_menu legend {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.side_menu input,
+.side_menu select,
+.side_menu textarea {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.side_menu label {
+  display: block;
+  margin: 10px auto;
+  color: black;
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: white;
+  border: 1px solid f0f0f0;
+  border-radius: 5px;
+  cursor: pointer;
+  /* margin: 0 10px; */
+}
+
+.side_menu textarea {
+  height: 200px;
+}
+
+.side_menu button {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  background-color: transparent;
+  border: 2px solid white;
+  color: #fff;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.side_menu button:hover {
+  background-color: white;
+  color: #3498db;
 }

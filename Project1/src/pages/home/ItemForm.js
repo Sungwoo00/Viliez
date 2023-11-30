@@ -11,7 +11,7 @@ import styles from './ItemForm.module.css';
 
 const ItemForm = ({ uid }) => {
   const [currentUser, setCurrentUser] = useState(null);
-
+  const [imagePreviewUrl, setImagePreviewUrl] = useState('');
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
   const [price, setPrice] = useState('');
@@ -83,7 +83,15 @@ const ItemForm = ({ uid }) => {
 
   const handleImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
-      setSelectedImage(event.target.files[0]);
+      const file = event.target.files[0];
+      setSelectedImage(file);
+
+      // FileReader를 사용하여 이미지 URL 생성
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreviewUrl(reader.result); // 이미지 URL로 상태 업데이트
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -129,6 +137,7 @@ const ItemForm = ({ uid }) => {
     setRentUser('');
     setSelectedImage(null);
     setRentalPeriod({ startDate: new Date(), endDate: null });
+    setImagePreviewUrl('');
 
     addDocument(dataToSubmit);
   };
@@ -155,11 +164,17 @@ const ItemForm = ({ uid }) => {
             readOnly
           />
           <input
-            type='file'
-            id='imageInput'
-            accept='image/*'
+            type="file"
+            id="imageInput"
+            accept="image/*"
             onChange={handleImageChange}
+            style={{ display: "none" }}
           />
+          <label htmlFor="imageInput">이미지 선택하기</label>
+
+          {imagePreviewUrl && (
+            <img src={imagePreviewUrl} alt="Preview" className={styles.imagePreview} />
+          )}
           <input
             placeholder='제목'
             id='tit'
