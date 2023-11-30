@@ -1,0 +1,55 @@
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+fieldset {
+  border: none;
+}
+
+legend {
+  font-size: 24px;
+  color: #fefefe;
+}
+
+textarea {
+  width: 100%;
+}
+
+input,
+textarea,
+select {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.aaa {
+  display: flex;
+  justify-content: space-between;
+}
+input:hover,
+textarea:hover,
+select:hover {
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.2);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+button {
+  display: block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #fff;
+  color: royalblue;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}

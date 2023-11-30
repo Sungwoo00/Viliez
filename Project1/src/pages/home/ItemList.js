@@ -60,7 +60,7 @@ const ItemList = ({ items }) => {
   return (
     <>
       {items.map((item) => (
-        <li key={item.id}>
+        <li key={item.id} className={styles.myitem_list}>
           {editing[item.id] ? (
             <EditItemForm
               item={updatedItems[item.id]}

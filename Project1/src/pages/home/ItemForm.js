@@ -7,6 +7,8 @@ import { ko } from 'date-fns/esm/locale';
 import { appStorage } from '../../firebase/confing';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
+import styles from './ItemForm.module.css';
+
 const ItemForm = ({ uid }) => {
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -166,33 +168,40 @@ const ItemForm = ({ uid }) => {
             required
             onChange={handleData}
           />
-          <select id='category' value={category} onChange={handleData} required>
-            <option>카테고리</option>
-            <option value='가전'>가전</option>
-            <option value='여행'>여행</option>
-            <option value='의류'>의류</option>
-            <option value='취미'>취미</option>
-          </select>
-          <input
-            placeholder='가격'
-            id='price'
-            type='number'
-            value={price}
-            required
-            onChange={handleData}
-            min='5000'
-            step='1000'
-          />
-          <input
-            placeholder='수량'
-            id='ea'
-            type='number'
-            value={ea}
-            required
-            onChange={handleData}
-            min='1'
-            step='1'
-          />
+          <div className={styles.aaa}>
+            <select
+              id='category'
+              value={category}
+              onChange={handleData}
+              required
+            >
+              <option>카테고리</option>
+              <option value='가전'>가전</option>
+              <option value='여행'>여행</option>
+              <option value='의류'>의류</option>
+              <option value='취미'>취미</option>
+            </select>
+            <input
+              placeholder='가격'
+              id='price'
+              type='number'
+              value={price}
+              required
+              onChange={handleData}
+              min='5000'
+              step='1000'
+            />
+            <input
+              placeholder='수량'
+              id='ea'
+              type='number'
+              value={ea}
+              required
+              onChange={handleData}
+              min='1'
+              step='1'
+            />
+          </div>
           <textarea
             placeholder='대여하는 사람을 위해 자세히 적어주세요.'
             id='txt'

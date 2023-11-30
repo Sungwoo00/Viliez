@@ -7,7 +7,7 @@ import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
 import Nav from './components/Nav';
 import useAuthContext from './hooks/useAuthContext';
-import ChatList from './pages/chat/chatList';
+import ChatList from './pages/chat/ChatList';
 import MyItem from './pages/mypage/MyItem';
 import RentedItem from './pages/mypage/RentedItem';
 
