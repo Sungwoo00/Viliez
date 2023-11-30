@@ -3,7 +3,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import useFirestore from '../../hooks/useFirestore';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-// import { ko } from 'date-fns/esm/locale';
+import { ko } from 'date-fns/esm/locale';
 import { appStorage } from '../../firebase/confing';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
@@ -145,10 +145,12 @@ const ItemForm = ({ uid }) => {
             shouldCloseOnSelect={false}
             monthsShown={2}
             minDate={new Date()}
-            dateFormat='yyyy년 MM월 dd일'
+            dateFormat=' yyyy년 MM월 dd일(eee) '
             onChange={handleDateChange}
             open={openDatePicker}
             onInputClick={() => setOpenDatePicker(true)}
+            locale={ko}
+            readOnly
           />
           <input
             type='file'

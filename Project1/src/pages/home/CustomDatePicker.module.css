@@ -10,3 +10,7 @@
 :global(.react-datepicker__day--in-range) {
   background-color: #4A7B91 !important;
 }
+
+:global(.react-datepicker-wrapper) {
+  width: 95% !important;
+}

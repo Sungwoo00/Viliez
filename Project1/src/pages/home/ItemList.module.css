@@ -33,7 +33,7 @@ li {
 input,
 select,
 textarea {
-  width: 100%;
+  width: auto;
   padding: 8px;
   margin-bottom: 10px;
   box-sizing: border-box;

@@ -162,19 +162,15 @@ const HomeItemList = ({ items, selectedCategory }) => {
               >
                 채팅하기
               </button> */}
-            <div className="calendar-container">
-              <div className="calendar-box">
-                {/* <div className="date">날짜 선택</div> */}
-                <div className='ReactDatePicker'>
-                  <CustomDatePicker
-                    startDate={rentalPeriod.startDate}
-                    endDate={rentalPeriod.endDate}
-                    handleDateChange={handleDateChange}
-                    isDatePickerOpen={isDatePickerOpen}
-                    openDatePicker={openDatePicker}
-                  />
-                </div>
-              </div>
+            {/* <div className="date">날짜 선택</div> */}
+            <div className='ReactDatePicker'>
+              <CustomDatePicker
+                startDate={rentalPeriod.startDate}
+                endDate={rentalPeriod.endDate}
+                handleDateChange={handleDateChange}
+                isDatePickerOpen={isDatePickerOpen}
+                openDatePicker={openDatePicker}
+              />
             </div>
             <input
               // className='Eainput'
