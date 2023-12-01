@@ -77,9 +77,9 @@ const HomeItemList = ({ items, selectedCategory }) => {
     if (!user) {
       navigate('/login');
     } else {
-      const chatRoomId = `${item.uid}-${user.uid}`;
+      const chatRoomId = `${item.uids.itemUid}`;
       openChat(item);
-      navigate(`/chat/${chatRoomId}`);
+      navigate(`/chat/${chatRoomId}`, { state: { item: item } });
       closeModal();
     }
   };

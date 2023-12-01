@@ -6,8 +6,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { ko } from 'date-fns/esm/locale';
 import { appStorage } from '../../firebase/confing';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-
+import Datepicker from './CustomDatePicker.module.css'
 import styles from './ItemForm.module.css';
+import { appFireStore } from '../../firebase/confing';
+import { collection, doc } from 'firebase/firestore';
 
 const ItemForm = ({ uid }) => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -86,10 +88,9 @@ const ItemForm = ({ uid }) => {
       const file = event.target.files[0];
       setSelectedImage(file);
 
-      // FileReader를 사용하여 이미지 URL 생성
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImagePreviewUrl(reader.result); // 이미지 URL로 상태 업데이트
+        setImagePreviewUrl(reader.result);
       };
       reader.readAsDataURL(file);
     }
@@ -114,8 +115,14 @@ const ItemForm = ({ uid }) => {
       }
     }
 
+    const docRef = doc(collection(appFireStore, "Sharemarket"));
+    const itemUid = docRef.id;
+
     const dataToSubmit = {
-      uid,
+      uids: {
+        ownerUid: uid,
+        itemUid
+      },
       price,
       ea,
       title,
@@ -126,7 +133,6 @@ const ItemForm = ({ uid }) => {
       displayName: currentUser?.displayName,
       photoURL: photoURL,
     };
-    // console.log('전송할 데이터:', dataToSubmit);
     console.log(dataToSubmit.photoURL);
 
     setTitle('');
@@ -147,6 +153,7 @@ const ItemForm = ({ uid }) => {
         <fieldset>
           <legend>상품 등록</legend>
           <ReactDatePicker
+            className={Datepicker.ReactDatePicker}
             id='rentalperiod'
             // locale='ko'
             // selected={rentalPeriod.startDate}
