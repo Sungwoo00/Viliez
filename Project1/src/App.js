@@ -7,9 +7,9 @@ import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
 import Nav from './components/Nav';
 import useAuthContext from './hooks/useAuthContext';
-import ChatList from './pages/chat/ChatList';
 import MyItem from './pages/mypage/MyItem';
 import RentedItem from './pages/mypage/RentedItem';
+import ChatList from './pages/chat/ChatList';
 
 function App() {
   const { isAuthReady, user } = useAuthContext();
@@ -34,11 +34,12 @@ function App() {
               }
             />
             <Route
-              path='/ChatList'
+              path='/chatlist'
               element={
                 user ? <ChatList /> : <Navigate replace={true} to='/login' />
               }
             />
+
             <Route
               path='/myitem'
               element={

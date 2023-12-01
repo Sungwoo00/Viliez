@@ -43,9 +43,6 @@ const Nav = () => {
           )}
           {user && (
             <>
-              {/* <li>
-                <Link to='/chat'>Chat</Link>
-              </li> */}
               <li>
                 <Link to='/chatlist'>ChatList</Link>
               </li>

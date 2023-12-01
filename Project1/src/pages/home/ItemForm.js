@@ -164,16 +164,20 @@ const ItemForm = ({ uid }) => {
             readOnly
           />
           <input
-            type="file"
-            id="imageInput"
-            accept="image/*"
+            type='file'
+            id='imageInput'
+            accept='image/*'
             onChange={handleImageChange}
-            style={{ display: "none" }}
+            style={{ display: 'none' }}
           />
-          <label htmlFor="imageInput">이미지 선택하기</label>
+          <label htmlFor='imageInput'>이미지 선택하기</label>
 
           {imagePreviewUrl && (
-            <img src={imagePreviewUrl} alt="Preview" className={styles.imagePreview} />
+            <img
+              src={imagePreviewUrl}
+              alt='Preview'
+              className={styles.imagePreview}
+            />
           )}
           <input
             placeholder='제목'

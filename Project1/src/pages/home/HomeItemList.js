@@ -19,7 +19,6 @@ const HomeItemList = ({ items, selectedCategory }) => {
   });
 
   const openModal = (index) => setSelectedItem(items[index]);
-  const openChat = (item) => setSelectedItem(item);
   const closeModal = () => setSelectedItem(null);
 
   const openDatePicker = () => setDatePickerOpen(true);
@@ -77,10 +76,9 @@ const HomeItemList = ({ items, selectedCategory }) => {
     if (!user) {
       navigate('/login');
     } else {
-      const chatRoomId = `${item.uid}-${user.uid}`;
-      openChat(item);
+      // const chatRoomId = `${item.uid}-${user.uid}`;
+      const chatRoomId = item.uid;
       navigate(`/chat/${chatRoomId}`);
-      closeModal();
     }
   };
 
@@ -92,19 +90,19 @@ const HomeItemList = ({ items, selectedCategory }) => {
       return null;
     }
 
-    const nearestEndDate = item.curRentInfo ? item.curRentInfo.reduce((nearestDate, rentInfo) => {
-      if (!nearestDate) return rentInfo.endDate;
-      const currentDate = new Date();
-      const nearestDateDiff = Math.abs(
-        new Date(nearestDate) - currentDate
-      );
-      const rentInfoDateDiff = Math.abs(
-        new Date(rentInfo.endDate) - currentDate
-      );
-      return rentInfoDateDiff < nearestDateDiff
-        ? rentInfo.endDate
-        : nearestDate;
-    }, null) : null;
+    const nearestEndDate = item.curRentInfo
+      ? item.curRentInfo.reduce((nearestDate, rentInfo) => {
+          if (!nearestDate) return rentInfo.endDate;
+          const currentDate = new Date();
+          const nearestDateDiff = Math.abs(new Date(nearestDate) - currentDate);
+          const rentInfoDateDiff = Math.abs(
+            new Date(rentInfo.endDate) - currentDate
+          );
+          return rentInfoDateDiff < nearestDateDiff
+            ? rentInfo.endDate
+            : nearestDate;
+        }, null)
+      : null;
 
     return (
       <li key={item.id} className={styles.item}>
