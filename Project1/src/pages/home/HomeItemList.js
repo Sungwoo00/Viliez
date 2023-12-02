@@ -19,6 +19,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
   });
 
   const openModal = (index) => setSelectedItem(items[index]);
+  const openChat = (item) => setSelectedItem(item);
   const closeModal = () => setSelectedItem(null);
 
   const openDatePicker = () => setDatePickerOpen(true);
@@ -76,9 +77,9 @@ const HomeItemList = ({ items, selectedCategory }) => {
     if (!user) {
       navigate('/login');
     } else {
-      const chatRoomId = `${item.uids.itemUid}`;
+      const chatRoomId = `${item.id}`;
       openChat(item);
-      navigate(`/chat/${chatRoomId}`, { state: { item: item } });
+      navigate(`/chat/${chatRoomId}`);
       closeModal();
     }
   };
