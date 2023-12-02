@@ -14,7 +14,7 @@
 }
 
 .message {
-  width: 60%;
+  width: auto;
   padding: 5px;
   margin-bottom: 10px;
   border-radius: 5px;
@@ -48,6 +48,7 @@
   margin-left: auto;
   max-width: 80%;
 }
+
 .myMessage::before {
   content: '';
   position: absolute;
@@ -56,6 +57,10 @@
   border-top: 10px solid transparent;
   border-left: 12px solid gray;
   border-bottom: 10px solid transparent;
+}
+
+.myMessage p {
+  margin: 5px;
 }
 
 .otherMessage {
