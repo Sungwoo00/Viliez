@@ -119,6 +119,7 @@ const ItemForm = ({ uid }) => {
     const itemUid = docRef.id;
 
     const dataToSubmit = {
+      uid,
       uids: {
         ownerUid: uid,
         itemUid
