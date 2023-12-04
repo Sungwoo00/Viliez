@@ -11,7 +11,7 @@ import { appFireStore } from '../firebase/confing';
 const useCollection = (transaction, myQuery) => {
   const [documents, setDocuments] = useState(null);
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -37,14 +37,14 @@ const useCollection = (transaction, myQuery) => {
       },
       (error) => {
         setError(error.message);
-        setIsLoading(false); 
+        setIsLoading(false);
       }
     );
 
     return () => {
       unsubscribe();
       setIsLoading(false);
-    }; 
+    };
   }, [transaction, myQuery]);
 
   return { documents, error, isLoading };

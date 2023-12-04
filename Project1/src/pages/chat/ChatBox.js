@@ -43,6 +43,7 @@ const ChatBox = () => {
       unsubscribe();
     };
   }, [chatRoomId]);
+
   const sendMessage = async () => {
     if (newMessage.trim() !== '') {
       const messagesRef = collection(

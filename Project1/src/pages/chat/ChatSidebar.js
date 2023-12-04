@@ -1,26 +1,28 @@
-import { collection, getDocs } from 'firebase/firestore';
-import { appFireStore } from '../../firebase/confing';
+import React from 'react';
+import useCollection from '../../hooks/useCollection';
 
-const ChatSidebar = () => {
-  async function getData() {
-    const q = await getDocs(collection(appFireStore, 'chatRooms'));
-    q.forEach((doc) => {
-      console.log(`${doc.id}=>${doc.data()}`);
-    });
+const ChatRooms = () => {
+  const { documents, error, isLoading } = useCollection('chatRooms');
+
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
-  getData();
-  console.log(getData.length);
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
-    <>
-      <ul>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-      </ul>
-    </>
+    <div>
+      <h1>Chat Rooms</h1>
+      {documents &&
+        documents.map((doc) => (
+          <div key={doc.id}>
+            <h2>{doc.text}</h2>
+          </div>
+        ))}
+    </div>
   );
 };
 
-export default ChatSidebar;
+export default ChatRooms;
