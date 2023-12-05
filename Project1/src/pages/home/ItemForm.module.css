@@ -1,5 +1,16 @@
 fieldset {
+  padding: 0;
   border: none;
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+.formItem {
+  border-bottom: 1px solid white; 
+  padding: 10px 0; 
 }
 
 input,
