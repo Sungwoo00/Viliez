@@ -18,17 +18,18 @@ const RentedItem = () => {
         const items = [];
         querySnapshot.forEach((doc) => {
           const data = doc.data();
-          if (data.curRentInfo.some(info => info.rentuser === user.displayName)) {
+          if (data.curRentInfo && data.curRentInfo.some(info => info.rentuser === user.displayName)) {
             items.push({ id: doc.id, ...data });
           }
         });
         setRentedItems(items);
       } catch (err) {
-        setError('Failed to fetch data');
+        setError(err.message);
+        console.error(err);
       } finally {
         setLoading(false);
       }
-    };
+    };  
 
     if (user) {
       fetchItems();
@@ -50,7 +51,7 @@ const RentedItem = () => {
         {rentedItems.length > 0 ? (
           <RentedItemList items={rentedItems} currentUserDisplayName={user.displayName} />
         ) : (
-          <li>No rented items found.</li>
+          <li>빌린 물건이 없습니다.</li>
         )}
       </ul>
     </main>
