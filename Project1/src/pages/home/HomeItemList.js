@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import useAuthContext from '../../hooks/useAuthContext';
 import useFirestore from '../../hooks/useFirestore';
-import styles from './Home.module.css';
+import styles from './HomeItemList.module.css';
 import { useNavigate } from 'react-router-dom';
 import 'react-datepicker/dist/react-datepicker.css';
 import CustomDatePicker from './CustomDatePicker';
@@ -121,23 +121,17 @@ const HomeItemList = ({ items, selectedCategory }) => {
         <p>{`가격: ${item.price
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}</p>
-        {/* {item.curRentInfo?.length > 0 &&
-          item.curRentInfo.map((rentInfo, rentIndex) => (
-            <h4 key={rentIndex}>
-              {`이 물건은 [${rentInfo.rentuser}]님이 [${rentInfo.curRentEa}]개 대여 중입니다.`}
-            </h4>
-          ))} */}
+        <img src={item.photoURL}></img>
         <div className={styles.home_btn_container}>
-          <img src={item.photoURL}></img>
           <button className={styles.btn} onClick={() => openModal(index)}>
-            상세 정보
+            자세히
           </button>
           <button
             type='button'
             className={styles.btn}
             onClick={() => chatHandler(item)}
           >
-            채팅하기
+            채팅
           </button>
         </div>
       </li>

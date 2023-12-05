@@ -1,32 +1,13 @@
 .container {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  max-width: 960px;
+  max-width: 700px;
   margin: 50px auto;
-  padding: 0 30px;
+  padding: 0 60px;
 }
 
 .side_menu form {
   padding: 20px;
   background-color: #3498db;
   border-radius: 10px;
-}
-
-.side_menu fieldset {
-  border: none;
-}
-.side_menu .custom-file-input {
-  display: none; 
-}
-
-.side_menu .custom-file-label {
-  display: inline-block;
-  padding: 10px 15px;
-  background-color: #f0f0f0;
-  border: 1px solid #d1d1d1;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 0 10px;
 }
 
 .side_menu .custom-file-label:hover {
@@ -64,7 +45,7 @@
 }
 
 .side_menu textarea {
-  height: 200px;
+  height: auto;
 }
 
 .side_menu button {

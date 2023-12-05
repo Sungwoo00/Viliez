@@ -1,0 +1,91 @@
+.home_btn_container {
+  margin-top: 10px;
+  display: flex;
+  text-align: center;
+}
+.btn {
+  background-color: royalblue;
+  color: whitesmoke;
+  padding: 10px 20px;
+  margin: 0 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+.btn:hover {
+  opacity: 0.8;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 100%;
+}
+.modal input {
+  /* width: auto; */
+  margin: 5px;
+}
+
+.modal .rentBtn {
+  background-color: royalblue;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.closeBtn {
+  background-color: royalblue;
+  display: block;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.closeBtn:hover {
+  background-color: darkblue;
+}
+
+.loadingContainer {
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  margin-top: 20px;
+}
+
+img {
+  width: 70%;
+  margin: 0 auto;
+  display: block;
+}
+
+.ReactDatePicker {
+  width: 300px;
+}

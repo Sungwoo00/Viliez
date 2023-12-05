@@ -92,8 +92,8 @@
   margin: 5px;
 }
 
-input[type="text"] {
-    width: 100%;
+input[type='text'] {
+  width: 100%;
 }
 .modal .rentBtn {
   background-color: royalblue;
@@ -128,15 +128,6 @@ input[type="text"] {
   align-items: center;
   height: 200px;
   margin-top: 20px;
-}
-
-.home_btn_container {
-  text-align: center;
-}
-img {
-  width: 50%;
-  margin: 0 auto;
-  display: block;
 }
 
 .ReactDatePicker {

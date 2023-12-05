@@ -6,7 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { ko } from 'date-fns/esm/locale';
 import { appStorage } from '../../firebase/confing';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import Datepicker from './CustomDatePicker.module.css'
+import Datepicker from './CustomDatePicker.module.css';
 import styles from './ItemForm.module.css';
 import { appFireStore } from '../../firebase/confing';
 import { collection, doc } from 'firebase/firestore';
@@ -115,14 +115,14 @@ const ItemForm = ({ uid }) => {
       }
     }
 
-    const docRef = doc(collection(appFireStore, "Sharemarket"));
+    const docRef = doc(collection(appFireStore, 'Sharemarket'));
     const itemUid = docRef.id;
 
     const dataToSubmit = {
       uid,
       uids: {
         ownerUid: uid,
-        itemUid
+        itemUid,
       },
       price,
       ea,
@@ -195,7 +195,7 @@ const ItemForm = ({ uid }) => {
             required
             onChange={handleData}
           />
-          <div className={styles.aaa}>
+          <div className={styles.category_price_ea}>
             <select
               id='category'
               value={category}

@@ -86,7 +86,7 @@ const ItemList = ({ items }) => {
 const EditItemForm = ({ item, handleChange, handleUpdate, cancelEditing }) => {
   return (
     <>
-      <label htmlFor='editTitle'>제목 : </label>
+      {/* <label htmlFor='editTitle'>제목 : </label> */}
       <input
         id='editTitle'
         type='text'
@@ -95,7 +95,7 @@ const EditItemForm = ({ item, handleChange, handleUpdate, cancelEditing }) => {
         onChange={(e) => handleChange('title', e.target.value)}
       />
 
-      <label>카테고리 : </label>
+      {/* <label>카테고리 : </label> */}
       <select
         value={item.category}
         onChange={(e) => handleChange('category', e.target.value)}
@@ -106,7 +106,7 @@ const EditItemForm = ({ item, handleChange, handleUpdate, cancelEditing }) => {
         <option value='취미'>취미</option>
       </select>
 
-      <label htmlFor='editPrice'>가격: </label>
+      {/* <label htmlFor='editPrice'>가격: </label> */}
       <input
         id='editPrice'
         type='number'
@@ -117,7 +117,7 @@ const EditItemForm = ({ item, handleChange, handleUpdate, cancelEditing }) => {
         step='1000'
       />
 
-      <label htmlFor='editEa'>수량: </label>
+      {/* <label htmlFor='editEa'>수량: </label> */}
       <input
         id='editEa'
         type='number'
@@ -128,20 +128,21 @@ const EditItemForm = ({ item, handleChange, handleUpdate, cancelEditing }) => {
         step='1'
       />
 
-      <label htmlFor='editDescription'>설명: </label>
+      {/* <label htmlFor='editDescription'>설명: </label> */}
       <textarea
         id='editDescription'
         placeholder='새로운 설명'
         value={item.description}
         onChange={(e) => handleChange('description', e.target.value)}
       />
-
-      <button className={styles.btn_edit} onClick={handleUpdate}>
-        확인
-      </button>
-      <button className={styles.btn_delete} onClick={cancelEditing}>
-        취소
-      </button>
+      <div className={styles.btn_container}>
+        <button className={styles.btn_edit} onClick={handleUpdate}>
+          확인
+        </button>
+        <button className={styles.btn_delete} onClick={cancelEditing}>
+          취소
+        </button>
+      </div>
     </>
   );
 };
@@ -185,12 +186,14 @@ const ViewItem = ({ item, startEditing, deleteItem }) => {
       <fieldset>
         <p className={styles.description}>{item.description}</p>
       </fieldset>
-      <button className={styles.btn_edit} onClick={startEditing}>
-        수정
-      </button>
-      <button className={styles.btn_delete} onClick={deleteItem}>
-        삭제
-      </button>
+      <div className={styles.btn_container}>
+        <button className={styles.btn_edit} onClick={startEditing}>
+          수정
+        </button>
+        <button className={styles.btn_delete} onClick={deleteItem}>
+          삭제
+        </button>
+      </div>
     </>
   );
 };
