@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import useLogout from '../hooks/useLogout';
 import useAuthContext from '../hooks/useAuthContext.js';
@@ -11,6 +11,7 @@ const Nav = () => {
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [, setSelectedOption] = useState('My Page');
+  const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -20,6 +21,19 @@ const Nav = () => {
     setSelectedOption(option);
     setIsDropdownOpen(false);
   };
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setIsDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <body>
@@ -53,7 +67,11 @@ const Nav = () => {
                 <Link to='/register'>Register</Link>
               </li>
 
-              <div className={styles.select} onClick={toggleDropdown}>
+              <div
+                className={styles.select}
+                onClick={toggleDropdown}
+                ref={dropdownRef}
+              >
                 <span className={styles.selected} onClick={toggleDropdown}>
                   My Page
                 </span>
@@ -71,7 +89,11 @@ const Nav = () => {
                     <Link to='/renteditem'>Rented Item</Link>
                   </li>
                   <li onClick={() => handleOptionClick('로그아웃')}>
-                    <button type='button' onClick={logout}>
+                    <button
+                      type='button'
+                      className={styles.user_delete_btn}
+                      onClick={logout}
+                    >
                       로그아웃
                     </button>
                   </li>

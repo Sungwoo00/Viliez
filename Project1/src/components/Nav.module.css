@@ -2,8 +2,14 @@
   position: relative;
   width: 100%;
   background-color: royalblue;
-  padding: 20px 50px;
+  padding: 30px 60px;
   text-align: left;
+}
+
+.list_nav {
+  display: flex;
+  justify-content: right;
+  align-items: center;
 }
 
 .tit a,
@@ -13,9 +19,8 @@ button {
   text-decoration: none;
   cursor: pointer;
   transition: font-weight 0.5s ease, font-size 0.5s ease;
-}
-.user_delete_btn:hover {
-  color: red;
+  background-color: transparent;
+  border: none;
 }
 
 .tit a:hover,
@@ -23,47 +28,43 @@ button {
 button:hover {
   font-weight: bold;
   font-size: calc(100% + 1px);
-}
-
-.list_nav {
-  display: flex;
-  justify-content: right;
-  align-items: center;
+  border-top: 1.8px solid orange;
+  color: orange;
 }
 
 .list_nav a {
-  padding: 10px 15px;
-  border-radius: 10px;
+  padding: 0 8px;
   text-decoration-line: overline;
 }
 
-button {
-  background-color: transparent;
-  border: none;
-  color: white;
-  text-decoration: none;
-  cursor: pointer;
-  transition: font-weight 0.5s ease, font-size 0.5s ease;
-}
-button:hover {
-  font-weight: bold;
-  font-size: calc(100% + 1px);
-}
-.user_delete_btn:hover {
-  font-weight: bold;
-  font-size: calc(100% + 1px);
-}
-.select {
-  display: flex;
-  transition: backgrond 0.3s;
-}
 .selected {
+  margin-left: 8px;
+  border-top: 1.8px solid white;
+  padding-top: 2px;
+  cursor: pointer;
+  color: white;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.user_delete_btn {
   border-top: 1.8px solid white;
   cursor: pointer;
   color: white;
   font-size: 16px;
-  margin-left: 11px;
   transition: 0.3s;
+}
+
+.user_delete_btn:hover {
+  font-weight: bold;
+  font-size: calc(100% + 1px);
+  border-top: 1.8px solid orange;
+  color: orange;
+}
+
+.select {
+  display: flex;
+  transition: backgrond 0.3s;
 }
 
 .menu {
@@ -71,24 +72,32 @@ button:hover {
   display: none;
   position: absolute;
   top: 80%;
-  right: 1%;
+  right: 2%;
   width: auto;
   padding: 0.2em 0.3em;
   border: 1px black solid;
   border-radius: 8px;
   z-index: 1;
 }
+
 .menu li,
 .menu button {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
-.menuOpen {
-  display: block;
+
+.menu li {
+  padding: 0.4em;
+  margin: 0.4em 0;
+  cursor: pointer;
 }
+
 .menu button {
   color: white;
+}
+
+.menuOpen {
+  display: block;
 }
 
 .menuAnimation {
@@ -102,9 +111,4 @@ button:hover {
   to {
     max-height: 200px;
   }
-}
-.menu li {
-  padding: 0.6em 0.5em;
-  margin: 0.3em 0;
-  cursor: pointer;
 }
