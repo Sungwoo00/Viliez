@@ -3,7 +3,6 @@
   width: 100%;
   background-color: royalblue;
   padding: 30px 60px;
-  text-align: left;
 }
 
 .list_nav {
@@ -28,8 +27,8 @@ button {
 button:hover {
   font-weight: bold;
   font-size: calc(100% + 1px);
-  border-top: 1.8px solid orange;
-  color: orange;
+  /* border-top: 1.8px solid silver; */
+  color: silver;
 }
 
 .list_nav a {
@@ -46,6 +45,12 @@ button:hover {
   font-size: 16px;
   transition: 0.3s;
 }
+.selected:hover {
+  font-weight: bold;
+  font-size: calc(100% + 1px);
+  border-top: 1.8px solid silver;
+  color: silver;
+}
 
 .user_delete_btn {
   border-top: 1.8px solid white;
@@ -58,8 +63,8 @@ button:hover {
 .user_delete_btn:hover {
   font-weight: bold;
   font-size: calc(100% + 1px);
-  border-top: 1.8px solid orange;
-  color: orange;
+  border-top: 1.8px solid silver;
+  color: silver;
 }
 
 .select {
@@ -68,7 +73,8 @@ button:hover {
 }
 
 .menu {
-  background-color: skyblue;
+  background-color: royalblue;
+  opacity: 0.8;
   display: none;
   position: absolute;
   top: 80%;

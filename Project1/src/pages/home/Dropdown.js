@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import styles from './Dropdown.module.css';
 
 const Dropdown = ({ onCategoryChange }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('All Items');
+  const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -16,9 +17,22 @@ const Dropdown = ({ onCategoryChange }) => {
     onCategoryChange(option);
   };
 
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setIsDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
-      <div className={styles.container}>
+      <div className={styles.container} ref={dropdownRef}>
         <div className={styles.select} onClick={toggleDropdown}>
           <span className={styles.selected}>{selectedOption}</span>
           <div
