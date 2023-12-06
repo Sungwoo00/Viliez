@@ -1,93 +1,100 @@
-.home_btn_container {
-  margin-top: 10px;
-  display: flex;
-  text-align: center;
-}
-.btn {
-  background-color: royalblue;
-  color: whitesmoke;
-  padding: 10px 20px;
-  margin: 0 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-}
-.btn:hover {
-  opacity: 0.8;
-  color: white;
-}
-
 .modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .modal {
-  background: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  position: relative;
   max-width: 400px;
   width: 100%;
-}
-.modal input {
-  /* width: auto; */
-  margin: 5px;
-}
-
-.modal .rentBtn {
-  background-color: royalblue;
-  color: white;
-  border: none;
-  padding: 8px 12px;
+  padding: 20px;
+  background: white;
   border-radius: 5px;
-  cursor: pointer;
-  margin-left: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .closeBtn {
-  background-color: royalblue;
-  display: block;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 5px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: royalblue;
+  font-size: 30px;
   cursor: pointer;
-  margin: 10px;
 }
 
 .closeBtn:hover {
-  background-color: darkblue;
-  color: white;
+  font-size: 30px;
+  color: red;
 }
 
-.loadingContainer {
-  font-size: 20px;
+.modal p {
+  padding: 5px;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: left;
+  color: #333;
+  border-bottom: 1px solid #ccc;
+}
+
+.modal input {
+  margin: 5px;
+}
+
+.inputContainer {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
-  margin-top: 20px;
+}
+
+.quantityInput {
+  border: 1px solid #333;
+  flex: 0.75;
+}
+
+.modal .rentBtn {
+  flex: 0.2;
+  padding: 8px;
+  margin: 2px;
+  background-color: royalblue;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.home_btn_container {
+  margin-top: 10px;
+  display: flex;
+  text-align: center;
+}
+
+.infoBtn,
+.chatBtn {
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 16px;
+  background-color: royalblue;
+  color: whitesmoke;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.infoBtn:hover,
+.chatBtn:hover {
+  opacity: 0.8;
+  color: white;
 }
 
 img {
   width: 70%;
   margin: 0 auto;
   display: block;
-}
-
-.ReactDatePicker {
-  width: 300px;
 }

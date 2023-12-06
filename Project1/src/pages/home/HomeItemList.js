@@ -5,6 +5,7 @@ import styles from './HomeItemList.module.css';
 import { useNavigate } from 'react-router-dom';
 import 'react-datepicker/dist/react-datepicker.css';
 import CustomDatePicker from './CustomDatePicker';
+import { IoIosCloseCircleOutline } from 'react-icons/io';
 
 const HomeItemList = ({ items, selectedCategory }) => {
   const { updateDocument } = useFirestore('Sharemarket');
@@ -39,7 +40,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
       10
     );
     if (isNaN(quantity) || quantity < 1 || quantity > selectedItem.ea) {
-      alert('유효한 값을 입력하세요.');
+      alert('유효한 수량 값을 입력하세요.');
       return;
     }
 
@@ -123,12 +124,12 @@ const HomeItemList = ({ items, selectedCategory }) => {
           .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}</p>
         <img src={item.photoURL}></img>
         <div className={styles.home_btn_container}>
-          <button className={styles.btn} onClick={() => openModal(index)}>
+          <button className={styles.infoBtn} onClick={() => openModal(index)}>
             자세히
           </button>
           <button
             type='button'
-            className={styles.btn}
+            className={styles.chatBtn}
             onClick={() => chatHandler(item)}
           >
             채팅
@@ -141,22 +142,17 @@ const HomeItemList = ({ items, selectedCategory }) => {
   const renderModal = () => (
     <div className={styles.modalOverlay} onClick={closeModal}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <p>{`[${selectedItem.displayName}]님의 ${selectedItem.title}`}</p>
+        <button type='button' className={styles.closeBtn} onClick={closeModal}>
+          <IoIosCloseCircleOutline />
+        </button>
+        <h3>{`[${selectedItem.displayName}]님의 ${selectedItem.title}`}</h3>
         <p>{`가격: ${selectedItem.price
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}</p>
-        <p>{`${selectedItem.ea} 개`}</p>
-        <p>{selectedItem.description}</p>
+        <p>{`수량 : ${selectedItem.ea} 개`}</p>
+        <p>{`설명 : ${selectedItem.description}`}</p>
         {user && (
           <>
-            {/* <button
-                type='button'
-                className={styles.closeBtn}
-                onClick={chatHandler}
-              >
-                채팅하기
-              </button> */}
-            {/* <div className="date">날짜 선택</div> */}
             <div className='ReactDatePicker'>
               <CustomDatePicker
                 startDate={rentalPeriod.startDate}
@@ -166,16 +162,16 @@ const HomeItemList = ({ items, selectedCategory }) => {
                 openDatePicker={openDatePicker}
               />
             </div>
-            <input
-              // className='Eainput'
-              laceholder='0'
-              id='quantityInput'
-              type='number'
-              min='1'
-              max={selectedItem.ea}
-              onClick={(e) => e.stopPropagation()}
-            />
-            <div>
+            <div className={styles.inputContainer}>
+              <input
+                className={styles.quantityInput}
+                placeholder='수량을 입력하세요.'
+                id='quantityInput'
+                type='number'
+                min='1'
+                max={selectedItem.ea}
+                onClick={(e) => e.stopPropagation()}
+              />
               <button
                 type='button'
                 className={styles.rentBtn}
@@ -186,9 +182,6 @@ const HomeItemList = ({ items, selectedCategory }) => {
             </div>
           </>
         )}
-        <button type='button' className={styles.closeBtn} onClick={closeModal}>
-          닫기
-        </button>
       </div>
     </div>
   );

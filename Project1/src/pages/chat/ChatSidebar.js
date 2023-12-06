@@ -1,27 +1,36 @@
 import React from 'react';
 import useCollection from '../../hooks/useCollection';
+import SyncLoader from 'react-spinners/SyncLoader';
 
 const ChatRooms = () => {
   const { documents, error, isLoading } = useCollection('chatRooms');
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
   return (
-    <div>
-      <h1>Chat Rooms</h1>
-      {documents &&
-        documents.map((doc) => (
-          <div key={doc.id}>
-            <h2>{doc.text}</h2>
-          </div>
-        ))}
-    </div>
+    <>
+      {documents && <h1>ChatRooms</h1>}
+      {error && <strong>{error}</strong>}
+      {isLoading && (
+        <div
+          style={{
+            fontSize: '20px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '200px',
+            marginTop: '20px',
+          }}
+        >
+          <h2>잠시만 기다려주세요..</h2>
+          <SyncLoader
+            color='#136CE1'
+            margin='2'
+            loading={isLoading}
+            size={17}
+          />
+        </div>
+      )}
+    </>
   );
 };
 
