@@ -18,7 +18,8 @@ const RentedItem = () => {
       const items = [];
       querySnapshot.forEach((doc) => {
         const data = doc.data();
-        if (data.curRentInfo && data.curRentInfo.some(info => info.rentuser === user.displayName)) {
+        if ((data.curRentInfo && data.curRentInfo.some(info => info.rentuser === user.displayName)) ||
+          (data.returnedItems && data.returnedItems.some(info => info.rentuser === user.displayName))) {
           items.push({ id: doc.id, ...data });
         }
       });
@@ -30,12 +31,11 @@ const RentedItem = () => {
       setLoading(false);
     }
   };
-
   useEffect(() => {
     if (user) {
       fetchMyItems();
     }
-  }, [user]);
+  }, [user, fetchMyItems]);
 
   if (loading) {
     return <div>처리 중...</div>;

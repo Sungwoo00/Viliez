@@ -10,7 +10,28 @@ const RentedItemList = ({ items, currentUserDisplayName, fetchItems }) => {
           ?.filter(rentInfo => rentInfo.rentuser === currentUserDisplayName)
           .map(rentInfo => (
             <li className={styles.RentedItemList} key={`${item.id}-${rentInfo.startDate}`}>
-              <ViewItem item={item} rentInfo={rentInfo} currentUserDisplayName={currentUserDisplayName} fetchItems={fetchItems}/>
+              <ViewItem 
+                item={item} 
+                rentInfo={rentInfo} 
+                currentUserDisplayName={currentUserDisplayName} 
+                fetchItems={fetchItems}
+                isReturned={false} 
+              />
+            </li>
+          ))
+      )}
+      {items.flatMap(item => 
+        item.returnedItems
+          ?.filter(returnedInfo => returnedInfo.rentuser === currentUserDisplayName)
+          .map(returnedInfo => (
+            <li className={styles.RentedItemList} key={`${item.id}-${returnedInfo.endDate}`}>
+              <ViewItem 
+                item={item} 
+                rentInfo={returnedInfo} 
+                currentUserDisplayName={currentUserDisplayName} 
+                fetchItems={fetchItems}
+                isReturned={true} 
+              />
             </li>
           ))
       )}
@@ -18,7 +39,7 @@ const RentedItemList = ({ items, currentUserDisplayName, fetchItems }) => {
   );
 };
 
-const ViewItem = ({ item, rentInfo, currentUserDisplayName, fetchItems }) => {
+const ViewItem = ({ item, rentInfo, currentUserDisplayName, fetchItems, isReturned }) => {
   const endDate = new Date(rentInfo.endDate);
   const currentDate = new Date();
   const remainingDays = Math.ceil((endDate - currentDate) / (1000 * 60 * 60 * 24));
@@ -36,31 +57,33 @@ const ViewItem = ({ item, rentInfo, currentUserDisplayName, fetchItems }) => {
   const handleReturn = async (itemId, rentInfo) => {
     const confirmReturn = window.confirm("미리 반납 하시겠습니까?");
     if (confirmReturn) {
-      console.log("반납 처리가 시작됩니다.");
+      console.log("반납 처리 중입니다.");
   
       const updatedQuantity = item.ea + rentInfo.curRentEa;
       const rentIdentifier = `${rentInfo.startDate}-${rentInfo.endDate}`;
       const updatedCurRentInfo = item.curRentInfo.filter(
         (info) => `${info.startDate}-${info.endDate}` !== rentIdentifier
       );
+  
       const updatedReturnedItems = item.returnedItems ? [...item.returnedItems, rentInfo] : [rentInfo];
+
       const updatedItemInfo = {
         ...item,
         ea: updatedQuantity,
         curRentInfo: updatedCurRentInfo,
-        returnedItems: updatedReturnedItems
+        returnedItems: updatedReturnedItems,
       };
   
       try {
         await updateDocument(itemId, updatedItemInfo);
-        console.log("반납 처리가 완료되었습니다.");
+        console.log("반납 처리 되었습니다.");
         fetchItems(); 
       } catch (error) {
-        console.error("반납 처리 중 오류 발생: ", error);
+        console.error("반납 도중 오류 발생: ", error);
       }
     }
   };
-  
+
   return (
     <div className={styles.item}>
       {item.photoURL && <img src={item.photoURL} alt='Product' />}
@@ -71,14 +94,17 @@ const ViewItem = ({ item, rentInfo, currentUserDisplayName, fetchItems }) => {
       <p>대여 종료 날짜: {formatDate(endDate)}</p>
       <p>대여 수량: {rentInfo.curRentEa}</p>
 
-      {item.returnedInfo ? (
-        <strong>이 물품은 반납이 완료된 물품입니다.</strong>
+      {isReturned ? (
+        <>
+          <strong>이 물품은 반납이 완료된 물품입니다.</strong>
+          <p>반납 종료 날짜: {formatDate(new Date(rentInfo.endDate))}</p>
+          <p>반납 수량: {rentInfo.curRentEa}</p>
+        </>
       ) : (
-        <strong>반납까지 {remainingDays}일 남았습니다. </strong>
-      )}
-
-      {!item.returnedInfo && (
-        <button onClick={() => handleReturn(item.id, rentInfo)} className={styles.returnButton}>반납하기</button>
+        <>
+          <strong>반납까지 {remainingDays}일 남았습니다. </strong>
+          <button onClick={() => handleReturn(item.id, rentInfo)} className={styles.returnButton}>반납하기</button>
+        </>
       )}
     </div>
   );
