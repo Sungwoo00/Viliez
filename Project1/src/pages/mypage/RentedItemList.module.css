@@ -1,0 +1,74 @@
+.item {
+  /* margin-bottom: 20px; */
+  /* border-radius: 5px; */
+  /* border: 1px solid black; */
+  padding: 20px;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+  text-align: left;
+  bottom: 0;
+}
+
+.RentedItemList {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.item li {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.item p,
+.item strong,
+.item button {
+  display: block; 
+  margin-bottom: 10px; 
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.description {
+  font-size: 16px;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+}
+
+.list {
+  list-style-type: none;
+  border: 1px solid #f2f2f2;
+  box-shadow: 3px 3px 5px rgba(50, 50, 50, 0.3);
+  padding: 30px;
+  border: 1.2px solid black;
+  border-radius: 2%;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: rgb(94, 193, 233);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: royalblue;
+}
