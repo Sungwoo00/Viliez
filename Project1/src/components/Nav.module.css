@@ -12,8 +12,7 @@
 }
 
 .tit a,
-.list_nav a,
-button {
+.list_nav a {
   color: white;
   text-decoration: none;
   cursor: pointer;
@@ -23,8 +22,7 @@ button {
 }
 
 .tit a:hover,
-.list_nav a:hover,
-button:hover {
+.list_nav a:hover {
   font-weight: bold;
   font-size: calc(100% + 1px);
   /* border-top: 1.8px solid silver; */
@@ -53,11 +51,14 @@ button:hover {
 }
 
 .user_delete_btn {
+  border: none;
   border-top: 1.8px solid white;
-  cursor: pointer;
   color: white;
+  text-decoration: none;
+  transition: font-weight 0.5s ease, font-size 0.5s ease;
+  background-color: transparent;
+  cursor: pointer;
   font-size: 16px;
-  transition: 0.3s;
 }
 
 .user_delete_btn:hover {

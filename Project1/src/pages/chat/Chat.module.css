@@ -79,3 +79,8 @@
   border-right: 12px solid gray;
   border-bottom: 10px solid transparent;
 }
+
+.displayName {
+  font-weight: bold;
+  color: royalblue;
+}

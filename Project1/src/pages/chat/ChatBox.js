@@ -55,6 +55,7 @@ const ChatBox = () => {
       await addDoc(messagesRef, {
         text: newMessage,
         sender: user.uid,
+        displayName: user.displayName,
         timestamp: serverTimestamp(),
       });
       setNewMessage('');
@@ -70,19 +71,18 @@ const ChatBox = () => {
     <div className={styles.container}>
       <div className={styles.messageList} ref={messagesContainerRef}>
         {messages.map((message) => (
-          <div className={styles.chatprofile}>
-            <div
-              key={message.id}
-              className={`${styles.message} ${
-                message.sender === user.uid
-                  ? styles.myMessage
-                  : styles.otherMessage
-              }`}
-            >
-              <p>
-                <strong>{user.displayName}:</strong> {message.text}
-              </p>
-            </div>
+          <div
+            key={message.id}
+            className={`${styles.message} ${
+              message.sender === user.uid
+                ? styles.myMessage
+                : styles.otherMessage
+            }`}
+          >
+            <p>
+              <span className={styles.displayName}>{message.displayName}</span>:{' '}
+              <span className={styles.messageText}>{message.text}</span>
+            </p>
           </div>
         ))}
       </div>

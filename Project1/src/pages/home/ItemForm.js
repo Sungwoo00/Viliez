@@ -154,7 +154,7 @@ const ItemForm = ({ uid }) => {
         <fieldset>
           <legend>상품 등록</legend>
           <ul className={styles.formList}>
-            <li className={styles.formItem}>
+            <li>
               <ReactDatePicker
                 className={Datepicker.ReactDatePicker}
                 id='rentalperiod'
@@ -173,10 +173,9 @@ const ItemForm = ({ uid }) => {
                 locale={ko}
                 readOnly
               />
-
             </li>
 
-            <li className={styles.formItem}>
+            <li>
               <input
                 type='file'
                 id='imageInput'
@@ -186,19 +185,18 @@ const ItemForm = ({ uid }) => {
               />
               <label htmlFor='imageInput'>이미지 선택하기</label>
 
-              {
-                imagePreviewUrl && (
-                  <img
-                    src={imagePreviewUrl}
-                    alt='Preview'
-                    className={styles.imagePreview}
-                  />
-                )
-              }
+              {imagePreviewUrl && (
+                <img
+                  src={imagePreviewUrl}
+                  alt='Preview'
+                  className={styles.imagePreview}
+                />
+              )}
             </li>
 
-            <li className={styles.formItem}>
+            <li>
               <input
+                className={styles.formItem}
                 placeholder='제목'
                 id='tit'
                 type='text'
@@ -264,4 +262,3 @@ const ItemForm = ({ uid }) => {
 };
 
 export default ItemForm;
-

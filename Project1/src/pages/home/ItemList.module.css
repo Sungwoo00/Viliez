@@ -32,9 +32,9 @@
   border-radius: 5px;
 }
 
-input,
-select,
-textarea {
+.itemlist_input,
+.itemlist_select,
+.itemlist_textarea {
   width: 100%;
   padding: 8px;
   margin-bottom: 10px;

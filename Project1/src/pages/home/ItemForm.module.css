@@ -5,25 +5,8 @@ fieldset {
 
 ul {
   padding: 0;
-  list-style-type: none;
 }
 
 .formItem {
-  border-bottom: 1px solid white; 
-  padding: 10px 0; 
-}
-
-input,
-textarea,
-select {
-  margin-bottom: 10px;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-}
-
-.category_price_ea {
-  display: flex;
+  padding: 2px 0;
 }

@@ -86,17 +86,16 @@ const ItemList = ({ items }) => {
 const EditItemForm = ({ item, handleChange, handleUpdate, cancelEditing }) => {
   return (
     <>
-      {/* <label htmlFor='editTitle'>제목 : </label> */}
       <input
+        className={styles.itemlist_input}
         id='editTitle'
         type='text'
         placeholder='새로운 제목'
         value={item.title}
         onChange={(e) => handleChange('title', e.target.value)}
       />
-
-      {/* <label>카테고리 : </label> */}
       <select
+        className={styles.itemlist_select}
         value={item.category}
         onChange={(e) => handleChange('category', e.target.value)}
       >
@@ -108,6 +107,7 @@ const EditItemForm = ({ item, handleChange, handleUpdate, cancelEditing }) => {
 
       {/* <label htmlFor='editPrice'>가격: </label> */}
       <input
+        className={styles.itemlist_input}
         id='editPrice'
         type='number'
         placeholder='새로운 가격'
@@ -116,9 +116,8 @@ const EditItemForm = ({ item, handleChange, handleUpdate, cancelEditing }) => {
         min='5000'
         step='1000'
       />
-
-      {/* <label htmlFor='editEa'>수량: </label> */}
       <input
+        className={styles.itemlist_input}
         id='editEa'
         type='number'
         placeholder='새로운 수량'
@@ -127,9 +126,8 @@ const EditItemForm = ({ item, handleChange, handleUpdate, cancelEditing }) => {
         min='1'
         step='1'
       />
-
-      {/* <label htmlFor='editDescription'>설명: </label> */}
       <textarea
+        className={styles.itemlist_textarea}
         id='editDescription'
         placeholder='새로운 설명'
         value={item.description}
