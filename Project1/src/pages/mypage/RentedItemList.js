@@ -86,7 +86,7 @@ const ViewItem = ({ item, rentInfo, currentUserDisplayName, fetchItems, isReturn
 
   return (
     <div className={styles.item}>
-      {item.photoURL && <img src={item.photoURL} alt='Product' />}
+      {item.photoURL && <img className={styles.returnedImg} src={item.photoURL} alt='Product' />}
       <strong className={styles.title}>{item.title}</strong>
       <p className={styles.price}>대여 비용: {formatPrice(item.price)}원</p>
       <p className={styles.description}>{item.description}</p>
@@ -96,7 +96,7 @@ const ViewItem = ({ item, rentInfo, currentUserDisplayName, fetchItems, isReturn
 
       {isReturned ? (
         <>
-          <strong>이 물품은 반납이 완료된 물품입니다.</strong>
+          <strong className={styles.separation}>이 물품은 반납이 완료된 물품입니다.</strong>
           <p>반납 종료 날짜: {formatDate(new Date(rentInfo.endDate))}</p>
           <p>반납 수량: {rentInfo.curRentEa}</p>
         </>

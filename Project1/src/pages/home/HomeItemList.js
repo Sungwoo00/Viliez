@@ -24,6 +24,15 @@ const HomeItemList = ({ items, selectedCategory }) => {
   const closeModal = () => setSelectedItem(null);
 
   const openDatePicker = () => setDatePickerOpen(true);
+  const closeDatePicker = () => setDatePickerOpen(false);
+
+  const handleBackgroundClick = (e) => {
+    if (isDatePickerOpen) {
+      closeDatePicker();
+    } else {
+      closeModal();
+    }
+  };
 
   const handleDateChange = (dates) => {
     const [start, end] = dates;
@@ -122,7 +131,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
         <p>{`가격: ${item.price
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}</p>
-        <img src={item.photoURL}></img>
+        <img className={styles.homeImg} src={item.photoURL}></img>
         <div className={styles.home_btn_container}>
           <button className={styles.infoBtn} onClick={() => openModal(index)}>
             자세히
@@ -140,7 +149,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
   };
 
   const renderModal = () => (
-    <div className={styles.modalOverlay} onClick={closeModal}>
+    <div className={styles.modalOverlay} onClick={handleBackgroundClick}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <button type='button' className={styles.closeBtn} onClick={closeModal}>
           <IoIosCloseCircleOutline />
