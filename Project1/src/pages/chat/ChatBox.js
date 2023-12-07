@@ -71,18 +71,26 @@ const ChatBox = () => {
     <div className={styles.container}>
       <div className={styles.messageList} ref={messagesContainerRef}>
         {messages.map((message) => (
-          <div
-            key={message.id}
-            className={`${styles.message} ${
-              message.sender === user.uid
-                ? styles.myMessage
-                : styles.otherMessage
-            }`}
-          >
-            <p>
-              <span className={styles.displayName}>{message.displayName}</span>:{' '}
-              <span className={styles.messageText}>{message.text}</span>
+          <div>
+            <p
+              className={
+                message.sender === user.uid
+                  ? styles.myDisplayName
+                  : styles.otherDisplayName
+              }
+            >
+              {message.displayName}
             </p>
+            <div
+              key={message.id}
+              className={`${styles.message} ${
+                message.sender === user.uid
+                  ? styles.myMessage
+                  : styles.otherMessage
+              }`}
+            >
+              <p className={styles.messageText}>{message.text}</p>
+            </div>
           </div>
         ))}
       </div>
