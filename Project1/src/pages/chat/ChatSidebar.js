@@ -1,13 +1,19 @@
 import React from 'react';
 import useCollection from '../../hooks/useCollection';
 import SyncLoader from 'react-spinners/SyncLoader';
+import { IoChatbubbleEllipsesOutline } from 'react-icons/io5';
 
 const ChatRooms = () => {
   const { documents, error, isLoading } = useCollection('chatRooms');
 
   return (
     <>
-      {documents && <h1>ChatRooms</h1>}
+      {documents && (
+        <h1>
+          ChatRooms
+          <IoChatbubbleEllipsesOutline />
+        </h1>
+      )}
       {error && <strong>{error}</strong>}
       {isLoading && (
         <div

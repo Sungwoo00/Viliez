@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import 'react-datepicker/dist/react-datepicker.css';
 import CustomDatePicker from './CustomDatePicker';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
+import { differenceInCalendarDays } from 'date-fns';
 
 const HomeItemList = ({ items, selectedCategory }) => {
   const { updateDocument } = useFirestore('Sharemarket');
@@ -18,10 +19,18 @@ const HomeItemList = ({ items, selectedCategory }) => {
     startDate: null,
     endDate: null,
   });
+  const [quantity, setQuantity] = useState(0);
 
   const openModal = (index) => setSelectedItem(items[index]);
   const openChat = (item) => setSelectedItem(item);
-  const closeModal = () => setSelectedItem(null);
+  const closeModal = () => {
+    setSelectedItem(null);
+    setQuantity(0);
+    setRentalPeriod({
+      startDate: null,
+      endDate: null,
+    });
+  };
 
   const openDatePicker = () => setDatePickerOpen(true);
   const closeDatePicker = () => setDatePickerOpen(false);
@@ -41,6 +50,19 @@ const HomeItemList = ({ items, selectedCategory }) => {
     if (start && end) {
       setDatePickerOpen(false);
     }
+  };
+
+  const handleQuantityChange = (e) => {
+    setQuantity(e.target.value);
+  };
+
+  const calculateTotalPrice = () => {
+    const days =
+      differenceInCalendarDays(
+        new Date(rentalPeriod.endDate),
+        new Date(rentalPeriod.startDate)
+      ) + 1;
+    return selectedItem.price * quantity * days;
   };
 
   const rentHandler = () => {
@@ -179,8 +201,11 @@ const HomeItemList = ({ items, selectedCategory }) => {
                 type='number'
                 min='1'
                 max={selectedItem.ea}
+                value={quantity}
+                onChange={handleQuantityChange}
                 onClick={(e) => e.stopPropagation()}
               />
+
               <button
                 type='button'
                 className={styles.rentBtn}
@@ -188,6 +213,9 @@ const HomeItemList = ({ items, selectedCategory }) => {
               >
                 빌리기
               </button>
+            </div>
+            <div>
+              <p>{`총 가격: ${calculateTotalPrice()}원`}</p>
             </div>
           </>
         )}

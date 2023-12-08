@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import useLogout from '../hooks/useLogout';
 import useAuthContext from '../hooks/useAuthContext.js';
-
+import { TbUserShare } from 'react-icons/tb';
 import styles from './Nav.module.css';
 
 const Nav = () => {
@@ -39,7 +39,10 @@ const Nav = () => {
     <body>
       <nav className={styles.nav}>
         <h1 className={styles.tit}>
-          <Link to='/'>C2C Share Market</Link>
+          <Link to='/'>
+            C2C Share Market
+            <TbUserShare />
+          </Link>
         </h1>
         <ul className={styles.list_nav}>
           <li>

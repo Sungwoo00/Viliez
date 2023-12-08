@@ -46,7 +46,7 @@
 .myMessage::before {
   content: '';
   position: absolute;
-  top: 40%;
+  top: 30%;
   left: 100%;
   border-top: 10px solid transparent;
   border-left: 12px solid gray;
@@ -65,7 +65,7 @@
 .otherMessage::before {
   content: '';
   position: absolute;
-  top: 40%;
+  top: 30%;
   right: 100%;
   border-top: 10px solid transparent;
   border-right: 12px solid gray;
