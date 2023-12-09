@@ -42,8 +42,8 @@ const ItemList = ({ items }) => {
     }));
   };
 
-  const handleUpdate = (itemId) => {
-    updateDocument(itemId, updatedItems[itemId]);
+  const handleUpdate = async (itemId) => {
+    await updateDocument(itemId, updatedItems[itemId]);
     setEditing((prevEditing) => ({
       ...prevEditing,
       [itemId]: false,
@@ -63,7 +63,7 @@ const ItemList = ({ items }) => {
         <li key={item.id} className={styles.myitem_list}>
           {editing[item.id] ? (
             <EditItemForm
-              item={updatedItems[item.id]}
+              item={updatedItems[item.id] || item}
               handleChange={(field, value) =>
                 handleChange(item.id, field, value)
               }

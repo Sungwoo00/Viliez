@@ -21,6 +21,19 @@ const HomeItemList = ({ items, selectedCategory }) => {
   });
   const [quantity, setQuantity] = useState(0);
 
+  const [isImageModalOpen, setImageModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const openImageModal = (imageURL) => {
+    setSelectedImage(imageURL);
+    setImageModalOpen(true);
+  };
+
+  const closeImageModal = () => {
+    setSelectedImage(null);
+    setImageModalOpen(false);
+  };
+
   const openModal = (index) => setSelectedItem(items[index]);
   const openChat = (item) => setSelectedItem(item);
   const closeModal = () => {
@@ -153,7 +166,11 @@ const HomeItemList = ({ items, selectedCategory }) => {
         <p>{`가격: ${item.price
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}</p>
-        <img className={styles.homeImg} src={item.photoURL}></img>
+        <img
+          className={styles.homeImg}
+          src={item.photoURL}
+          onClick={() => openImageModal(item.photoURL)}
+        />
         <div className={styles.home_btn_container}>
           <button className={styles.infoBtn} onClick={() => openModal(index)}>
             자세히
@@ -223,10 +240,26 @@ const HomeItemList = ({ items, selectedCategory }) => {
     </div>
   );
 
+  const renderImageModal = () => (
+    <div className={styles.modalOverlay} onClick={closeImageModal}>
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+        <button
+          type='button'
+          className={styles.closeBtn}
+          onClick={closeImageModal}
+        >
+          <IoIosCloseCircleOutline />
+        </button>
+        {selectedImage && <img src={selectedImage} alt='Large' />}
+      </div>
+    </div>
+  );
+
   return (
     <>
       {items.map(renderListItem)}
       {selectedItem && renderModal()}
+      {isImageModalOpen && renderImageModal()}
     </>
   );
 };
