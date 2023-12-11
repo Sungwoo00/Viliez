@@ -15,7 +15,7 @@ function App() {
   const { isAuthReady, user } = useAuthContext();
 
   return (
-    <div className='App'>
+    <div style={{ marginTop: '170px' }}>
       {isAuthReady ? (
         <BrowserRouter>
           <Nav />

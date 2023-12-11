@@ -34,7 +34,7 @@ const Login = () => {
             value={email}
             onChange={handleData}
           />
-          <label htmlFor='myEmail'>email</label>
+          <label htmlFor='myEmail'>이메일</label>
         </div>
         <div className={styles.input_box}>
           <input
@@ -44,7 +44,7 @@ const Login = () => {
             value={password}
             onChange={handleData}
           />
-          <label htmlFor='myPassword'>password</label>
+          <label htmlFor='myPassword'>비밀번호</label>
         </div>
         <div className={styles.strong_container}>
           {!isPending && (
@@ -64,7 +64,7 @@ const Login = () => {
           )}
           {error && (
             <strong className={styles.error}>
-              이메일과 비밀번호를 확인해주세요.
+              이메일과 비밀번호를 확인하세요.
             </strong>
           )}
         </div>

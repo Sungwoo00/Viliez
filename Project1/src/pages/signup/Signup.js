@@ -39,7 +39,7 @@ const Signup = () => {
       case 'auth/invalid-email':
         return '유효하지 않은 이메일 주소입니다.';
       case 'auth/email-already-in-use':
-        return '이미 사용 중인 이메일 주소입니다.';
+        return '이미 사용 중인 이메일입니다.';
       case 'auth/weak-password':
         return '비밀번호는 6자 이상 입력하세요.';
       case 'password-mismatch':
@@ -61,7 +61,7 @@ const Signup = () => {
             value={email}
             onChange={handleData}
           />
-          <label htmlFor='myEmail'>email</label>
+          <label htmlFor='myEmail'>이메일</label>
         </div>
         <div className={styles.input_box}>
           <input
@@ -71,7 +71,7 @@ const Signup = () => {
             value={password}
             onChange={handleData}
           />
-          <label htmlFor='myPassword'>password</label>
+          <label htmlFor='myPassword'>비밀번호</label>
         </div>
 
         <div className={styles.input_box}>
@@ -82,7 +82,7 @@ const Signup = () => {
             value={password2}
             onChange={handleData}
           />
-          <label htmlFor='myPassword2'>password2</label>
+          <label htmlFor='myPassword2'>비밀번호 확인</label>
         </div>
 
         <div className={styles.input_box}>
@@ -93,7 +93,7 @@ const Signup = () => {
             value={displayName}
             onChange={handleData}
           />
-          <label htmlFor='myNickName'>Nickname</label>
+          <label htmlFor='myNickName'>닉네임</label>
         </div>
         <div className={styles.strong_container}>
           {!isPending && (
