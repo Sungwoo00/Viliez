@@ -131,7 +131,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
 
   const renderListItem = (item, index) => {
     if (
-      selectedCategory !== 'All Items' &&
+      selectedCategory !== '모든 물품' &&
       item.category !== selectedCategory
     ) {
       return null;

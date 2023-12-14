@@ -1,21 +1,24 @@
-.Rented_list {
+.container {
+  width: 90%;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.rented_list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  width: 90%;
-  margin: 0 auto;
-  padding: 20px;
+  padding: 10px;
 }
-@media all and (max-width: 1180px) {
-}
+
 @media all and (max-width: 950px) {
-  .Rented_list {
+  .rented_list {
     grid-template-columns: repeat(2, 1fr);
     gap: 5px;
   }
 }
 @media all and (max-width: 680px) {
-  .Rented_list {
+  .rented_list {
     grid-template-columns: repeat(1, 1fr);
   }
 }

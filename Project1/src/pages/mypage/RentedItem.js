@@ -13,17 +13,17 @@ const RentedItem = () => {
   const [error, setError] = useState(null);
   const [totalItemCount, setTotalItemCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4; 
-  const paginate = pageNumber => setCurrentPage(pageNumber);
- 
+  const itemsPerPage = 4;
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = rentedItems.slice(indexOfFirstItem, indexOfLastItem);
 
   useEffect(() => {
-    console.log("현재 페이지:", currentPage);
-    console.log("페이지당 아이템 수:", itemsPerPage);
-    console.log("현재 페이지의 아이템들:", currentItems);
+    console.log('현재 페이지:', currentPage);
+    console.log('페이지당 아이템 수:', itemsPerPage);
+    console.log('현재 페이지의 아이템들:', currentItems);
   }, [currentPage, currentItems]);
 
   const fetchMyItems = async () => {
@@ -49,7 +49,7 @@ const RentedItem = () => {
         }
       });
       setRentedItems(items);
-      setTotalItemCount(items.length); 
+      setTotalItemCount(items.length);
     } catch (err) {
       setError(err.message);
       console.error(err);
@@ -74,7 +74,7 @@ const RentedItem = () => {
   return (
     <main className={styles.container}>
       <h1>나의 대여 기록</h1>
-      <ul className={styles.Rented_list}>
+      <ul className={styles.rented_list}>
         {rentedItems.length > 0 ? (
           <RentedItemList
             items={currentItems}
@@ -85,7 +85,11 @@ const RentedItem = () => {
           <li>빌린 물건이 없습니다.</li>
         )}
       </ul>
-      <Paginate itemsPerPage={itemsPerPage} totalItems={totalItemCount} pages={paginate} />
+      <Paginate
+        itemsPerPage={itemsPerPage}
+        totalItems={totalItemCount}
+        pages={paginate}
+      />
     </main>
   );
 };

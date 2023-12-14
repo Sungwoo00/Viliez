@@ -1,13 +1,19 @@
 import { useState } from 'react';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  signOut,
+} from 'firebase/auth';
 
 import { appAuth } from '../firebase/confing';
 import useAuthContext from './useAuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const useSignup = () => {
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const { dispatch } = useAuthContext();
+  const navigate = useNavigate();
 
   const signup = (email, password, displayName, errorCode) => {
     setError(null);
@@ -30,9 +36,12 @@ const useSignup = () => {
 
         updateProfile(appAuth.currentUser, { displayName })
           .then(() => {
-            dispatch({ type: 'login', payload: user });
-            setError(null);
-            setIsPending(false);
+            signOut(appAuth).then(() => {
+              dispatch({ type: 'logout' });
+              setError(null);
+              setIsPending(false);
+              navigate('../login');
+            });
           })
           .catch((err) => {
             setError(err.message);

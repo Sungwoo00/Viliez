@@ -7,7 +7,7 @@ import Dropdown from './Dropdown';
 
 const Home = () => {
   const { documents, error, isLoading } = useCollection('Sharemarket');
-  const [selectedCategory, setSelectedCategory] = useState('All Items');
+  const [selectedCategory, setSelectedCategory] = useState('모든 물품');
 
   return (
     <div className={styles.container}>

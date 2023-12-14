@@ -4,7 +4,8 @@ import styles from './Dropdown.module.css';
 
 const Dropdown = ({ onCategoryChange }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('All Items');
+  const [selectedOption, setSelectedOption] =
+    useState('카테고리를 선택하세요.');
   const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
@@ -49,10 +50,10 @@ const Dropdown = ({ onCategoryChange }) => {
           }`}
         >
           <li
-            onClick={() => handleOptionClick('All Items')}
-            className={selectedOption === 'All Items' ? styles.active : ''}
+            onClick={() => handleOptionClick('모든 물품')}
+            className={selectedOption === '모든 물품' ? styles.active : ''}
           >
-            All Items
+            모든 물품
           </li>
           <li
             onClick={() => handleOptionClick('가전')}

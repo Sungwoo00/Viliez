@@ -5,12 +5,26 @@ import useFirestore from '../../hooks/useFirestore';
 const RentedItemList = ({ items, currentUserDisplayName, fetchItems }) => {
   const countRentedItems = () => {
     return items.reduce((count, item) => {
-      return count + (item.curRentInfo?.some((rentInfo) => rentInfo.rentuser === currentUserDisplayName) ? 1 : 0);
+      return (
+        count +
+        (item.curRentInfo?.some(
+          (rentInfo) => rentInfo.rentuser === currentUserDisplayName
+        )
+          ? 1
+          : 0)
+      );
     }, 0);
   };
   const countReturnedItems = () => {
     return items.reduce((count, item) => {
-      return count + (item.returnedItems?.some((returnedInfo) => returnedInfo.rentuser === currentUserDisplayName) ? 1 : 0);
+      return (
+        count +
+        (item.returnedItems?.some(
+          (returnedInfo) => returnedInfo.rentuser === currentUserDisplayName
+        )
+          ? 1
+          : 0)
+      );
     }, 0);
   };
   const rentedItemsCount = countRentedItems();
@@ -18,46 +32,48 @@ const RentedItemList = ({ items, currentUserDisplayName, fetchItems }) => {
   return (
     rentedItemsCount,
     returnedItemsCount,
-    <>
-      {items.flatMap((item) =>
-        item.curRentInfo
-          ?.filter((rentInfo) => rentInfo.rentuser === currentUserDisplayName)
-          .map((rentInfo) => (
-            <li
-              className={styles.RentedItemList}
-              key={`${item.id}-${rentInfo.startDate}`}
-            >
-              <ViewItem
-                item={item}
-                rentInfo={rentInfo}
-                currentUserDisplayName={currentUserDisplayName}
-                fetchItems={fetchItems}
-                isReturned={false}
-              />
-            </li>
-          ))
-      )}
-      {items.flatMap((item) =>
-        item.returnedItems
-          ?.filter(
-            (returnedInfo) => returnedInfo.rentuser === currentUserDisplayName
-          )
-          .map((returnedInfo) => (
-            <li
-              className={styles.RentedItemList}
-              key={`${item.id}-${returnedInfo.endDate}`}
-            >
-              <ViewItem
-                item={item}
-                rentInfo={returnedInfo}
-                currentUserDisplayName={currentUserDisplayName}
-                fetchItems={fetchItems}
-                isReturned={true}
-              />
-            </li>
-          ))
-      )}
-    </>
+    (
+      <>
+        {items.flatMap((item) =>
+          item.curRentInfo
+            ?.filter((rentInfo) => rentInfo.rentuser === currentUserDisplayName)
+            .map((rentInfo) => (
+              <li
+                className={styles.RentedItemList}
+                key={`${item.id}-${rentInfo.startDate}`}
+              >
+                <ViewItem
+                  item={item}
+                  rentInfo={rentInfo}
+                  currentUserDisplayName={currentUserDisplayName}
+                  fetchItems={fetchItems}
+                  isReturned={false}
+                />
+              </li>
+            ))
+        )}
+        {items.flatMap((item) =>
+          item.returnedItems
+            ?.filter(
+              (returnedInfo) => returnedInfo.rentuser === currentUserDisplayName
+            )
+            .map((returnedInfo) => (
+              <li
+                className={styles.RentedItemList}
+                key={`${item.id}-${returnedInfo.endDate}`}
+              >
+                <ViewItem
+                  item={item}
+                  rentInfo={returnedInfo}
+                  currentUserDisplayName={currentUserDisplayName}
+                  fetchItems={fetchItems}
+                  isReturned={true}
+                />
+              </li>
+            ))
+        )}
+      </>
+    )
   );
 };
 
