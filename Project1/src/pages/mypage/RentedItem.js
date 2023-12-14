@@ -4,12 +4,27 @@ import RentedItemList from './RentedItemList';
 import styles from './RentedItem.module.css';
 import { collection, getDocs } from 'firebase/firestore';
 import { appFireStore } from '../../firebase/confing';
+import Paginate from '../Page/Paginate';
 
 const RentedItem = () => {
   const { user } = useAuthContext();
   const [rentedItems, setRentedItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [totalItemCount, setTotalItemCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4; 
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+ 
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = rentedItems.slice(indexOfFirstItem, indexOfLastItem);
+
+  useEffect(() => {
+    console.log("현재 페이지:", currentPage);
+    console.log("페이지당 아이템 수:", itemsPerPage);
+    console.log("현재 페이지의 아이템들:", currentItems);
+  }, [currentPage, currentItems]);
 
   const fetchMyItems = async () => {
     try {
@@ -34,6 +49,7 @@ const RentedItem = () => {
         }
       });
       setRentedItems(items);
+      setTotalItemCount(items.length); 
     } catch (err) {
       setError(err.message);
       console.error(err);
@@ -61,7 +77,7 @@ const RentedItem = () => {
       <ul className={styles.Rented_list}>
         {rentedItems.length > 0 ? (
           <RentedItemList
-            items={rentedItems}
+            items={currentItems}
             currentUserDisplayName={user.displayName}
             fetchItems={fetchMyItems}
           />
@@ -69,6 +85,7 @@ const RentedItem = () => {
           <li>빌린 물건이 없습니다.</li>
         )}
       </ul>
+      <Paginate itemsPerPage={itemsPerPage} totalItems={totalItemCount} pages={paginate} />
     </main>
   );
 };

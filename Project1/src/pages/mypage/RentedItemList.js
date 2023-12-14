@@ -3,7 +3,21 @@ import styles from './RentedItemList.module.css';
 import useFirestore from '../../hooks/useFirestore';
 
 const RentedItemList = ({ items, currentUserDisplayName, fetchItems }) => {
+  const countRentedItems = () => {
+    return items.reduce((count, item) => {
+      return count + (item.curRentInfo?.some((rentInfo) => rentInfo.rentuser === currentUserDisplayName) ? 1 : 0);
+    }, 0);
+  };
+  const countReturnedItems = () => {
+    return items.reduce((count, item) => {
+      return count + (item.returnedItems?.some((returnedInfo) => returnedInfo.rentuser === currentUserDisplayName) ? 1 : 0);
+    }, 0);
+  };
+  const rentedItemsCount = countRentedItems();
+  const returnedItemsCount = countReturnedItems();
   return (
+    rentedItemsCount,
+    returnedItemsCount,
     <>
       {items.flatMap((item) =>
         item.curRentInfo
@@ -60,8 +74,8 @@ const ViewItem = ({
     (endDate - currentDate) / (1000 * 60 * 60 * 24)
   );
 
-  const formatPrice = (price) => {
-    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const formatPrice = (TotalRentPrice) => {
+    return TotalRentPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
   const formatDate = (date) => {
@@ -108,7 +122,7 @@ const ViewItem = ({
         <img className={styles.returnedImg} src={item.photoURL} alt='Product' />
       )}
       <strong className={styles.title}>{item.title}</strong>
-      {/* <p className={styles.price}>대여 비용: {formatPrice(item.price)}원</p> */}
+      {/* <p className={styles.price}>총 대여 비용: {formatPrice(item.TotalRentPrice)}원</p> */}
       <p className={styles.description}>{item.description}</p>
       <p>대여 시작 날짜: {formatDate(new Date(rentInfo.startDate))}</p>
       <p>대여 종료 날짜: {formatDate(endDate)}</p>
