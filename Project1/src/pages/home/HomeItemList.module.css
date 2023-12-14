@@ -74,6 +74,7 @@
   margin-top: 10px;
   display: flex;
   text-align: center;
+  justify-content: space-around;
 }
 
 .infoBtn,
@@ -91,8 +92,10 @@
   transition: background-color 0.3s;
 }
 
-img {
-  width: 70%;
+.homeImg {
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
   margin: 0 auto;
   display: block;
 }

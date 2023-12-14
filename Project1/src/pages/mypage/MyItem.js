@@ -14,7 +14,7 @@ const MyItem = () => {
 
   return (
     <main className={styles.container}>
-      <h1>My Item list</h1>
+      <h1>나의 상품</h1>
       <ul className={styles.content_list}>
         {error && <strong>{error}</strong>}
         {documents && <ItemList items={documents}></ItemList>}

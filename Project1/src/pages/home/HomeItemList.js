@@ -159,7 +159,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
           {item.ea !== 0 ? '대여 가능' : '모두 대여 중'})
         </p>
         {nearestEndDate ? (
-          <p>{`가장 빠른 예약 가능 날짜:${nearestEndDate}`}</p>
+          <p>{`예약 가능 날짜:${nearestEndDate}`}</p>
         ) : (
           <p>예약 가능한 날짜 정보가 없습니다.</p>
         )}

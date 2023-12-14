@@ -37,7 +37,7 @@ const Nav = () => {
   return (
     <nav className={styles.nav}>
       <h1 className={styles.tit}>
-        <Link to='/'>C2C Share Market</Link>
+        <Link to='/'>C2C 공유 상점</Link>
       </h1>
       <ul className={styles.list_nav}>
         <li>
