@@ -20,6 +20,21 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
+.img_modal {
+  position: relative;
+  top: 40px;
+  max-width: 600px;
+  max-height: 600px;
+  padding: 20px;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.img_modal img {
+  width: 80%;
+  width: 80%;
+}
+
 .closeBtn {
   background-color: transparent;
   border: none;

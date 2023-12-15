@@ -112,7 +112,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
             : null,
         },
       ],
-      TotalRentPrice: totalRentPrice, 
+      TotalRentPrice: totalRentPrice,
     };
 
     setSelectedItem(updatedItem);
@@ -245,7 +245,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
 
   const renderImageModal = () => (
     <div className={styles.modalOverlay} onClick={closeImageModal}>
-      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+      <div className={styles.img_modal} onClick={(e) => e.stopPropagation()}>
         <button
           type='button'
           className={styles.closeBtn}

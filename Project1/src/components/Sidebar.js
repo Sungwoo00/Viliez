@@ -1,26 +1,26 @@
 import { useState, useRef, useEffect } from 'react';
 
-import styles from './Dropdown.module.css';
+import styles from './Sidebar.module.css';
 
-const Dropdown = ({ onCategoryChange }) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+const Sidebar = ({ onCategoryChange }) => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedOption, setSelectedOption] =
     useState('카테고리를 선택하세요.');
-  const dropdownRef = useRef(null);
+  const sidebarRef = useRef(null);
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
   };
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
-    setIsDropdownOpen(false);
+    setIsSidebarOpen(false);
     onCategoryChange(option);
   };
 
   const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setIsDropdownOpen(false);
+    if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+      setIsSidebarOpen(false);
     }
   };
 
@@ -33,12 +33,12 @@ const Dropdown = ({ onCategoryChange }) => {
 
   return (
     <>
-      <div className={styles.container} ref={dropdownRef}>
-        <div className={styles.select} onClick={toggleDropdown}>
+      <div className={styles.container} ref={sidebarRef}>
+        <div className={styles.select} onClick={toggleSidebar}>
           <span className={styles.selected}>{selectedOption}</span>
           <div
             className={`${styles.caret} ${
-              isDropdownOpen
+              isSidebarOpen
                 ? `${styles.caretRotate} ${styles.caretAnimation}`
                 : ''
             }`}
@@ -46,7 +46,7 @@ const Dropdown = ({ onCategoryChange }) => {
         </div>
         <ul
           className={`${styles.menu} ${
-            isDropdownOpen ? `${styles.menuOpen} ${styles.menuAnimation}` : ''
+            isSidebarOpen ? `${styles.menuOpen} ${styles.menuAnimation}` : ''
           }`}
         >
           <li
@@ -85,4 +85,4 @@ const Dropdown = ({ onCategoryChange }) => {
   );
 };
 
-export default Dropdown;
+export default Sidebar;

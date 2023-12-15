@@ -1,0 +1,76 @@
+.container {
+  width: 100%;
+  overflow: auto;
+}
+
+.select {
+  display: block;
+  margin: auto;
+  transition: background 0.3s;
+}
+
+.selected {
+  font-size: 22px;
+}
+
+.caret {
+  transform: rotate(0);
+}
+
+.caretAnimation {
+  animation: rotateCaret 0.3s linear forwards;
+}
+
+@keyframes rotateCaret {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+.caret:hover {
+  cursor: pointer;
+}
+
+.menu {
+  display: none;
+  text-align: left;
+  width: 100%;
+  padding: 0.2em 0.5em;
+
+  border-radius: 5px;
+}
+
+.menuOpen {
+  display: block;
+}
+
+.menuAnimation {
+  animation: slideIn 1s forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.menu li {
+  display: block;
+  padding: 0.6em 0.5em;
+  margin: 0.3em 0;
+  cursor: pointer;
+}
+
+.menu li:hover {
+  text-decoration-line: underline;
+}
+
+.active {
+  background: rgb(229, 226, 226);
+}
