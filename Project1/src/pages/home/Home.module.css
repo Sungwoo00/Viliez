@@ -1,14 +1,17 @@
 .container {
-  display: flex;
+  position: relative;
   max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
 }
 .sidebar {
-  flex: 1;
+  position: absolute;
   padding-top: 20px;
+  top: 0; 
+  left: 0; 
+  z-index: 1; 
 }
-
 .content_list {
-  flex: 3;
   list-style: none;
   padding: 0;
   display: grid;
