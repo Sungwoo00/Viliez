@@ -166,7 +166,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
         ) : (
           <p>예약 가능한 날짜 정보가 없습니다.</p>
         )}
-        <p>{`가격: ${item.price
+        <p>{`일일 대여 비용: ${item.price
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}</p>
         <img
@@ -197,7 +197,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
           <IoIosCloseCircleOutline />
         </button>
         <h3>{`[${selectedItem.displayName}]님의 ${selectedItem.title}`}</h3>
-        <p>{`가격: ${selectedItem.price
+        <p>{`일일 대여 비용: ${selectedItem.price
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}</p>
         <p>{`수량 : ${selectedItem.ea} 개`}</p>
@@ -235,7 +235,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
               </button>
             </div>
             <div>
-              <p>{`총 가격: ${calculateTotalPrice()}원`}</p>
+              <p>{`총 대여 비용: ${calculateTotalPrice()}원`}</p>
             </div>
           </>
         )}
