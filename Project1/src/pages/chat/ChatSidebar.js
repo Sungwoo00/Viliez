@@ -3,7 +3,7 @@ import useCollection from '../../hooks/useCollection';
 import SyncLoader from 'react-spinners/SyncLoader';
 
 const ChatRooms = () => {
-  const { documents, error, isLoading } = useCollection('chatRooms');
+  const { error, isLoading } = useCollection('chatRooms');
 
   return (
     <>

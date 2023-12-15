@@ -54,32 +54,40 @@ const Paginate = ({ itemsPerPage, totalItems, pages, currentPage }) => {
         {/* {pageGroup > 1 && ( */}
         <li className={styles.page_item}>
           <a onClick={goToPrevPageGroup} href='#' className={styles.page_Link}>
-            {"<<"}
+            {'<<'}
           </a>
         </li>
         {/* )} */}
         <li className={styles.page_item}>
           <a onClick={goToPrevPage} href='#' className={styles.page_Link}>
-            {"<"}
+            {'<'}
           </a>
         </li>
-        {pageNumbers.map(number => (
+        {pageNumbers.map((number) => (
           <li key={number} className={styles.page_item}>
-            <a onClick={(e) => { e.preventDefault(); pages(number); }} href='#'
-              className={`${styles.page_NumLink} ${number === currentPage ? styles.activePage : ''}`}>
+            <a
+              onClick={(e) => {
+                e.preventDefault();
+                pages(number);
+              }}
+              href='#'
+              className={`${styles.page_NumLink} ${
+                number === currentPage ? styles.activePage : ''
+              }`}
+            >
               {number}
             </a>
           </li>
         ))}
         <li className={styles.page_item}>
           <a onClick={goToNextPage} href='#' className={styles.page_Link}>
-            {">"}
+            {'>'}
           </a>
         </li>
         {/* {pageGroup < maxPageGroup && ( */}
         <li className={styles.page_item}>
           <a onClick={goToNextPageGroup} href='#' className={styles.page_Link}>
-            {">>"}
+            {'>>'}
           </a>
         </li>
         {/* )} */}

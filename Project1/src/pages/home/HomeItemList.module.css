@@ -112,5 +112,12 @@
   height: 150px;
   object-fit: cover;
   margin: 0 auto;
+  cursor: pointer;
   display: block;
+  transition: all 0.3s ease;
+}
+.homeImg:hover {
+  border: 2px solid lightslategrey;
+  transform: scale(1.15);
+  z-index: 1;
 }
