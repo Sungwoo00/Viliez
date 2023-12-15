@@ -15,17 +15,18 @@
 
 .Pages .page_Link {
   font-size: 33px;
-  padding: 8px 12px;
-  margin: 0 4px;
+  padding: 8px 5px;
   text-decoration: none;
   transition: font-size 0.3s ease;
   display: inline-block; 
   color:#007bff;
 }
+
 .Pages .page_Link:hover,
 .Pages .page_Link:active {
   transform: scale(1.2);
 }
+
 .Pages .page_NumLink {
   text-decoration: none;
   padding: 8px 12px;
@@ -39,6 +40,11 @@
 
 .Pages .page_NumLink:hover,
 .Pages .page_NumLink:active {
+  background-color: #007bff;
+  color: white;
+}
+
+.Pages .activePage {
   background-color: #007bff;
   color: white;
 }

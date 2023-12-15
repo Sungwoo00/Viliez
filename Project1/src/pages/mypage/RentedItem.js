@@ -13,18 +13,13 @@ const RentedItem = () => {
   const [error, setError] = useState(null);
   const [totalItemCount, setTotalItemCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4;
+  const itemsPerPage = 3;
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = rentedItems.slice(indexOfFirstItem, indexOfLastItem);
 
-  useEffect(() => {
-    console.log('현재 페이지:', currentPage);
-    console.log('페이지당 아이템 수:', itemsPerPage);
-    console.log('현재 페이지의 아이템들:', currentItems);
-  }, [currentPage, currentItems]);
 
   const fetchMyItems = async () => {
     try {
@@ -89,6 +84,8 @@ const RentedItem = () => {
         itemsPerPage={itemsPerPage}
         totalItems={totalItemCount}
         pages={paginate}
+        currentPage={currentPage}
+
       />
     </main>
   );

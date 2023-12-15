@@ -88,6 +88,8 @@ const HomeItemList = ({ items, selectedCategory }) => {
       return;
     }
 
+    const totalRentPrice = calculateTotalPrice();
+
     const curRentInfo = selectedItem.curRentInfo || [];
 
     const updatedItem = {
@@ -110,6 +112,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
             : null,
         },
       ],
+      TotalRentPrice: totalRentPrice, 
     };
 
     setSelectedItem(updatedItem);
