@@ -1,16 +1,28 @@
 .container {
   width: 100%;
   overflow: auto;
+  padding: 10px;
+  background: white;
+  text-align: left;
+  min-width: 150px;
+  /* border: solid 1px; */
 }
-
+.containerWithBorder {
+  border: solid 1px;
+}
 .select {
-  display: block;
+  display: flex;
   margin: auto;
+  text-align: left;
   transition: background 0.3s;
+  align-items: center;
+  justify-content: center; 
+  
 }
 
 .selected {
-  font-size: 22px;
+  font-size: 20px;
+  margin-left: 10px; 
 }
 
 .caret {
@@ -36,10 +48,8 @@
 
 .menu {
   display: none;
-  text-align: left;
   width: 100%;
-  padding: 0.2em 0.5em;
-
+  /* padding: 0.5em 0px 0.5em ; */
   border-radius: 5px;
 }
 
@@ -53,7 +63,7 @@
 
 @keyframes slideIn {
   from {
-    transform: translateY(-100%);
+    transform: translateY(-8%);
   }
   to {
     transform: translateY(0);
@@ -62,13 +72,14 @@
 
 .menu li {
   display: block;
-  padding: 0.6em 0.5em;
+  padding: 0.6em 0px 0.6em 10px;
   margin: 0.3em 0;
   cursor: pointer;
 }
 
 .menu li:hover {
-  text-decoration-line: underline;
+  background-color: #007bff;
+  color: white;
 }
 
 .active {

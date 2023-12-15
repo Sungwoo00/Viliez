@@ -1,11 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
-
 import styles from './Sidebar.module.css';
+import { IoMenu } from 'react-icons/io5';
 
 const Sidebar = ({ onCategoryChange }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [selectedOption, setSelectedOption] =
-    useState('카테고리를 선택하세요.');
+  const [selectedOption, setSelectedOption] = useState('카테고리 선택');
   const sidebarRef = useRef(null);
 
   const toggleSidebar = () => {
@@ -33,21 +32,24 @@ const Sidebar = ({ onCategoryChange }) => {
 
   return (
     <>
-      <div className={styles.container} ref={sidebarRef}>
+      <div
+        className={`${styles.container} ${isSidebarOpen ? styles.containerWithBorder : ''
+          }`}
+        ref={sidebarRef}
+      >
         <div className={styles.select} onClick={toggleSidebar}>
+          <IoMenu size={25} />
           <span className={styles.selected}>{selectedOption}</span>
           <div
-            className={`${styles.caret} ${
-              isSidebarOpen
-                ? `${styles.caretRotate} ${styles.caretAnimation}`
-                : ''
-            }`}
+            className={`${styles.caret} ${isSidebarOpen
+              ? `${styles.caretRotate} ${styles.caretAnimation}`
+              : ''
+              }`}
           ></div>
         </div>
         <ul
-          className={`${styles.menu} ${
-            isSidebarOpen ? `${styles.menuOpen} ${styles.menuAnimation}` : ''
-          }`}
+          className={`${styles.menu} ${isSidebarOpen ? `${styles.menuOpen} ${styles.menuAnimation}` : ''
+            }`}
         >
           <li
             onClick={() => handleOptionClick('모든 물품')}

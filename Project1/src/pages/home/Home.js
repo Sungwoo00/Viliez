@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import HomeItemList from './HomeItemList';
 import styles from './Home.module.css';
 import useCollection from '../../hooks/useCollection';
@@ -10,14 +10,20 @@ const Home = () => {
   const { documents, error, isLoading } = useCollection('Sharemarket');
   const [selectedCategory, setSelectedCategory] = useState('모든 물품');
 
+  const filteredItems = documents?.filter(
+    item => selectedCategory === '모든 물품' || item.category === selectedCategory
+  );
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategory]);
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = documents
-    ? documents.slice(indexOfFirstItem, indexOfLastItem)
-    : [];
+  const currentItems = filteredItems?.slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -50,7 +56,7 @@ const Home = () => {
       </div>
       <Paginate
         itemsPerPage={itemsPerPage}
-        totalItems={documents ? documents.length : 0}
+        totalItems={filteredItems?.length || 0}
         pages={paginate}
         currentPage={currentPage}
       />

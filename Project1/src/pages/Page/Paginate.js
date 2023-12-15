@@ -52,11 +52,11 @@ const Paginate = ({ itemsPerPage, totalItems, pages, currentPage }) => {
     <nav>
       <ul className={styles.Pages}>
         {/* {pageGroup > 1 && ( */}
-        <li className={styles.page_item}>
+        {/* <li className={styles.page_item}>
           <a onClick={goToPrevPageGroup} href='#' className={styles.page_Link}>
             {'<<'}
           </a>
-        </li>
+        </li> */}
         {/* )} */}
         <li className={styles.page_item}>
           <a onClick={goToPrevPage} href='#' className={styles.page_Link}>
@@ -85,11 +85,11 @@ const Paginate = ({ itemsPerPage, totalItems, pages, currentPage }) => {
           </a>
         </li>
         {/* {pageGroup < maxPageGroup && ( */}
-        <li className={styles.page_item}>
+        {/* <li className={styles.page_item}>
           <a onClick={goToNextPageGroup} href='#' className={styles.page_Link}>
             {'>>'}
           </a>
-        </li>
+        </li> */}
         {/* )} */}
       </ul>
     </nav>
