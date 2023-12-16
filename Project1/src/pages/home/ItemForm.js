@@ -106,11 +106,11 @@ const ItemForm = ({ uid }) => {
 
       try {
         await uploadBytes(storageRef, selectedImage);
-        alert('image upload success');
+        alert('상품을 등록하였습니다.');
         photoURL = await getDownloadURL(storageRef);
-        console.log('Download URL:', photoURL);
+        // console.log('Download URL:', photoURL);
       } catch (error) {
-        alert('image upload ');
+        alert('상품 등록 오류 ❗️');
         return;
       }
     }
@@ -189,6 +189,7 @@ const ItemForm = ({ uid }) => {
                 <img
                   src={imagePreviewUrl}
                   alt='Preview'
+                  required
                   className={styles.imagePreview}
                 />
               )}
@@ -227,6 +228,8 @@ const ItemForm = ({ uid }) => {
                 id='price'
                 type='number'
                 value={price}
+                min='5000'
+                step='1000'
                 required
                 onChange={handleData}
               />
@@ -238,6 +241,8 @@ const ItemForm = ({ uid }) => {
                 id='ea'
                 type='number'
                 value={ea}
+                min='1'
+                step='1'
                 required
                 onChange={handleData}
               />

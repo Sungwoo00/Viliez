@@ -6,7 +6,7 @@ const Paginate = ({ itemsPerPage, totalItems, pages, currentPage }) => {
   const maxPageNumber = Math.ceil(totalItems / itemsPerPage);
   const pageNumbers = [];
   const pagesPerGroup = 5;
-  const maxPageGroup = Math.ceil(maxPageNumber / pagesPerGroup);
+  // const maxPageGroup = Math.ceil(maxPageNumber / pagesPerGroup);
 
   for (
     let i = (pageGroup - 1) * pagesPerGroup + 1;
@@ -34,19 +34,19 @@ const Paginate = ({ itemsPerPage, totalItems, pages, currentPage }) => {
     }
   };
 
-  const goToPrevPageGroup = () => {
-    if (pageGroup > 1) {
-      setPageGroup(pageGroup - 1);
-      pages((pageGroup - 1) * pagesPerGroup);
-    }
-  };
+  // const goToPrevPageGroup = () => {
+  //   if (pageGroup > 1) {
+  //     setPageGroup(pageGroup - 1);
+  //     pages((pageGroup - 1) * pagesPerGroup);
+  //   }
+  // };
 
-  const goToNextPageGroup = () => {
-    if (pageGroup < maxPageGroup) {
-      setPageGroup(pageGroup + 1);
-      pages(pageGroup * pagesPerGroup + 1);
-    }
-  };
+  // const goToNextPageGroup = () => {
+  //   if (pageGroup < maxPageGroup) {
+  //     setPageGroup(pageGroup + 1);
+  //     pages(pageGroup * pagesPerGroup + 1);
+  //   }
+  // };
 
   return (
     <nav>
