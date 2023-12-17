@@ -4,7 +4,7 @@ import RentedItemList from './RentedItemList';
 import styles from './RentedItem.module.css';
 import { collection, getDocs } from 'firebase/firestore';
 import { appFireStore } from '../../firebase/confing';
-import Paginate from '../Page/Paginate';
+import Paginate from '../../components/Paginate';
 
 const RentedItem = () => {
   const { user } = useAuthContext();
@@ -19,7 +19,6 @@ const RentedItem = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = rentedItems.slice(indexOfFirstItem, indexOfLastItem);
-
 
   const fetchMyItems = async () => {
     try {
@@ -85,7 +84,6 @@ const RentedItem = () => {
         totalItems={totalItemCount}
         pages={paginate}
         currentPage={currentPage}
-
       />
     </main>
   );

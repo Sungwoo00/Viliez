@@ -1,9 +1,9 @@
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import HomeItemList from './HomeItemList';
 import styles from './Home.module.css';
 import useCollection from '../../hooks/useCollection';
 import SyncLoader from 'react-spinners/SyncLoader';
-import Paginate from '../Page/Paginate';
+import Paginate from '../../components/Paginate';
 import Sidebar from '../../components/Sidebar';
 
 const Home = () => {
@@ -11,7 +11,8 @@ const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState('모든 물품');
 
   const filteredItems = documents?.filter(
-    item => selectedCategory === '모든 물품' || item.category === selectedCategory
+    (item) =>
+      selectedCategory === '모든 물품' || item.category === selectedCategory
   );
 
   const [currentPage, setCurrentPage] = useState(1);
