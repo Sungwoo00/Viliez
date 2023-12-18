@@ -4,7 +4,7 @@ import useFirestore from '../../hooks/useFirestore';
 import styles from './HomeItemList.module.css';
 import { useNavigate } from 'react-router-dom';
 import 'react-datepicker/dist/react-datepicker.css';
-import CustomDatePicker from './CustomDatePicker';
+import CustomDatePicker from '../../components/CustomDatePicker';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 import { differenceInCalendarDays } from 'date-fns';
 
