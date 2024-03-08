@@ -1,0 +1,123 @@
+.nav {
+  position: fixed;
+  top: 0;
+  z-index: 5;
+  width: 100%;
+  background-color: royalblue;
+  padding: 30px 60px;
+}
+
+.list_nav {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.tit a,
+.list_nav a {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  transition: font-weight 0.5s ease, font-size 0.5s ease;
+  background-color: transparent;
+  border: none;
+}
+
+.tit a:hover,
+.list_nav a:hover {
+  font-weight: bold;
+  font-size: calc(100% + 1px);
+  /* border-top: 1.8px solid silver; */
+  color: silver;
+}
+
+.list_nav a {
+  padding: 0 8px;
+  text-decoration-line: overline;
+}
+
+.selected {
+  margin-left: 8px;
+  border-top: 1.8px solid white;
+  padding-top: 2px;
+  cursor: pointer;
+  color: white;
+  font-size: 16px;
+  transition: 0.3s;
+}
+.selected:hover {
+  font-weight: bold;
+  font-size: calc(100% + 1px);
+  border-top: 1.8px solid silver;
+  color: silver;
+}
+
+.user_delete_btn {
+  border: none;
+  border-top: 1.8px solid white;
+  color: white;
+  text-decoration: none;
+  transition: font-weight 0.5s ease, font-size 0.5s ease;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.user_delete_btn:hover {
+  font-weight: bold;
+  font-size: calc(100% + 1px);
+  border-top: 1.8px solid silver;
+  color: silver;
+}
+
+.select {
+  display: flex;
+  transition: backgrond 0.3s;
+}
+
+.menu {
+  background-color: royalblue;
+  opacity: 0.8;
+  display: none;
+  position: absolute;
+  top: 80%;
+  right: 3.3%;
+  width: auto;
+  padding: 0.2em 0.3em;
+  border: 1px black solid;
+  border-radius: 8px;
+  z-index: 3;
+}
+
+.menu li,
+.menu button {
+  display: flex;
+  justify-content: center;
+}
+
+.menu li {
+  padding: 0.4em;
+  margin: 0.4em 0;
+  cursor: pointer;
+}
+
+.menu button {
+  color: white;
+}
+
+.menuOpen {
+  display: block;
+}
+
+.menuAnimation {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    max-height: 0;
+  }
+  to {
+    max-height: 200px;
+  }
+}

@@ -1,0 +1,28 @@
+.container {
+  width: 90%;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.content_list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media all and (max-width: 950px) {
+  .content_list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+  }
+}
+@media all and (max-width: 680px) {
+  .content_list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+h1 {
+  color: #1a237e;
+  text-align: center;
+  margin-bottom: 20px;
+}

@@ -1,0 +1,77 @@
+.myitem_list {
+  margin-bottom: 20px;
+  border-radius: 5px;
+  position: relative;
+  border: 1px solid black;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.price,
+.ea {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.description {
+  font-size: 16px;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+.editing {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.itemlist_input,
+.itemlist_select,
+.itemlist_textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.btn_container {
+  display: flex;
+  justify-content: space-evenly;
+}
+.btn_edit,
+.btn_delete {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn_delete {
+  background-color: #f44336;
+  margin-left: 10px;
+}
+
+.btn_edit:hover,
+.btn_delete:hover {
+  opacity: 0.8;
+}
+
+.ImgSize {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}

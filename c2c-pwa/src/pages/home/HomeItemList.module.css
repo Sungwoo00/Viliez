@@ -1,0 +1,125 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+  position: relative;
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.img_modal {
+  position: relative;
+  top: 80px;
+  max-width: 600px;
+  max-height: 600px;
+  padding: 20px;
+  background: white;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.img_modal img {
+  width: 70%;
+  height: 70%;
+}
+
+.closeBtn {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: royalblue;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.closeBtn:hover {
+  font-size: 30px;
+  color: red;
+}
+
+.modal p {
+  padding: 5px;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: left;
+  color: #333;
+  border-bottom: 1px solid #ccc;
+}
+
+.modal input {
+  margin: 5px;
+  padding: 7px;
+}
+
+.inputContainer {
+  display: flex;
+}
+
+.quantityInput {
+  border: 1.5px solid black;
+  flex: 0.75;
+}
+
+.modal .rentBtn {
+  flex: 0.2;
+  padding: 8px;
+  margin: 2px;
+  background-color: royalblue;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.home_btn_container {
+  margin-top: 10px;
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+}
+
+.infoBtn,
+.chatBtn {
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 16px;
+  background-color: royalblue;
+  color: whitesmoke;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.homeImg {
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+  margin: 0 auto;
+  cursor: pointer;
+  display: block;
+  transition: all 0.3s ease;
+}
+.homeImg:hover {
+  border: 2px solid lightslategrey;
+  transform: scale(1.15);
+  z-index: 1;
+}
