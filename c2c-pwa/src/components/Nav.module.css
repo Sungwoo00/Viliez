@@ -33,12 +33,12 @@
 
 .list_nav a {
   padding: 0 8px;
-  text-decoration-line: overline;
+  /* text-decoration-line: overline; */
 }
 
 .selected {
   margin-left: 8px;
-  border-top: 1.8px solid white;
+  /* border-top: 1.8px solid white; */
   padding-top: 2px;
   cursor: pointer;
   color: white;
@@ -48,13 +48,13 @@
 .selected:hover {
   font-weight: bold;
   font-size: calc(100% + 1px);
-  border-top: 1.8px solid silver;
+  /* border-top: 1.8px solid silver; */
   color: silver;
 }
 
 .user_delete_btn {
   border: none;
-  border-top: 1.8px solid white;
+  /* border-top: 1.8px solid white; */
   color: white;
   text-decoration: none;
   transition: font-weight 0.5s ease, font-size 0.5s ease;
@@ -66,7 +66,7 @@
 .user_delete_btn:hover {
   font-weight: bold;
   font-size: calc(100% + 1px);
-  border-top: 1.8px solid silver;
+  /* border-top: 1.8px solid silver; */
   color: silver;
 }
 
