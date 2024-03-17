@@ -33,23 +33,26 @@ const Sidebar = ({ onCategoryChange }) => {
   return (
     <>
       <div
-        className={`${styles.container} ${isSidebarOpen ? styles.containerWithBorder : ''
-          }`}
+        className={`${styles.container} ${
+          isSidebarOpen ? styles.containerWithBorder : ''
+        }`}
         ref={sidebarRef}
       >
         <div className={styles.select} onClick={toggleSidebar}>
           <IoMenu size={25} />
           <span className={styles.selected}>{selectedOption}</span>
           <div
-            className={`${styles.caret} ${isSidebarOpen
-              ? `${styles.caretRotate} ${styles.caretAnimation}`
-              : ''
-              }`}
+            className={`${styles.caret} ${
+              isSidebarOpen
+                ? `${styles.caretRotate} ${styles.caretAnimation}`
+                : ''
+            }`}
           ></div>
         </div>
         <ul
-          className={`${styles.menu} ${isSidebarOpen ? `${styles.menuOpen} ${styles.menuAnimation}` : ''
-            }`}
+          className={`${styles.menu} ${
+            isSidebarOpen ? `${styles.menuOpen} ${styles.menuAnimation}` : ''
+          }`}
         >
           <li
             onClick={() => handleOptionClick('모든 물품')}
