@@ -157,23 +157,24 @@ const HomeItemList = ({ items, selectedCategory }) => {
     return (
       <li key={item.id} className={styles.item}>
         <strong className={styles.title}>{item.title}</strong>
-        <p>
-          남은 수량: {item.ea} 개 (
-          {item.ea !== 0 ? '대여 가능' : '모두 대여 중'})
-        </p>
-        {nearestEndDate ? (
-          <p>{`예약 가능 날짜:${nearestEndDate}`}</p>
-        ) : (
-          <p>예약 가능한 날짜 정보가 없습니다.</p>
-        )}
-        <p>{`일일 대여 비용: ${item.price
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}</p>
         <img
           className={styles.homeImg}
           src={item.photoURL}
           onClick={() => openImageModal(item.photoURL)}
         />
+        <p className={styles.amountP}>
+          남은 수량: {item.ea} 개 (
+          {item.ea !== 0 ? '대여 가능' : '모두 대여 중'})
+        </p>
+        {nearestEndDate ? (
+          <p className={styles.dateP}>{`예약 가능 날짜:${nearestEndDate}`}</p>
+        ) : (
+          <p className={styles.dateP}>예약 가능한 날짜 정보가 없습니다.</p>
+        )}
+        <p className={styles.priceP}>{`일일 대여 비용: ${item.price
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}</p>
+
         <div className={styles.home_btn_container}>
           <button className={styles.infoBtn} onClick={() => openModal(index)}>
             자세히
