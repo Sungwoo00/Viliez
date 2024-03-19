@@ -7,7 +7,7 @@ import {
   collection,
 } from 'firebase/firestore';
 import { deleteUser, signOut } from 'firebase/auth';
-import { appAuth, appFireStore } from '../firebase/confing';
+import { appAuth, appFireStore } from '../firebase/config';
 import useAuthContext from './useAuthContext';
 import { useState } from 'react';
 

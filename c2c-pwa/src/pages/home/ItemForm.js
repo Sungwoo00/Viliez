@@ -4,11 +4,11 @@ import useFirestore from '../../hooks/useFirestore';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ko } from 'date-fns/esm/locale';
-import { appStorage } from '../../firebase/confing';
+import { appStorage } from '../../firebase/config';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import Datepicker from '../../components/CustomDatePicker.module.css';
 import styles from './ItemForm.module.css';
-import { appFireStore } from '../../firebase/confing';
+import { appFireStore } from '../../firebase/config';
 import { collection, doc } from 'firebase/firestore';
 
 const ItemForm = ({ uid }) => {

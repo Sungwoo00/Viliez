@@ -6,7 +6,7 @@ import {
   doc,
 } from 'firebase/firestore';
 import { useReducer } from 'react';
-import { appFireStore, timestamp } from '../firebase/confing';
+import { appFireStore, timestamp } from '../firebase/config';
 
 const initState = {
   document: null,

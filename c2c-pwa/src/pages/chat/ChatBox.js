@@ -7,7 +7,7 @@ import {
   onSnapshot,
 } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
-import { appFireStore } from '../../firebase/confing';
+import { appFireStore } from '../../firebase/config';
 import styles from './Chat.module.css';
 
 const ChatBox = () => {

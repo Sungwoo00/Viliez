@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
-import { appAuth } from '../firebase/confing';
+import { appAuth } from '../firebase/config';
 import useAuthContext from './useAuthContext';
 
 const useLogin = () => {

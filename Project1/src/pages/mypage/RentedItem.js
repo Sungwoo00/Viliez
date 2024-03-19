@@ -3,7 +3,7 @@ import useAuthContext from '../../hooks/useAuthContext';
 import RentedItemList from './RentedItemList';
 import styles from './RentedItem.module.css';
 import { collection, getDocs } from 'firebase/firestore';
-import { appFireStore } from '../../firebase/confing';
+import { appFireStore } from '../../firebase/config';
 import Paginate from '../../components/Paginate';
 
 const RentedItem = () => {

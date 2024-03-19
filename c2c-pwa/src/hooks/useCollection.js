@@ -6,7 +6,7 @@ import {
   where,
 } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
-import { appFireStore } from '../firebase/confing';
+import { appFireStore } from '../firebase/config';
 
 const useCollection = (transaction, myQuery) => {
   const [documents, setDocuments] = useState(null);
