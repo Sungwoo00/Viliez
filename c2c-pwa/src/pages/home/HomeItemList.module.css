@@ -124,27 +124,25 @@
   z-index: 1;
 }
 
-/* ToDo : 모바일 UI css */
-@media (max-width: 600px) {
+@media (max-width: 550px) {
   .homeImg {
-    width: 100px;
-    height: 100px;
+    width: 125px;
+    height: 125px;
     float: left;
-  }
-  .home_btn_container {
-    margin: 0 auto;
   }
   .infoBtn,
   .chatBtn {
     padding: 10px 20px;
-    margin: 0 auto;
     font-size: 12px;
   }
-  .amountP,
   .dateP {
     display: none;
   }
   .modal {
     width: 300px;
+    top: 100px;
+  }
+  .home_btn_container {
+    display: block;
   }
 }
