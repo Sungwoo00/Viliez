@@ -1,4 +1,7 @@
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import Lottie from 'react-lottie-player';
+import loadingScreenJson from './lottie/loadingScreen.json';
 
 import Home from './pages/home/Home';
 import Register from './pages/home/Register';
@@ -13,6 +16,37 @@ import RentedItem from './pages/mypage/RentedItem';
 
 function App() {
   const { isAuthReady, user } = useAuthContext();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
+  if (loading) {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}
+      >
+        <Lottie
+          loop={false}
+          animationData={loadingScreenJson}
+          play
+          style={{ width: 400, height: 400 }}
+        />
+        <h2 style={{ color: '#192F71' }}>준비되는 동안 잠시만 기다려주세요</h2>
+      </div>
+    );
+  }
 
   return (
     <div style={{ marginTop: '170px' }}>
