@@ -139,6 +139,7 @@ input[type='text'] {
 @media (max-width: 550px) {
   .container {
     padding: 5px;
+    top: -80px;
   }
   .content_list li {
     padding: 5px;

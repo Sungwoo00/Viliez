@@ -54,13 +54,14 @@ const Home = () => {
             ></HomeItemList>
           )}
         </ul>
+        <Paginate
+          itemsPerPage={itemsPerPage}
+          totalItems={filteredItems?.length || 0}
+          pages={paginate}
+          currentPage={currentPage}
+        />
       </div>
-      <Paginate
-        itemsPerPage={itemsPerPage}
-        totalItems={filteredItems?.length || 0}
-        pages={paginate}
-        currentPage={currentPage}
-      />
+      )
     </>
   );
 };
