@@ -1,18 +1,18 @@
-import { useState, useEffect } from "react";
-import HomeItemList from "./HomeItemList";
-import styles from "./Home.module.css";
-import useCollection from "../../hooks/useCollection";
-import SyncLoader from "react-spinners/SyncLoader";
-import Paginate from "../../components/Paginate";
-import Sidebar from "../../components/Sidebar";
+import { useState, useEffect } from 'react';
+import HomeItemList from './HomeItemList';
+import styles from './Home.module.css';
+import useCollection from '../../hooks/useCollection';
+import SyncLoader from 'react-spinners/SyncLoader';
+import Paginate from '../../components/Paginate';
+import Sidebar from '../../components/Sidebar';
 
 const Home = () => {
-  const { documents, error, isLoading } = useCollection("Sharemarket");
-  const [selectedCategory, setSelectedCategory] = useState("모든 물품");
+  const { documents, error, isLoading } = useCollection('Sharemarket');
+  const [selectedCategory, setSelectedCategory] = useState('모든 물품');
 
   const filteredItems = documents?.filter(
     (item) =>
-      selectedCategory === "모든 물품" || item.category === selectedCategory
+      selectedCategory === '모든 물품' || item.category === selectedCategory
   );
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -38,8 +38,8 @@ const Home = () => {
           <div className={styles.loadingContainer}>
             <h2>물건을 가져오는 중..</h2>
             <SyncLoader
-              color="#136CE1"
-              margin="2"
+              color='#136CE1'
+              margin='2'
               loading={isLoading}
               size={17}
             />

@@ -135,3 +135,30 @@
   text-align: center;
   font-weight: bold;
 }
+
+.btnWrapper {
+  padding-top: 24px;
+}
+
+.linkBtn {
+  width: 100%;
+  border: 1px solid #222;
+  background-color: #fff;
+
+  font-size: 16px;
+  font-weight: 600;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  text-decoration: none;
+}
+.btnWrapper a {
+  color: #000;
+  text-decoration: none;
+}
+.linkBtn:hover {
+  background-color: #000;
+  color: #fff;
+}

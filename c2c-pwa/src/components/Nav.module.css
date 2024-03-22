@@ -5,14 +5,17 @@
   width: 100%;
   background-color: royalblue;
   padding: 30px 60px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .list_nav {
   display: flex;
-  justify-content: right;
   align-items: center;
 }
-
+.tit {
+  margin-left: 20px;
+}
 .tit a,
 .list_nav a {
   color: white;

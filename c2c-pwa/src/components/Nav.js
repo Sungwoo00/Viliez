@@ -36,20 +36,17 @@ const Nav = () => {
 
   return (
     <nav className={styles.nav}>
-      <h1 className={styles.tit}>
+      <h2 className={styles.tit}>
         <Link to='/'>C2C 공유 상점</Link>
-      </h1>
+      </h2>
       <ul className={styles.list_nav}>
-        <li>
+        {/* <li>
           <Link to='/'>홈</Link>
-        </li>
+        </li> */}
         {!user && (
           <>
             <li>
-              <Link to='/login'>로그인</Link>
-            </li>
-            <li>
-              <Link to='/signup'>회원가입</Link>
+              <Link to='/login'>로그인/회원가입</Link>
             </li>
           </>
         )}
@@ -65,47 +62,30 @@ const Nav = () => {
               <Link to='/register'>상품등록</Link>
             </li>
 
-            <div
-              className={styles.select}
-              onClick={toggleDropdown}
-              ref={dropdownRef}
-            >
-              <span className={styles.selected} onClick={toggleDropdown}>
-                마이페이지
-              </span>
-              <ul
-                className={`${styles.menu} ${
-                  isDropdownOpen
-                    ? `${styles.menuOpen} ${styles.menuAnimation}`
-                    : ''
-                }`}
+            <li>
+              <Link to='/myitem'>나의상품</Link>
+            </li>
+            <li>
+              <Link to='/renteditem'>대여기록</Link>
+            </li>
+            <li onClick={() => handleOptionClick('로그아웃')}>
+              <button
+                type='button'
+                className={styles.user_delete_btn}
+                onClick={logout}
               >
-                <li>
-                  <Link to='/myitem'>나의상품</Link>
-                </li>
-                <li>
-                  <Link to='/renteditem'>대여기록</Link>
-                </li>
-                <li onClick={() => handleOptionClick('로그아웃')}>
-                  <button
-                    type='button'
-                    className={styles.user_delete_btn}
-                    onClick={logout}
-                  >
-                    로그아웃
-                  </button>
-                </li>
-                <li onClick={() => handleOptionClick('회원탈퇴')}>
-                  <button
-                    type='button'
-                    className={styles.user_delete_btn}
-                    onClick={userDelete}
-                  >
-                    회원탈퇴
-                  </button>
-                </li>
-              </ul>
-            </div>
+                로그아웃
+              </button>
+            </li>
+            {/* <li onClick={() => handleOptionClick('회원탈퇴')}>
+              <button
+                type='button'
+                className={styles.user_delete_btn}
+                onClick={userDelete}
+              >
+                회원탈퇴
+              </button>
+            </li> */}
           </>
         )}
       </ul>
