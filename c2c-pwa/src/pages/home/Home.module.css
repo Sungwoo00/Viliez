@@ -32,6 +32,7 @@
 }
 @media all and (max-width: 650px) {
   .content_list {
+    margin-top: 6vh;
     grid-template-columns: repeat(1, 1fr);
   }
 }
@@ -94,7 +95,7 @@
   margin: 5px;
 }
 
-input[type='text'] {
+input[type="text"] {
   width: 100%;
 }
 .modal .rentBtn {
@@ -149,7 +150,7 @@ input[type='text'] {
     margin: 0;
     text-align: center;
   }
-  /* .sidebar {
-    display: none;
-  } */
+  .sidebar {
+    /* display: none; */
+  }
 }
