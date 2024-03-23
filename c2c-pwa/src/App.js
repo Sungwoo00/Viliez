@@ -49,52 +49,60 @@ function App() {
   }
 
   return (
-    <div style={{ marginTop: '170px' }}>
+    <div>
       {isAuthReady ? (
         <BrowserRouter>
           <Nav />
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route
-              path='/Register'
-              element={
-                user ? <Register /> : <Navigate replace={true} to='/login' />
-              }
-            />
-            <Route
-              path='/chat/:chatRoomId'
-              element={
-                user ? <Chat /> : <Navigate replace={true} to='/login' />
-              }
-            />
-            {/* <Route
+          <div style={{ marginTop: '170px' }}>
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route
+                path='/Register'
+                element={
+                  user ? <Register /> : <Navigate replace={true} to='/login' />
+                }
+              />
+              <Route
+                path='/chat/:chatRoomId'
+                element={
+                  user ? <Chat /> : <Navigate replace={true} to='/login' />
+                }
+              />
+              {/* <Route
               path='/chatlist'
               element={
                 user ? <ChatList /> : <Navigate replace={true} to='/login' />
               }
             /> */}
 
-            <Route
-              path='/myitem'
-              element={
-                user ? <MyItem /> : <Navigate replace={true} to='/login' />
-              }
-            />
-            <Route
-              path='/renteditem'
-              element={
-                user ? <RentedItem /> : <Navigate replace={true} to='/login' />
-              }
-            />
-            <Route
-              path='/login'
-              element={!user ? <Login /> : <Navigate replace={true} to='/' />}
-            />
-            <Route
-              path='/signup'
-              element={!user ? <Signup /> : <Navigate replace={true} to='/' />}
-            />
-          </Routes>
+              <Route
+                path='/myitem'
+                element={
+                  user ? <MyItem /> : <Navigate replace={true} to='/login' />
+                }
+              />
+              <Route
+                path='/renteditem'
+                element={
+                  user ? (
+                    <RentedItem />
+                  ) : (
+                    <Navigate replace={true} to='/login' />
+                  )
+                }
+              />
+              <Route
+                path='/login'
+                element={!user ? <Login /> : <Navigate replace={true} to='/' />}
+              />
+              <Route
+                path='/signup'
+                element={
+                  !user ? <Signup /> : <Navigate replace={true} to='/' />
+                }
+              />
+            </Routes>
+          </div>
         </BrowserRouter>
       ) : (
         ''

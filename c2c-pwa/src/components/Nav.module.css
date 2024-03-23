@@ -1,10 +1,13 @@
-.nav {
+.nav_container {
   position: fixed;
-  top: 0;
   z-index: 5;
+  top: 0;
   width: 100%;
   background-color: royalblue;
-  padding: 30px 60px;
+}
+
+.nav {
+  padding: 30px 20px;
   display: flex;
   justify-content: space-between;
 }
@@ -14,7 +17,7 @@
   align-items: center;
 }
 .tit {
-  margin-left: 20px;
+  margin-left: 10px;
 }
 .tit a,
 .list_nav a {
@@ -30,18 +33,15 @@
 .list_nav a:hover {
   font-weight: bold;
   font-size: calc(100% + 1px);
-  /* border-top: 1.8px solid silver; */
   color: silver;
 }
 
 .list_nav a {
   padding: 0 8px;
-  /* text-decoration-line: overline; */
 }
 
 .selected {
   margin-left: 8px;
-  /* border-top: 1.8px solid white; */
   padding-top: 2px;
   cursor: pointer;
   color: white;
@@ -51,13 +51,11 @@
 .selected:hover {
   font-weight: bold;
   font-size: calc(100% + 1px);
-  /* border-top: 1.8px solid silver; */
   color: silver;
 }
 
 .user_delete_btn {
   border: none;
-  /* border-top: 1.8px solid white; */
   color: white;
   text-decoration: none;
   transition: font-weight 0.5s ease, font-size 0.5s ease;
@@ -69,7 +67,6 @@
 .user_delete_btn:hover {
   font-weight: bold;
   font-size: calc(100% + 1px);
-  /* border-top: 1.8px solid silver; */
   color: silver;
 }
 
@@ -116,20 +113,17 @@
   animation: fadeIn 0.8s ease-in-out;
 }
 
-@keyframes fadeIn {
-  from {
-    max-height: 0;
-  }
-  to {
-    max-height: 200px;
-  }
-}
-
 @media (max-width: 550px) {
   .nav {
-    padding: 20px;
+    padding: 10px;
   }
-  .tit {
-    display: none;
+  .tit a {
+    font-size: 20px;
+  }
+  .list_nav a {
+    font-size: 12px;
+  }
+  .user_delete_btn {
+    font-size: 12px;
   }
 }

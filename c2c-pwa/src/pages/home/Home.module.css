@@ -2,11 +2,11 @@
   position: relative;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px;
+  padding: 30px;
+  display: block;
 }
 .sidebar {
   position: absolute;
-  padding-top: 20px;
   top: 0;
   left: 0;
   z-index: 1;
@@ -149,7 +149,7 @@ input[type='text'] {
     margin: 0;
     text-align: center;
   }
-  .sidebar {
+  /* .sidebar {
     display: none;
-  }
+  } */
 }
