@@ -1,8 +1,8 @@
-import React from 'react';
-import styles from './RentedItemList.module.css';
-import useFirestore from '../../hooks/useFirestore';
+import React from "react";
+import styles from "./RentedItemHistory.module.css";
+import useFirestore from "../../hooks/useFirestore";
 
-const RentedItemList = ({ items, currentUserDisplayName, fetchItems }) => {
+const RentedItemHistory = ({ items, currentUserDisplayName, fetchItems }) => {
   const countRentedItems = () => {
     return items.reduce((count, item) => {
       return (
@@ -39,7 +39,7 @@ const RentedItemList = ({ items, currentUserDisplayName, fetchItems }) => {
             ?.filter((rentInfo) => rentInfo.rentuser === currentUserDisplayName)
             .map((rentInfo) => (
               <li
-                className={styles.RentedItemList}
+                className={styles.RentedItemHistory}
                 key={`${item.id}-${rentInfo.startDate}`}
               >
                 <ViewItem
@@ -59,7 +59,7 @@ const RentedItemList = ({ items, currentUserDisplayName, fetchItems }) => {
             )
             .map((returnedInfo) => (
               <li
-                className={styles.RentedItemList}
+                className={styles.RentedItemHistory}
                 key={`${item.id}-${returnedInfo.endDate}`}
               >
                 <ViewItem
@@ -91,19 +91,19 @@ const ViewItem = ({
   );
 
   const formatPrice = (TotalRentPrice) => {
-    return TotalRentPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return TotalRentPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
   const formatDate = (date) => {
     return date.toLocaleDateString();
   };
 
-  const { updateDocument } = useFirestore('Sharemarket');
+  const { updateDocument } = useFirestore("Sharemarket");
 
   const handleReturn = async (itemId, rentInfo) => {
-    const confirmReturn = window.confirm('반납하시겠습니까 ?');
+    const confirmReturn = window.confirm("반납하시겠습니까 ?");
     if (confirmReturn) {
-      console.log('반납 처리 중입니다.');
+      console.log("반납 처리 중입니다.");
 
       const updatedQuantity = item.ea + rentInfo.curRentEa;
       const rentIdentifier = `${rentInfo.startDate}-${rentInfo.endDate}`;
@@ -124,10 +124,10 @@ const ViewItem = ({
 
       try {
         await updateDocument(itemId, updatedItemInfo);
-        console.log('반납 처리 되었습니다.');
+        console.log("반납 처리 되었습니다.");
         fetchItems();
       } catch (error) {
-        console.error('반납 도중 오류 발생: ', error);
+        console.error("반납 도중 오류 발생: ", error);
       }
     }
   };
@@ -135,7 +135,7 @@ const ViewItem = ({
   return (
     <div className={styles.item}>
       {item.photoURL && (
-        <img className={styles.returnedImg} src={item.photoURL} alt='Product' />
+        <img className={styles.returnedImg} src={item.photoURL} alt="Product" />
       )}
       <strong className={styles.title}>{item.title}</strong>
       {/* <p className={styles.price}>총 대여 비용: {formatPrice(item.TotalRentPrice)}원</p> */}
@@ -167,4 +167,4 @@ const ViewItem = ({
   );
 };
 
-export default RentedItemList;
+export default RentedItemHistory;

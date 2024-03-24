@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import useAuthContext from '../../hooks/useAuthContext';
-import RentedItemList from './RentedItemList';
-import styles from './RentedItem.module.css';
-import { collection, getDocs } from 'firebase/firestore';
-import { appFireStore } from '../../firebase/config';
-import Paginate from '../../components/Paginate';
+import React, { useState, useEffect } from "react";
+import useAuthContext from "../../hooks/useAuthContext";
+import RentedItemHistory from "./RentedItemHistory";
+import styles from "./RentedItem.module.css";
+import { collection, getDocs } from "firebase/firestore";
+import { appFireStore } from "../../firebase/config";
+import Paginate from "../../components/Paginate";
 
 const RentedItem = () => {
   const { user } = useAuthContext();
@@ -24,7 +24,7 @@ const RentedItem = () => {
     try {
       setLoading(true);
       const querySnapshot = await getDocs(
-        collection(appFireStore, 'Sharemarket')
+        collection(appFireStore, "Sharemarket")
       );
       const items = [];
       querySnapshot.forEach((doc) => {
@@ -70,7 +70,7 @@ const RentedItem = () => {
       <h1>나의 대여 기록</h1>
       <ul className={styles.rented_list}>
         {rentedItems.length > 0 ? (
-          <RentedItemList
+          <RentedItemHistory
             items={currentItems}
             currentUserDisplayName={user.displayName}
             fetchItems={fetchMyItems}

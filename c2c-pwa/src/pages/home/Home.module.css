@@ -1,7 +1,7 @@
 .container {
   position: relative;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 120px auto 0 auto;
   padding: 30px;
   display: block;
 }
@@ -95,7 +95,7 @@
   margin: 5px;
 }
 
-input[type='text'] {
+input[type="text"] {
   width: 100%;
 }
 .modal .rentBtn {
@@ -140,7 +140,7 @@ input[type='text'] {
 @media (max-width: 550px) {
   .container {
     padding: 5px;
-    top: -100px;
+    margin-top: 10px;
   }
   .content_list li {
     padding: 5px;
