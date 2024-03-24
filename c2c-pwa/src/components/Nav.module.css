@@ -147,6 +147,9 @@
   margin-bottom: 5px;
   cursor: pointer;
 }
+.mobileOnly {
+  display: none;
+}
 
 @media (max-width: 550px) {
   .nav_container {
@@ -180,5 +183,8 @@
   }
   .icon {
     display: block;
+  }
+  .mobileOnly {
+    display: flex;
   }
 }
