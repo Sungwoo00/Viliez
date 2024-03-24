@@ -95,7 +95,7 @@
   margin: 5px;
 }
 
-input[type="text"] {
+input[type='text'] {
   width: 100%;
 }
 .modal .rentBtn {
@@ -140,7 +140,7 @@ input[type="text"] {
 @media (max-width: 550px) {
   .container {
     padding: 5px;
-    top: -80px;
+    top: -100px;
   }
   .content_list li {
     padding: 5px;
@@ -149,8 +149,5 @@ input[type="text"] {
     box-shadow: none;
     margin: 0;
     text-align: center;
-  }
-  .sidebar {
-    /* display: none; */
   }
 }

@@ -53,7 +53,7 @@ function App() {
       {isAuthReady ? (
         <BrowserRouter>
           <Nav />
-          <div style={{ marginTop: '170px' }}>
+          <div style={{ marginTop: '120px' }}>
             <Routes>
               <Route path='/' element={<Home />} />
               <Route
