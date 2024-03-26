@@ -5,8 +5,7 @@ import styles from './Nav.module.css';
 
 import logoImage from '../img/viliez.jpg';
 import { IoIosLogOut } from 'react-icons/io';
-import { GoHistory } from 'react-icons/go';
-import { CiShop } from 'react-icons/ci';
+import { CiLogin } from 'react-icons/ci';
 import { LuUpload } from 'react-icons/lu';
 import { FaRegUser } from 'react-icons/fa';
 import { LiaHomeSolid } from 'react-icons/lia';
@@ -31,7 +30,7 @@ const Nav = () => {
             <>
               <li className={styles.iconButtonContainer}>
                 <Link to='/login'>
-                  <FaRegUser className={styles.icon} />
+                  <CiLogin className={styles.icon} />
                 </Link>
                 <Link to='/login'>로그인/회원가입</Link>
               </li>
@@ -45,21 +44,20 @@ const Nav = () => {
                 </Link>
                 <Link to='/register'>상품등록</Link>
               </li>
+
               <li className={styles.iconButtonContainer}>
-                <Link to='/myitem'>
-                  <CiShop className={styles.icon} />
+                <Link to='/mypage'>
+                  <FaRegUser className={styles.icon} />
                 </Link>
-                <Link to='/myitem'>나의상품</Link>
-              </li>
-              <li className={styles.iconButtonContainer}>
-                <Link to='/renteditem'>
-                  <GoHistory className={styles.icon} />
-                </Link>
-                <Link to='/renteditem'>대여기록</Link>
+                <Link to='/mypage'>마이페이지</Link>
               </li>
               <li className={styles.iconButtonContainer}>
                 <IoIosLogOut className={styles.icon} onClick={logout} />
-                <button type='button' className={styles.user_delete_btn}>
+                <button
+                  type='button'
+                  className={styles.user_delete_btn}
+                  onClick={logout}
+                >
                   로그아웃
                 </button>
               </li>
