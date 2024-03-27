@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Modal.module.css';
+import { IoIosCloseCircleOutline } from 'react-icons/io';
 
 const Modal = ({ isOpen, closeModal, children }) => {
   if (!isOpen) return null;
@@ -8,7 +9,7 @@ const Modal = ({ isOpen, closeModal, children }) => {
     <div className={styles.modal_overlay}>
       <div className={styles.modal}>
         <button className={styles.close_button} onClick={closeModal}>
-          닫기
+          <IoIosCloseCircleOutline size={25} />
         </button>
         {children}
       </div>

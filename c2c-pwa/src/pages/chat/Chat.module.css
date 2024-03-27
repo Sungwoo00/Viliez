@@ -1,7 +1,14 @@
 .container {
   max-width: 600px;
-  margin: 120px auto 0 auto;
+  margin: 120px auto;
   padding: 30px;
+}
+@media (max-width: 550px) {
+  .container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+  }
 }
 
 .messageList {

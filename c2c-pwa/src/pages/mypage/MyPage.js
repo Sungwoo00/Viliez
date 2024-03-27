@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import styles from './MyPage.module.css';
+import { Link, useNavigate } from 'react-router-dom';
+import Modal from '../../components/Modal';
+import useDelete from '../../hooks/useDelete';
+import { getAuth, updateProfile, updatePassword, signOut } from 'firebase/auth';
 import { CiShop } from 'react-icons/ci';
 import { GoHistory } from 'react-icons/go';
 import { LiaUserEditSolid } from 'react-icons/lia';
-import Modal from '../../components/Modal';
-import useDelete from '../../hooks/useDelete';
+
+import styles from './MyPage.module.css';
 
 const MyPage = () => {
   const { userDelete } = useDelete();
+  const navigate = useNavigate();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [nickname, setNickname] = useState('');
@@ -28,15 +31,46 @@ const MyPage = () => {
   };
 
   const handleSaveNickname = () => {
-    // 닉네임 저장 기능 구현
-    // 저장 후 모달 닫기
-    setIsModalOpen(false);
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (user) {
+      updateProfile(user, {
+        displayName: nickname,
+      })
+        .then(() => {
+          alert('이름이 변경되었습니다!');
+          setIsModalOpen(false);
+        })
+        .catch((error) => {
+          console.error('Error updating nickname:', error);
+        });
+    } else console.log('No user');
   };
 
   const handleSavePassword = () => {
-    // 비밀번호 저장 기능 구현
-    // 저장 후 모달 닫기
-    setIsModalOpen(false);
+    if (newPassword !== confirmPassword) {
+      alert('비밀번호가 일치하지 않습니다.');
+      return;
+    }
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (user) {
+      updatePassword(user, newPassword)
+        .then(() => {
+          alert('비밀번호가 변경되었습니다. 다시 로그인을 해주세요.');
+          signOut(auth).then(() => {
+            setIsModalOpen(false);
+            navigate('/login');
+          });
+        })
+        .catch((error) => {
+          console.error('Error updating password:', error);
+        });
+    } else {
+      console.log('No user');
+    }
   };
 
   return (
