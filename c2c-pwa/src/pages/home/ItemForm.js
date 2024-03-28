@@ -1,27 +1,28 @@
-import { useEffect, useState } from 'react';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import useFirestore from '../../hooks/useFirestore';
-import ReactDatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { ko } from 'date-fns/esm/locale';
-import { appStorage } from '../../firebase/config';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import Datepicker from '../../components/CustomDatePicker.module.css';
-import styles from './ItemForm.module.css';
-import { appFireStore } from '../../firebase/config';
-import { collection, doc } from 'firebase/firestore';
+import { useEffect, useState } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import useFirestore from "../../hooks/useFirestore";
+import ReactDatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { ko } from "date-fns/esm/locale";
+import { appStorage } from "../../firebase/config";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import Datepicker from "../../components/CustomDatePicker.module.css";
+import styles from "./ItemForm.module.css";
+import { appFireStore } from "../../firebase/config";
+import { collection, doc } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 const ItemForm = ({ uid }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [imagePreviewUrl, setImagePreviewUrl] = useState('');
-  const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('');
-  const [price, setPrice] = useState('');
-  const [ea, setEa] = useState('');
-  const [description, setDescription] = useState('');
-  const [rentuser, setRentUser] = useState('');
-  const [, setStartDateString] = useState('');
-  const [, setEndDateString] = useState('');
+  const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("");
+  const [price, setPrice] = useState("");
+  const [ea, setEa] = useState("");
+  const [description, setDescription] = useState("");
+  const [rentuser, setRentUser] = useState("");
+  const [, setStartDateString] = useState("");
+  const [, setEndDateString] = useState("");
   const [openDatePicker, setOpenDatePicker] = useState(false);
   const [rentalPeriod, setRentalPeriod] = useState({
     startDate: new Date(),
@@ -29,20 +30,20 @@ const ItemForm = ({ uid }) => {
   });
 
   const [selectedImage, setSelectedImage] = useState(null);
-  const { addDocument, response } = useFirestore('Sharemarket');
+  const { addDocument, response } = useFirestore("Sharemarket");
 
   const handleData = (event) => {
-    if (event.target.id === 'tit') {
+    if (event.target.id === "tit") {
       setTitle(event.target.value);
-    } else if (event.target.id === 'category') {
+    } else if (event.target.id === "category") {
       setCategory(event.target.value);
-    } else if (event.target.id === 'price') {
+    } else if (event.target.id === "price") {
       setPrice(event.target.value);
-    } else if (event.target.id === 'ea') {
+    } else if (event.target.id === "ea") {
       setEa(event.target.value);
-    } else if (event.target.id === 'txt') {
+    } else if (event.target.id === "txt") {
       setDescription(event.target.value);
-    } else if (event.target.id === 'rentuser') {
+    } else if (event.target.id === "rentuser") {
       setRentUser(event.target.value);
     }
   };
@@ -52,10 +53,10 @@ const ItemForm = ({ uid }) => {
     setRentalPeriod({ startDate: start, endDate: end });
 
     if (start) {
-      setStartDateString(start.toISOString().split('T')[0]);
+      setStartDateString(start.toISOString().split("T")[0]);
     }
     if (end) {
-      setEndDateString(end.toISOString().split('T')[0]);
+      setEndDateString(end.toISOString().split("T")[0]);
     }
     if (start && end) {
       setOpenDatePicker(false);
@@ -72,12 +73,12 @@ const ItemForm = ({ uid }) => {
 
   useEffect(() => {
     if (response.success) {
-      setTitle('');
-      setCategory('');
-      setPrice('');
-      setEa('');
-      setDescription('');
-      setRentUser('');
+      setTitle("");
+      setCategory("");
+      setPrice("");
+      setEa("");
+      setDescription("");
+      setRentUser("");
       setSelectedImage(null);
       setRentalPeriod({ startDate: new Date(), endDate: null });
     }
@@ -106,16 +107,15 @@ const ItemForm = ({ uid }) => {
 
       try {
         await uploadBytes(storageRef, selectedImage);
-        alert('상품을 등록하였습니다.');
+        toast.success("상품을 등록하였습니다.");
         photoURL = await getDownloadURL(storageRef);
-        // console.log('Download URL:', photoURL);
       } catch (error) {
-        alert('상품 등록 오류 ❗️');
+        toast.success("상품 등록 오류 ❗️");
         return;
       }
     }
 
-    const docRef = doc(collection(appFireStore, 'Sharemarket'));
+    const docRef = doc(collection(appFireStore, "Sharemarket"));
     const itemUid = docRef.id;
 
     const dataToSubmit = {
@@ -136,15 +136,15 @@ const ItemForm = ({ uid }) => {
     };
     console.log(dataToSubmit.photoURL);
 
-    setTitle('');
-    setCategory('');
-    setPrice('');
-    setEa('');
-    setDescription('');
-    setRentUser('');
+    setTitle("");
+    setCategory("");
+    setPrice("");
+    setEa("");
+    setDescription("");
+    setRentUser("");
     setSelectedImage(null);
     setRentalPeriod({ startDate: new Date(), endDate: null });
-    setImagePreviewUrl('');
+    setImagePreviewUrl("");
 
     addDocument(dataToSubmit);
   };
@@ -164,7 +164,7 @@ const ItemForm = ({ uid }) => {
                 endDate={rentalPeriod.endDate}
                 selectsRange
                 shouldCloseOnSelect={false}
-                monthsShown={2}
+                monthsShown={1}
                 minDate={new Date()}
                 dateFormat=' yyyy년 MM월 dd일(eee) '
                 onChange={handleDateChange}
@@ -181,20 +181,18 @@ const ItemForm = ({ uid }) => {
                 id='imageInput'
                 accept='image/*'
                 onChange={handleImageChange}
-                style={{ display: 'none' }}
+                style={{ display: "none" }}
               />
               <label htmlFor='imageInput'>이미지 선택하기</label>
-
-              {imagePreviewUrl && (
-                <img
-                  src={imagePreviewUrl}
-                  alt='Preview'
-                  required
-                  className={styles.imagePreview}
-                />
-              )}
             </li>
-
+            {imagePreviewUrl && (
+              <img
+                src={imagePreviewUrl}
+                alt='Preview'
+                required
+                className={styles.imagePreview}
+              />
+            )}
             <li>
               <input
                 className={styles.formItem}
@@ -259,7 +257,10 @@ const ItemForm = ({ uid }) => {
               />
             </li>
           </ul>
-          <button type='submit'>제출</button>
+
+          <button className={styles.register_Btn} type='submit'>
+            올리기
+          </button>
         </fieldset>
       </form>
     </>

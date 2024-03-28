@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import CustomDatePicker from "../../components/CustomDatePicker";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { differenceInCalendarDays } from "date-fns";
+import { toast } from "react-toastify";
 
 const HomeItemList = ({ items, selectedCategory }) => {
   const { updateDocument } = useFirestore("Sharemarket");
@@ -84,7 +85,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
       10
     );
     if (isNaN(quantity) || quantity < 1 || quantity > selectedItem.ea) {
-      alert("유효한 수량 값을 입력하세요.");
+      toast.error("유효한 수량을 입력하세요.");
       return;
     }
 
@@ -117,7 +118,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
 
     setSelectedItem(updatedItem);
     updateDocument(selectedItem.id, updatedItem);
-    alert(`${selectedItem.title}을 성공적으로 빌리셨습니다.`);
+    toast.success(`${selectedItem.title}을 성공적으로 빌리셨습니다.`);
     closeModal();
   };
 
@@ -158,6 +159,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
       <li key={item.id} className={styles.item}>
         <strong className={styles.title}>{item.title}</strong>
         <img
+          alt={item.id}
           className={styles.homeImg}
           src={item.photoURL}
           onClick={() => openImageModal(item.photoURL)}
@@ -180,7 +182,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
             자세히
           </button>
           <button
-            type="button"
+            type='button'
             className={styles.chatBtn}
             onClick={() => chatHandler(item)}
           >
@@ -194,7 +196,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
   const renderModal = () => (
     <div className={styles.modalOverlay} onClick={handleBackgroundClick}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <button type="button" className={styles.closeBtn} onClick={closeModal}>
+        <button type='button' className={styles.closeBtn} onClick={closeModal}>
           <IoIosCloseCircleOutline />
         </button>
         <h3>{`[${selectedItem.displayName}]님의 ${selectedItem.title}`}</h3>
@@ -205,7 +207,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
         <p>{`설명 : ${selectedItem.description}`}</p>
         {user && (
           <>
-            <div className="ReactDatePicker">
+            <div className='ReactDatePicker'>
               <CustomDatePicker
                 startDate={rentalPeriod.startDate}
                 endDate={rentalPeriod.endDate}
@@ -217,10 +219,10 @@ const HomeItemList = ({ items, selectedCategory }) => {
             <div className={styles.inputContainer}>
               <input
                 className={styles.quantityInput}
-                placeholder="수량을 입력하세요."
-                id="quantityInput"
-                type="number"
-                min="1"
+                placeholder='수량을 입력하세요.'
+                id='quantityInput'
+                type='number'
+                min='1'
                 max={selectedItem.ea}
                 value={quantity}
                 onChange={handleQuantityChange}
@@ -228,7 +230,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
               />
 
               <button
-                type="button"
+                type='button'
                 className={styles.rentBtn}
                 onClick={rentHandler}
               >
@@ -248,13 +250,13 @@ const HomeItemList = ({ items, selectedCategory }) => {
     <div className={styles.modalOverlay} onClick={closeImageModal}>
       <div className={styles.img_modal} onClick={(e) => e.stopPropagation()}>
         <button
-          type="button"
+          type='button'
           className={styles.closeBtn}
           onClick={closeImageModal}
         >
           <IoIosCloseCircleOutline />
         </button>
-        {selectedImage && <img src={selectedImage} alt="Large" />}
+        {selectedImage && <img src={selectedImage} alt='Large' />}
       </div>
     </div>
   );

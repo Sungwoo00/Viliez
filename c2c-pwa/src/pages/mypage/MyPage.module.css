@@ -48,3 +48,9 @@
 .modal_content button:hover {
   background-color: #0056b3;
 }
+
+@media (max-width: 550px) {
+  .mypage_container {
+    height: 80vh;
+  }
+}

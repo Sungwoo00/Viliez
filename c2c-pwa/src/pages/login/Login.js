@@ -1,19 +1,19 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import BarLoader from 'react-spinners/BarLoader';
-import styles from './Login.module.css';
-import useLogin from '../../hooks/useLogin';
-import { Link } from 'react-router-dom';
+import BarLoader from "react-spinners/BarLoader";
+import styles from "./Login.module.css";
+import useLogin from "../../hooks/useLogin";
+import { Link } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const { error, isPending, login } = useLogin();
 
   const handleData = (event) => {
-    if (event.target.type === 'email') {
+    if (event.target.type === "email") {
       setEmail(event.target.value);
-    } else if (event.target.type === 'password') {
+    } else if (event.target.type === "password") {
       setPassword(event.target.value);
     }
   };
@@ -25,7 +25,7 @@ const Login = () => {
 
   return (
     <form className={styles.login_form} onSubmit={handleSubmit}>
-      <div style={{ borderBottom: '1px solid black', paddingBottom: '24px' }}>
+      <div style={{ borderBottom: "1px solid black", paddingBottom: "24px" }}>
         <fieldset>
           <legend>로그인</legend>
           <div className={styles.input_box}>
@@ -51,17 +51,17 @@ const Login = () => {
           <div className={styles.strong_container}>
             {!isPending && (
               <button type='submit' className={styles.btn}>
-                {' '}
+                {" "}
                 로그인
               </button>
             )}
             {isPending && (
               <BarLoader
                 color='#136CE1'
-                cssOverride={{}}
+                // cssOverride={{}}
                 height={5}
                 speedMultiplier={1}
-                width={360}
+                width={300}
               />
             )}
             {error && (
