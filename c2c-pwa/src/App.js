@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-import Lottie from 'react-lottie-player';
-import loadingScreenJson from './lottie/loadingScreen.json';
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import Lottie from "react-lottie-player";
+import loadingScreenJson from "./lottie/loadingScreen.json";
 
-import Home from './pages/home/Home';
-import Register from './pages/home/Register';
-import Chat from './pages/chat/Chat';
-import Login from './pages/login/Login';
-import Signup from './pages/signup/Signup';
-import Nav from './components/Nav';
-import useAuthContext from './hooks/useAuthContext';
+import Home from "./pages/home/Home";
+import Register from "./pages/home/Register";
+import Chat from "./pages/chat/Chat";
+import Login from "./pages/login/Login";
+import Signup from "./pages/signup/Signup";
+import Nav from "./components/Nav";
+import useAuthContext from "./hooks/useAuthContext";
 
-import MyItem from './pages/mypage/MyItem';
-import RentedItem from './pages/mypage/RentedItem';
-import MyPage from './pages/mypage/MyPage';
+import MyItem from "./pages/mypage/MyItem";
+import RentedItem from "./pages/mypage/RentedItem";
+import MyPage from "./pages/mypage/MyPage";
 
 function App() {
   const { isAuthReady, user } = useAuthContext();
@@ -31,11 +31,11 @@ function App() {
     return (
       <div
         style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh',
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "85vh",
         }}
       >
         <Lottie
@@ -44,7 +44,7 @@ function App() {
           play
           style={{ width: 400, height: 400 }}
         />
-        <h2 style={{ color: '#192F71' }}>준비되는 동안 잠시만 기다려주세요</h2>
+        <h2 style={{ color: "#192F71" }}>준비되는 동안 잠시만 기다려주세요</h2>
       </div>
     );
   }
@@ -56,17 +56,17 @@ function App() {
           <Nav />
           <div>
             <Routes>
-              <Route path='/' element={<Home />} />
+              <Route path="/" element={<Home />} />
               <Route
-                path='/Register'
+                path="/Register"
                 element={
-                  user ? <Register /> : <Navigate replace={true} to='/login' />
+                  user ? <Register /> : <Navigate replace={true} to="/login" />
                 }
               />
               <Route
-                path='/chat/:chatRoomId'
+                path="/chat/:chatRoomId"
                 element={
-                  user ? <Chat /> : <Navigate replace={true} to='../login' />
+                  user ? <Chat /> : <Navigate replace={true} to="../login" />
                 }
               />
               {/* <Route
@@ -76,42 +76,42 @@ function App() {
               }
             /> */}
               <Route
-                path='/mypage'
+                path="/mypage"
                 element={
-                  user ? <MyPage /> : <Navigate replace={true} to='../login' />
+                  user ? <MyPage /> : <Navigate replace={true} to="../login" />
                 }
               />
               <Route
-                path='/myitem'
+                path="/myitem"
                 element={
-                  user ? <MyItem /> : <Navigate replace={true} to='../login' />
+                  user ? <MyItem /> : <Navigate replace={true} to="../login" />
                 }
               />
               <Route
-                path='/renteditem'
+                path="/renteditem"
                 element={
                   user ? (
                     <RentedItem />
                   ) : (
-                    <Navigate replace={true} to='../login' />
+                    <Navigate replace={true} to="../login" />
                   )
                 }
               />
               <Route
-                path='/login'
-                element={!user ? <Login /> : <Navigate replace={true} to='/' />}
+                path="/login"
+                element={!user ? <Login /> : <Navigate replace={true} to="/" />}
               />
               <Route
-                path='/signup'
+                path="/signup"
                 element={
-                  !user ? <Signup /> : <Navigate replace={true} to='/' />
+                  !user ? <Signup /> : <Navigate replace={true} to="/" />
                 }
               />
             </Routes>
           </div>
         </BrowserRouter>
       ) : (
-        ''
+        ""
       )}
     </div>
   );

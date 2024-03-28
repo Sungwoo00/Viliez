@@ -116,6 +116,7 @@
 @media (max-width: 550px) {
   .nav {
     padding: 10px;
+    height: 75px;
   }
   .tit a {
     font-size: 20px;
