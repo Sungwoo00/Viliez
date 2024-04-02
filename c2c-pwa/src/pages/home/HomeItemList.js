@@ -141,8 +141,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
     if (!user) {
       navigate("/login");
     } else {
-      const chatRoomId = `${[item.id, item.uid].sort()}`;
-
+      const chatRoomId = item.id;
       setSelectedItem(item);
       navigate(`/chat/${chatRoomId}`);
       closeModal();
@@ -198,7 +197,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
             자세히
           </button>
           <button
-            type='button'
+            type="button"
             className={styles.chatBtn}
             onClick={() => chatHandler(item)}
           >
@@ -212,7 +211,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
   const renderModal = () => (
     <div className={styles.modalOverlay}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <button type='button' className={styles.closeBtn} onClick={closeModal}>
+        <button type="button" className={styles.closeBtn} onClick={closeModal}>
           <IoIosCloseCircleOutline />
         </button>
         <h3>{`[${selectedItem.displayName}]님의 ${selectedItem.title}`}</h3>
@@ -247,10 +246,10 @@ const HomeItemList = ({ items, selectedCategory }) => {
             <div className={styles.inputContainer}>
               <input
                 className={styles.quantityInput}
-                placeholder='수량을 입력하세요.'
-                id='quantityInput'
-                type='number'
-                min='1'
+                placeholder="수량을 입력하세요."
+                id="quantityInput"
+                type="number"
+                min="1"
                 max={selectedItem.ea}
                 value={quantity}
                 onChange={handleQuantityChange}
@@ -258,7 +257,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
               />
 
               <button
-                type='button'
+                type="button"
                 className={styles.rentBtn}
                 onClick={rentHandler}
               >
@@ -278,13 +277,13 @@ const HomeItemList = ({ items, selectedCategory }) => {
     <div className={styles.modalOverlay} onClick={closeImageModal}>
       <div className={styles.img_modal} onClick={(e) => e.stopPropagation()}>
         <button
-          type='button'
+          type="button"
           className={styles.closeBtn}
           onClick={closeImageModal}
         >
           <IoIosCloseCircleOutline />
         </button>
-        {selectedImage && <img src={selectedImage} alt='Large' />}
+        {selectedImage && <img src={selectedImage} alt="Large" />}
       </div>
     </div>
   );

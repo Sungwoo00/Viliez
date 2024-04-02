@@ -52,7 +52,7 @@
 }
 
 .myMessage::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 30%;
   left: 100%;
@@ -72,7 +72,7 @@
   max-width: 80%;
 }
 .otherMessage::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 30%;
   right: 100%;
