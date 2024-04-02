@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import useFirestore from "../../hooks/useFirestore";
-import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { ko } from "date-fns/esm/locale";
 import { appStorage } from "../../firebase/config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import Datepicker from "../../components/CustomDatePicker.module.css";
 import styles from "./ItemForm.module.css";
 import { appFireStore } from "../../firebase/config";
 import { collection, doc } from "firebase/firestore";
@@ -21,9 +18,7 @@ const ItemForm = ({ uid }) => {
   const [ea, setEa] = useState("");
   const [description, setDescription] = useState("");
   const [rentuser, setRentUser] = useState("");
-  const [, setStartDateString] = useState("");
-  const [, setEndDateString] = useState("");
-  const [openDatePicker, setOpenDatePicker] = useState(false);
+
   const [rentalPeriod, setRentalPeriod] = useState({
     startDate: new Date(),
     endDate: null,
@@ -48,20 +43,6 @@ const ItemForm = ({ uid }) => {
     }
   };
 
-  const handleDateChange = (dates) => {
-    const [start, end] = dates;
-    setRentalPeriod({ startDate: start, endDate: end });
-
-    if (start) {
-      setStartDateString(start.toISOString().split("T")[0]);
-    }
-    if (end) {
-      setEndDateString(end.toISOString().split("T")[0]);
-    }
-    if (start && end) {
-      setOpenDatePicker(false);
-    }
-  };
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
@@ -107,7 +88,7 @@ const ItemForm = ({ uid }) => {
 
       try {
         await uploadBytes(storageRef, selectedImage);
-        toast.success("상품을 등록하였습니다.");
+        // toast.success("상품을 등록하였습니다.");
         photoURL = await getDownloadURL(storageRef);
       } catch (error) {
         toast.success("상품 등록 오류 ❗️");
@@ -134,7 +115,6 @@ const ItemForm = ({ uid }) => {
       displayName: currentUser?.displayName,
       photoURL: photoURL,
     };
-    console.log(dataToSubmit.photoURL);
 
     setTitle("");
     setCategory("");
@@ -147,34 +127,16 @@ const ItemForm = ({ uid }) => {
     setImagePreviewUrl("");
 
     addDocument(dataToSubmit);
+
+    toast.success("상품을 등록하였습니다.");
   };
+
   return (
     <>
       <form onSubmit={handleSubmit}>
         <fieldset>
           <legend>상품 등록</legend>
           <ul className={styles.formList}>
-            <li>
-              <ReactDatePicker
-                className={Datepicker.ReactDatePicker}
-                id='rentalperiod'
-                // locale='ko'
-                // selected={rentalPeriod.startDate}
-                startDate={rentalPeriod.startDate}
-                endDate={rentalPeriod.endDate}
-                selectsRange
-                shouldCloseOnSelect={false}
-                monthsShown={1}
-                minDate={new Date()}
-                dateFormat=' yyyy년 MM월 dd일(eee) '
-                onChange={handleDateChange}
-                open={openDatePicker}
-                onInputClick={() => setOpenDatePicker(true)}
-                locale={ko}
-                readOnly
-              />
-            </li>
-
             <li>
               <input
                 type='file'
@@ -222,12 +184,12 @@ const ItemForm = ({ uid }) => {
 
             <li className={styles.formItem}>
               <input
-                placeholder='가격'
+                placeholder='시간당 가격'
                 id='price'
                 type='number'
                 value={price}
-                min='5000'
-                step='1000'
+                min='1000'
+                step='500'
                 required
                 onChange={handleData}
               />

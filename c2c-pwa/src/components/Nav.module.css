@@ -33,7 +33,7 @@
 .list_nav a:hover {
   font-weight: bold;
   /* font-size: calc(100% + 1px); */
-  color: silver;
+  /* color: silver; */
 }
 
 .list_nav a {
@@ -103,14 +103,6 @@
 
 .menu button {
   color: white;
-}
-
-.menuOpen {
-  display: block;
-}
-
-.menuAnimation {
-  animation: fadeIn 0.8s ease-in-out;
 }
 
 @media (max-width: 550px) {

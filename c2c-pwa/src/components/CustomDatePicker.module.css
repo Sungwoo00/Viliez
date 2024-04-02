@@ -9,21 +9,8 @@
   background-color: #fcfcfc !important;
 }
 
-:global(.react-datepicker__day--in-range) {
-  background-color: #4a7b91 !important;
-}
-
 :global(.react-datepicker-wrapper) {
-  width: 95% !important;
-}
-
-:global(.react-datepicker__month-container) {
-  float: left;
-  border-right: 1px solid #aeaeae;
-}
-
-:global(.react-datepicker__month-container:last-child) {
-  border-right: none;
+  width: 90% !important;
 }
 
 :global(input) {

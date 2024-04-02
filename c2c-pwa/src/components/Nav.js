@@ -1,14 +1,14 @@
-import { Link } from 'react-router-dom';
-import useLogout from '../hooks/useLogout';
-import useAuthContext from '../hooks/useAuthContext.js';
-import styles from './Nav.module.css';
+import { Link } from "react-router-dom";
+import useLogout from "../hooks/useLogout";
+import useAuthContext from "../hooks/useAuthContext.js";
+import styles from "./Nav.module.css";
 
-import logoImage from '../img/viliez.jpg';
-import { IoIosLogOut } from 'react-icons/io';
-import { CiLogin } from 'react-icons/ci';
-import { LuUpload } from 'react-icons/lu';
-import { FaRegUser } from 'react-icons/fa';
-import { LiaHomeSolid } from 'react-icons/lia';
+import logoImage from "../img/viliez.jpg";
+import { IoIosLogOut } from "react-icons/io";
+import { CiLogin } from "react-icons/ci";
+import { LuUpload } from "react-icons/lu";
+import { FaRegUser } from "react-icons/fa";
+import { LiaHomeSolid } from "react-icons/lia";
 
 const Nav = () => {
   const { logout } = useLogout();

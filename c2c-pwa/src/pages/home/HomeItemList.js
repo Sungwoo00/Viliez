@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 import CustomDatePicker from "../../components/CustomDatePicker";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import { differenceInCalendarDays } from "date-fns";
+import { differenceInMilliseconds } from "date-fns";
 import { toast } from "react-toastify";
 
 const HomeItemList = ({ items, selectedCategory }) => {
@@ -15,15 +15,15 @@ const HomeItemList = ({ items, selectedCategory }) => {
   const navigate = useNavigate();
 
   const [selectedItem, setSelectedItem] = useState(null);
-  const [isDatePickerOpen, setDatePickerOpen] = useState(false);
   const [rentalPeriod, setRentalPeriod] = useState({
     startDate: null,
     endDate: null,
   });
-  const [quantity, setQuantity] = useState(0);
-
+  const [quantity, setQuantity] = useState("");
   const [isImageModalOpen, setImageModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [isStartDatePickerOpen, setIsStartDatePickerOpen] = useState(false);
+  const [isEndDatePickerOpen, setIsEndDatePickerOpen] = useState(false);
 
   const openImageModal = (imageURL) => {
     setSelectedImage(imageURL);
@@ -36,33 +36,45 @@ const HomeItemList = ({ items, selectedCategory }) => {
   };
 
   const openModal = (index) => setSelectedItem(items[index]);
-  const openChat = (item) => setSelectedItem(item);
   const closeModal = () => {
     setSelectedItem(null);
-    setQuantity(0);
+    setQuantity("");
     setRentalPeriod({
       startDate: null,
       endDate: null,
     });
   };
 
-  const openDatePicker = () => setDatePickerOpen(true);
-  const closeDatePicker = () => setDatePickerOpen(false);
-
-  const handleBackgroundClick = (e) => {
-    if (isDatePickerOpen) {
-      closeDatePicker();
-    } else {
-      closeModal();
-    }
+  const openStartDatePicker = () => {
+    setIsStartDatePickerOpen(true);
   };
 
-  const handleDateChange = (dates) => {
-    const [start, end] = dates;
-    setRentalPeriod({ startDate: start, endDate: end });
+  const closeStartDatePicker = () => {
+    setIsStartDatePickerOpen(false);
+  };
 
-    if (start && end) {
-      setDatePickerOpen(false);
+  const openEndDatePicker = () => {
+    setIsEndDatePickerOpen(true);
+  };
+
+  const closeEndDatePicker = () => {
+    setIsEndDatePickerOpen(false);
+  };
+
+  const handleDateChange = (date, type) => {
+    if (type === "start") {
+      setRentalPeriod({
+        ...rentalPeriod,
+        startDate: date,
+      });
+      closeStartDatePicker();
+      openEndDatePicker();
+    } else {
+      setRentalPeriod({
+        ...rentalPeriod,
+        endDate: date,
+      });
+      closeEndDatePicker();
     }
   };
 
@@ -71,12 +83,15 @@ const HomeItemList = ({ items, selectedCategory }) => {
   };
 
   const calculateTotalPrice = () => {
-    const days =
-      differenceInCalendarDays(
-        new Date(rentalPeriod.endDate),
-        new Date(rentalPeriod.startDate)
-      ) + 1;
-    return selectedItem.price * quantity * days;
+    const milliseconds = differenceInMilliseconds(
+      new Date(rentalPeriod.endDate),
+      new Date(rentalPeriod.startDate)
+    );
+
+    // Convert milliseconds to hours
+    const hours = milliseconds / (1000 * 60 * 60);
+
+    return selectedItem.price * quantity * hours;
   };
 
   const rentHandler = () => {
@@ -126,9 +141,10 @@ const HomeItemList = ({ items, selectedCategory }) => {
     if (!user) {
       navigate("/login");
     } else {
-      const chatRoomId = `${item.id}`;
-      openChat(item);
-      navigate(`/chat/${chatRoomId}${user.uid}`);
+      const chatRoomId = `${[item.id, item.uid].sort()}`;
+
+      setSelectedItem(item);
+      navigate(`/chat/${chatRoomId}`);
       closeModal();
     }
   };
@@ -173,7 +189,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
         ) : (
           <p className={styles.dateP}>예약 가능한 날짜 정보가 없습니다.</p>
         )}
-        <p className={styles.priceP}>{`일일 대여 비용: ${item.price
+        <p className={styles.priceP}>{`시간당 대여 비용: ${item.price
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`}</p>
 
@@ -194,26 +210,38 @@ const HomeItemList = ({ items, selectedCategory }) => {
   };
 
   const renderModal = () => (
-    <div className={styles.modalOverlay} onClick={handleBackgroundClick}>
+    <div className={styles.modalOverlay}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <button type='button' className={styles.closeBtn} onClick={closeModal}>
           <IoIosCloseCircleOutline />
         </button>
         <h3>{`[${selectedItem.displayName}]님의 ${selectedItem.title}`}</h3>
-        <p>{`일일 대여 비용: ${selectedItem.price
+        <p>{`시간당 대여 비용: ${selectedItem.price
           .toString()
           .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`}</p>
         <p>{`수량 : ${selectedItem.ea} 개`}</p>
         <p>{`설명 : ${selectedItem.description}`}</p>
         {user && (
           <>
-            <div className='ReactDatePicker'>
+            <div style={{ display: "flex" }}>
               <CustomDatePicker
-                startDate={rentalPeriod.startDate}
-                endDate={rentalPeriod.endDate}
-                handleDateChange={handleDateChange}
-                isDatePickerOpen={isDatePickerOpen}
-                openDatePicker={openDatePicker}
+                selectedDate={rentalPeriod.startDate}
+                handleDateChange={(date) => handleDateChange(date, "start")}
+                isDatePickerOpen={isStartDatePickerOpen}
+                openDatePicker={openStartDatePicker}
+              />
+
+              <CustomDatePicker
+                selectedDate={rentalPeriod.endDate}
+                handleDateChange={(date) => handleDateChange(date, "end")}
+                isDatePickerOpen={isEndDatePickerOpen}
+                openDatePicker={openEndDatePicker}
+                minDate={
+                  new Date(
+                    new Date(rentalPeriod.startDate).getTime() +
+                      24 * 60 * 60 * 1000
+                  )
+                }
               />
             </div>
             <div className={styles.inputContainer}>
