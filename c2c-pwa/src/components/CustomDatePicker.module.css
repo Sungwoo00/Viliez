@@ -18,3 +18,12 @@
   padding: 8px;
   border: 1px solid black;
 }
+:global(
+    .react-datepicker__time-container
+      .react-datepicker__time
+      .react-datepicker__time-box
+      ul.react-datepicker__time-list
+      li.react-datepicker__time-list-item
+  ) {
+  margin: 0.5vh;
+}

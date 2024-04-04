@@ -100,6 +100,10 @@ const HomeItemList = ({ items, selectedCategory }) => {
       10
     );
     if (isNaN(quantity) || quantity < 1 || quantity > selectedItem.ea) {
+      if (selectedItem.ea === 0) {
+        toast.error("대여 가능 물품의 수량이 부족합니다.");
+        return;
+      }
       toast.error("유효한 수량을 입력하세요.");
       return;
     }
@@ -133,19 +137,26 @@ const HomeItemList = ({ items, selectedCategory }) => {
 
     setSelectedItem(updatedItem);
     updateDocument(selectedItem.id, updatedItem);
-    toast.success(`${selectedItem.title}을 성공적으로 빌리셨습니다.`);
+    toast.success(
+      `${selectedItem.displayName}님의
+      ${selectedItem.title}을 성공적으로 빌리셨습니다.`
+    );
     closeModal();
   };
 
   const chatHandler = (item) => {
     if (!user) {
       navigate("/login");
-    } else {
-      const chatRoomId = item.id;
-      setSelectedItem(item);
-      navigate(`/chat/${chatRoomId}`);
-      closeModal();
+      return;
     }
+    // if (user.uid === item.uid) {
+    //   toast.error("자신이 등록한 물품에는 대화를 시도할 수 없습니다.");
+    //   return;
+    // }
+    const chatRoomId = item.id;
+    setSelectedItem(item);
+    navigate(`/chat/${chatRoomId}`);
+    closeModal();
   };
 
   const renderListItem = (item, index) => {
@@ -228,6 +239,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
                 handleDateChange={(date) => handleDateChange(date, "start")}
                 isDatePickerOpen={isStartDatePickerOpen}
                 openDatePicker={openStartDatePicker}
+                closeDatePicker={closeStartDatePicker}
               />
 
               <CustomDatePicker
@@ -235,6 +247,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
                 handleDateChange={(date) => handleDateChange(date, "end")}
                 isDatePickerOpen={isEndDatePickerOpen}
                 openDatePicker={openEndDatePicker}
+                closeDatePicker={closeEndDatePicker}
                 minDate={
                   new Date(
                     new Date(rentalPeriod.startDate).getTime() +
