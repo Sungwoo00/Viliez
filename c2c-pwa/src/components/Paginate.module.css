@@ -4,8 +4,8 @@
   width: 100%;
   text-align: center;
   display: flex;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
 }
 
 .Pages .page_item {
@@ -18,13 +18,8 @@
   padding: 8px 5px;
   text-decoration: none;
   transition: font-size 0.3s ease;
-  display: inline-block; 
-  color:#007bff;
-}
-
-.Pages .page_Link:hover,
-.Pages .page_Link:active {
-  transform: scale(1.2);
+  display: inline-block;
+  color: #007bff;
 }
 
 .Pages .page_NumLink {
@@ -33,9 +28,8 @@
   margin: 0 4px;
   border: 1px solid #007bff;
   background-color: white;
-  color: #007bff; 
+  color: #007bff;
   border-radius: 100px;
-  transition: background-color 0.3s;
 }
 
 .Pages .page_NumLink:hover,
