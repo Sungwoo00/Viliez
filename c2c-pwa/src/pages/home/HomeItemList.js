@@ -113,6 +113,18 @@ const HomeItemList = ({ items, selectedCategory }) => {
 
     const totalRentPriceAndDuration = calculateTotalPriceAndDuration();
 
+    const formatDateTimeToKST = (date) => {
+      if (!date) return null;
+
+      const kstDate = new Date(date.getTime() + 9 * 60 * 60 * 1000);
+
+      const isoString = kstDate.toISOString();
+      const [datePart, timePart] = isoString.split("T");
+      const timePartWithoutZ = timePart.split(".")[0];
+
+      return `${datePart} ${timePartWithoutZ}`;
+    };
+
     const curRentInfo = selectedItem.curRentInfo || [];
 
     const updatedItem = {
@@ -128,10 +140,10 @@ const HomeItemList = ({ items, selectedCategory }) => {
           rentuser: user.displayName,
           curRentEa: quantity,
           startDate: rentalPeriod.startDate
-            ? rentalPeriod.startDate.toISOString().split("T")[0]
+            ? formatDateTimeToKST(rentalPeriod.startDate)
             : null,
           endDate: rentalPeriod.endDate
-            ? rentalPeriod.endDate.toISOString().split("T")[0]
+            ? formatDateTimeToKST(rentalPeriod.endDate)
             : null,
         },
       ],

@@ -1,6 +1,6 @@
-import React from 'react';
-import styles from './RentedItemHistory.module.css';
-import useFirestore from '../../hooks/useFirestore';
+import React from "react";
+import styles from "./RentedItemHistory.module.css";
+import useFirestore from "../../hooks/useFirestore";
 
 const RentedItemHistory = ({ items, currentUserDisplayName, fetchItems }) => {
   const countRentedItems = () => {
@@ -89,21 +89,29 @@ const ViewItem = ({
   const remainingDays = Math.ceil(
     (endDate - currentDate) / (1000 * 60 * 60 * 24)
   );
+  const remainingHours =
+    Math.ceil((endDate - currentDate) / (1000 * 60 * 60)) % 24;
 
   // const formatPrice = (TotalRentPrice) => {
   //   return TotalRentPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   // };
 
   const formatDate = (date) => {
-    return date.toLocaleDateString();
+    return date.toLocaleDateString("ko-KR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      hour12: false,
+    });
   };
 
-  const { updateDocument } = useFirestore('Sharemarket');
+  const { updateDocument } = useFirestore("Sharemarket");
 
   const handleReturn = async (itemId, rentInfo) => {
-    const confirmReturn = window.confirm('반납하시겠습니까 ?');
+    const confirmReturn = window.confirm("반납하시겠습니까 ?");
     if (confirmReturn) {
-      console.log('반납 처리 중입니다.');
+      console.log("반납 처리 중입니다.");
 
       const updatedQuantity = item.ea + rentInfo.curRentEa;
       const rentIdentifier = `${rentInfo.startDate}-${rentInfo.endDate}`;
@@ -124,10 +132,10 @@ const ViewItem = ({
 
       try {
         await updateDocument(itemId, updatedItemInfo);
-        console.log('반납 처리 되었습니다.');
+        console.log("반납 처리 되었습니다.");
         fetchItems();
       } catch (error) {
-        console.error('반납 도중 오류 발생: ', error);
+        console.error("반납 도중 오류 발생: ", error);
       }
     }
   };
@@ -154,7 +162,10 @@ const ViewItem = ({
         </>
       ) : (
         <>
-          <strong>반납까지 {remainingDays}일 남았습니다. </strong>
+          {/* <strong>반납까지 {remainingDays}일 남았습니다. </strong> */}
+          <strong>
+            반납까지 {remainingDays}일 {remainingHours}시간 남았습니다.
+          </strong>
           <button
             onClick={() => handleReturn(item.id, rentInfo)}
             className={styles.returnButton}
