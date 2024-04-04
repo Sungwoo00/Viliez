@@ -82,16 +82,19 @@ const HomeItemList = ({ items, selectedCategory }) => {
     setQuantity(e.target.value);
   };
 
-  const calculateTotalPrice = () => {
+  const calculateTotalPriceAndDuration = () => {
     const milliseconds = differenceInMilliseconds(
       new Date(rentalPeriod.endDate),
       new Date(rentalPeriod.startDate)
     );
 
     // Convert milliseconds to hours
-    const hours = milliseconds / (1000 * 60 * 60);
+    const totalHours = milliseconds / (1000 * 60 * 60);
+    const totalPrice = selectedItem.price * quantity * totalHours;
+    const days = Math.floor(totalHours / 24);
+    const hours = totalHours % 24;
 
-    return selectedItem.price * quantity * hours;
+    return { days, hours, totalPrice };
   };
 
   const rentHandler = () => {
@@ -108,7 +111,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
       return;
     }
 
-    const totalRentPrice = calculateTotalPrice();
+    const totalRentPriceAndDuration = calculateTotalPriceAndDuration();
 
     const curRentInfo = selectedItem.curRentInfo || [];
 
@@ -132,7 +135,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
             : null,
         },
       ],
-      TotalRentPrice: totalRentPrice,
+      TotalRentPriceAndDuration: totalRentPriceAndDuration,
     };
 
     setSelectedItem(updatedItem);
@@ -208,7 +211,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
             자세히
           </button>
           <button
-            type="button"
+            type='button'
             className={styles.chatBtn}
             onClick={() => chatHandler(item)}
           >
@@ -222,7 +225,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
   const renderModal = () => (
     <div className={styles.modalOverlay}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <button type="button" className={styles.closeBtn} onClick={closeModal}>
+        <button type='button' className={styles.closeBtn} onClick={closeModal}>
           <IoIosCloseCircleOutline />
         </button>
         <h3>{`[${selectedItem.displayName}]님의 ${selectedItem.title}`}</h3>
@@ -259,10 +262,10 @@ const HomeItemList = ({ items, selectedCategory }) => {
             <div className={styles.inputContainer}>
               <input
                 className={styles.quantityInput}
-                placeholder="수량을 입력하세요."
-                id="quantityInput"
-                type="number"
-                min="1"
+                placeholder='수량을 입력하세요.'
+                id='quantityInput'
+                type='number'
+                min='1'
                 max={selectedItem.ea}
                 value={quantity}
                 onChange={handleQuantityChange}
@@ -270,7 +273,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
               />
 
               <button
-                type="button"
+                type='button'
                 className={styles.rentBtn}
                 onClick={rentHandler}
               >
@@ -278,7 +281,14 @@ const HomeItemList = ({ items, selectedCategory }) => {
               </button>
             </div>
             <div>
-              <p>{`총 대여 비용: ${calculateTotalPrice()}원`}</p>
+              <p>{`총 대여 비용: ${
+                calculateTotalPriceAndDuration().totalPrice
+              }원`}</p>
+              <p>
+                {`총 대여 기간: ${calculateTotalPriceAndDuration().days}일 ${
+                  calculateTotalPriceAndDuration().hours
+                }시간`}
+              </p>
             </div>
           </>
         )}
@@ -290,13 +300,13 @@ const HomeItemList = ({ items, selectedCategory }) => {
     <div className={styles.modalOverlay} onClick={closeImageModal}>
       <div className={styles.img_modal} onClick={(e) => e.stopPropagation()}>
         <button
-          type="button"
+          type='button'
           className={styles.closeBtn}
           onClick={closeImageModal}
         >
           <IoIosCloseCircleOutline />
         </button>
-        {selectedImage && <img src={selectedImage} alt="Large" />}
+        {selectedImage && <img src={selectedImage} alt='Large' />}
       </div>
     </div>
   );
