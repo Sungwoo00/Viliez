@@ -88,16 +88,17 @@ const HomeItemList = ({ items, selectedCategory }) => {
       new Date(rentalPeriod.startDate)
     );
 
-    // Convert milliseconds to hours
     const totalHours = milliseconds / (1000 * 60 * 60);
     const totalPrice = selectedItem.price * quantity * totalHours;
     const days = Math.floor(totalHours / 24);
     const hours = totalHours % 24;
 
-    return { days, hours, totalPrice };
+    return { totalHours, days, hours, totalPrice };
   };
 
   const rentHandler = () => {
+    const { totalHours } = calculateTotalPriceAndDuration();
+
     const quantity = parseInt(
       document.getElementById("quantityInput").value,
       10
@@ -108,6 +109,11 @@ const HomeItemList = ({ items, selectedCategory }) => {
         return;
       }
       toast.error("유효한 수량을 입력하세요.");
+      return;
+    }
+
+    if (totalHours < 24) {
+      toast.error("최소 대여시간은 24시간 입니다.");
       return;
     }
 
@@ -173,6 +179,23 @@ const HomeItemList = ({ items, selectedCategory }) => {
     navigate(`/chat/${chatRoomId}`);
     closeModal();
   };
+  const calculateNearestEndDate = (item) => {
+    const nearestEndDate = item.curRentInfo
+      ? item.curRentInfo.reduce((nearestDate, rentInfo) => {
+          if (!nearestDate) return rentInfo.endDate;
+          const currentDate = new Date();
+          const nearestDateDiff = Math.abs(new Date(nearestDate) - currentDate); // 현재 날짜와 가장 가까운 날짜 차이 계산
+          const rentInfoDateDiff = Math.abs(
+            new Date(rentInfo.endDate) - currentDate
+          );
+          return rentInfoDateDiff < nearestDateDiff
+            ? rentInfo.endDate
+            : nearestDate;
+        }, null)
+      : null;
+
+    return { nearestEndDate };
+  };
 
   const renderListItem = (item, index) => {
     if (
@@ -182,19 +205,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
       return null;
     }
 
-    const nearestEndDate = item.curRentInfo
-      ? item.curRentInfo.reduce((nearestDate, rentInfo) => {
-          if (!nearestDate) return rentInfo.endDate;
-          const currentDate = new Date();
-          const nearestDateDiff = Math.abs(new Date(nearestDate) - currentDate);
-          const rentInfoDateDiff = Math.abs(
-            new Date(rentInfo.endDate) - currentDate
-          );
-          return rentInfoDateDiff < nearestDateDiff
-            ? rentInfo.endDate
-            : nearestDate;
-        }, null)
-      : null;
+    const { nearestEndDate } = calculateNearestEndDate(item);
 
     return (
       <li key={item.id} className={styles.item}>
@@ -209,10 +220,10 @@ const HomeItemList = ({ items, selectedCategory }) => {
           남은 수량: {item.ea} 개 (
           {item.ea !== 0 ? "대여 가능" : "모두 대여 중"})
         </p>
-        {nearestEndDate ? (
-          <p className={styles.dateP}>{`예약 가능 날짜:${nearestEndDate}`}</p>
-        ) : (
-          <p className={styles.dateP}>예약 가능한 날짜 정보가 없습니다.</p>
+        {item.ea === 0 && nearestEndDate && (
+          <p
+            className={styles.dateP}
+          >{`예약 가능 날짜:${nearestEndDate.toLocaleString()}`}</p>
         )}
         <p className={styles.priceP}>{`시간당 대여 비용: ${item.price
           .toString()
@@ -223,7 +234,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
             자세히
           </button>
           <button
-            type='button'
+            type="button"
             className={styles.chatBtn}
             onClick={() => chatHandler(item)}
           >
@@ -234,91 +245,102 @@ const HomeItemList = ({ items, selectedCategory }) => {
     );
   };
 
-  const renderModal = () => (
-    <div className={styles.modalOverlay}>
-      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <button type='button' className={styles.closeBtn} onClick={closeModal}>
-          <IoIosCloseCircleOutline />
-        </button>
-        <h3>{`[${selectedItem.displayName}]님의 ${selectedItem.title}`}</h3>
-        <p>{`시간당 대여 비용: ${selectedItem.price
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`}</p>
-        <p>{`수량 : ${selectedItem.ea} 개`}</p>
-        <p>{`설명 : ${selectedItem.description}`}</p>
-        {user && (
-          <>
-            <div style={{ display: "flex" }}>
-              <CustomDatePicker
-                selectedDate={rentalPeriod.startDate}
-                handleDateChange={(date) => handleDateChange(date, "start")}
-                isDatePickerOpen={isStartDatePickerOpen}
-                openDatePicker={openStartDatePicker}
-                closeDatePicker={closeStartDatePicker}
-              />
+  const renderModal = () => {
+    const { nearestEndDate } = calculateNearestEndDate(selectedItem);
 
-              <CustomDatePicker
-                selectedDate={rentalPeriod.endDate}
-                handleDateChange={(date) => handleDateChange(date, "end")}
-                isDatePickerOpen={isEndDatePickerOpen}
-                openDatePicker={openEndDatePicker}
-                closeDatePicker={closeEndDatePicker}
-                minDate={
-                  new Date(
-                    new Date(rentalPeriod.startDate).getTime() +
-                      24 * 60 * 60 * 1000
-                  )
-                }
-              />
-            </div>
-            <div className={styles.inputContainer}>
-              <input
-                className={styles.quantityInput}
-                placeholder='수량을 입력하세요.'
-                id='quantityInput'
-                type='number'
-                min='1'
-                max={selectedItem.ea}
-                value={quantity}
-                onChange={handleQuantityChange}
-                onClick={(e) => e.stopPropagation()}
-              />
+    return (
+      <div className={styles.modalOverlay}>
+        <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+          <button
+            type="button"
+            className={styles.closeBtn}
+            onClick={closeModal}
+          >
+            <IoIosCloseCircleOutline />
+          </button>
+          <h3>{`[${selectedItem.displayName}]님의 ${selectedItem.title}`}</h3>
+          <p>{`시간당 대여 비용: ${selectedItem.price
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`}</p>
+          <p>{`수량 : ${selectedItem.ea} 개`}</p>
+          {nearestEndDate && selectedItem.ea === 0 ? (
+            <p className={styles.dateP}>{`예약 가능 날짜:${nearestEndDate}`}</p>
+          ) : null}
+          <p>{`설명 : ${selectedItem.description}`}</p>
+          {user && (
+            <>
+              <div style={{ display: "flex" }}>
+                <CustomDatePicker
+                  selectedDate={rentalPeriod.startDate}
+                  handleDateChange={(date) => handleDateChange(date, "start")}
+                  isDatePickerOpen={isStartDatePickerOpen}
+                  openDatePicker={openStartDatePicker}
+                  closeDatePicker={closeStartDatePicker}
+                />
 
-              <button
-                type='button'
-                className={styles.rentBtn}
-                onClick={rentHandler}
-              >
-                빌리기
-              </button>
-            </div>
-            <div>
-              <p>{`총 대여 비용: ${
-                calculateTotalPriceAndDuration().totalPrice
-              }원`}</p>
-              <p>
-                {`총 대여 기간: ${calculateTotalPriceAndDuration().days}일 ${
-                  calculateTotalPriceAndDuration().hours
-                }시간`}
-              </p>
-            </div>
-          </>
-        )}
+                <CustomDatePicker
+                  selectedDate={rentalPeriod.endDate}
+                  handleDateChange={(date) => handleDateChange(date, "end")}
+                  isDatePickerOpen={isEndDatePickerOpen}
+                  openDatePicker={openEndDatePicker}
+                  closeDatePicker={closeEndDatePicker}
+                  minDate={
+                    new Date(
+                      new Date(rentalPeriod.startDate).getTime() +
+                        24 * 60 * 60 * 1000
+                    )
+                  }
+                />
+              </div>
+              <div className={styles.inputContainer}>
+                <input
+                  className={styles.quantityInput}
+                  placeholder="수량을 입력하세요."
+                  id="quantityInput"
+                  type="number"
+                  min="1"
+                  max={selectedItem.ea}
+                  value={quantity}
+                  onChange={handleQuantityChange}
+                  onClick={(e) => e.stopPropagation()}
+                />
+
+                <button
+                  type="button"
+                  className={styles.rentBtn}
+                  onClick={rentHandler}
+                >
+                  빌리기
+                </button>
+              </div>
+              <div>
+                <p>{`총 대여 비용: ${
+                  calculateTotalPriceAndDuration().totalPrice
+                }원`}</p>
+                <p>
+                  {`총 대여 기간: ${calculateTotalPriceAndDuration().days}일 ${
+                    calculateTotalPriceAndDuration().hours
+                  }시간`}
+                </p>
+              </div>
+            </>
+          )}
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   const renderImageModal = () => (
     <div className={styles.modalOverlay} onClick={closeImageModal}>
       <div className={styles.img_modal} onClick={(e) => e.stopPropagation()}>
         <button
-          type='button'
+          type="button"
           className={styles.closeBtn}
           onClick={closeImageModal}
         >
           <IoIosCloseCircleOutline />
         </button>
-        {selectedImage && <img src={selectedImage} alt='Large' />}
+        {selectedImage && <img src={selectedImage} alt="Large" />}
       </div>
     </div>
   );
