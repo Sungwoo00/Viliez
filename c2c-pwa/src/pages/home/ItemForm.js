@@ -125,10 +125,8 @@ const ItemForm = ({ uid }) => {
     setSelectedImage(null);
     setRentalPeriod({ startDate: new Date(), endDate: null });
     setImagePreviewUrl("");
-
+    toast.success(`${title} 상품을 등록하였습니다.`);
     addDocument(dataToSubmit);
-
-    toast.success("상품을 등록하였습니다.");
   };
 
   return (
