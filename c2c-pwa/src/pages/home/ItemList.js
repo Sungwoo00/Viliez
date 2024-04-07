@@ -105,7 +105,6 @@ const EditItemForm = ({ item, handleChange, handleUpdate, cancelEditing }) => {
         <option value='취미'>취미</option>
       </select>
 
-      {/* <label htmlFor='editPrice'>가격: </label> */}
       <input
         className={styles.itemlist_input}
         id='editPrice'
@@ -113,8 +112,8 @@ const EditItemForm = ({ item, handleChange, handleUpdate, cancelEditing }) => {
         placeholder='새로운 가격'
         value={item.price}
         onChange={(e) => handleChange("price", e.target.value)}
-        min='5000'
-        step='1000'
+        min='1000'
+        step='500'
       />
       <input
         className={styles.itemlist_input}
@@ -162,16 +161,6 @@ const ViewItem = ({ item, startEditing, deleteItem }) => {
         <p>이 물품은 {rentusers.join(", ")}님이 예약 중입니다.</p>
       ) : (
         <p>현재 예약 중인 사람이 없습니다.</p>
-      )}
-      {item.rentalPeriod && (
-        <p>
-          대여 가능 기간 :
-          {item.rentalPeriod.startDate?.toDate()?.toLocaleDateString("ko-KR") ||
-            "시작 날짜 정보가 없습니다."}{" "}
-          ~
-          {item.rentalPeriod.endDate?.toDate()?.toLocaleDateString("ko-KR") ||
-            "종료 날짜 정보가 없습니다."}
-        </p>
       )}
       <div>
         {item.photoURL && (
