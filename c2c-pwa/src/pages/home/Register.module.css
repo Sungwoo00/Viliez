@@ -42,12 +42,12 @@
   height: auto;
 }
 
-.register_container button {
+/* .register_container button {
   display: block;
   width: 100%;
   padding: 10px 15px;
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-}
+} */
 
 @media (max-width: 550px) {
   .register_container {

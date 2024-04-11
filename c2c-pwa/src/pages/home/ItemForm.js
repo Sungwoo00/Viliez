@@ -11,20 +11,21 @@ import { toast } from "react-toastify";
 
 const ItemForm = ({ uid }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+  const [imagePreviewUrls, setImagePreviewUrls] = useState([]);
+  const [selectedImages, setSelectedImages] = useState([]);
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [ea, setEa] = useState("");
   const [description, setDescription] = useState("");
   const [rentuser, setRentUser] = useState("");
+  const [visibleStartIndex, setVisibleStartIndex] = useState(0);
 
   const [rentalPeriod, setRentalPeriod] = useState({
     startDate: new Date(),
     endDate: null,
   });
 
-  const [selectedImage, setSelectedImage] = useState(null);
   const { addDocument, response } = useFirestore("Sharemarket");
 
   const handleData = (event) => {
@@ -60,42 +61,70 @@ const ItemForm = ({ uid }) => {
       setEa("");
       setDescription("");
       setRentUser("");
-      setSelectedImage(null);
+      setSelectedImages([]);
       setRentalPeriod({ startDate: new Date(), endDate: null });
     }
   }, [response]);
 
-  const handleImageChange = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
-      setSelectedImage(file);
+  // const handleImageChange = (event) => {
+  //   if (event.target.files && event.target.files[0]) {
+  //     const file = event.target.files[0];
+  //     setSelectedImage(file);
 
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreviewUrl(reader.result);
-      };
-      reader.readAsDataURL(file);
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setImagePreviewUrl(reader.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
+  const handleImageChange = (event) => {
+    if (event.target.files) {
+      const filesArray = Array.from(event.target.files).slice(0, 12); // 파일 배열 생성
+      setSelectedImages(filesArray); // 선택된 이미지 상태 업데이트
+
+      const fileReaders = filesArray.map((file) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file); // 각 파일을 데이터 URL로 읽기
+        return new Promise((resolve) => {
+          reader.onloadend = () => resolve(reader.result); // 각 파일 로드 완료 시 Promise 해결
+        });
+      });
+
+      Promise.all(fileReaders).then((files) => {
+        setImagePreviewUrls(files); // 모든 파일이 로드 완료되면 이미지 URL 상태 업데이트
+      });
+    }
+  };
+  const nextImage = () => {
+    if (visibleStartIndex < imagePreviewUrls.length - 3) {
+      setVisibleStartIndex(visibleStartIndex + 1);
+    }
+  };
+  const prevImage = () => {
+    if (visibleStartIndex > 0) {
+      setVisibleStartIndex(visibleStartIndex - 1);
     }
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    let photoURL = null;
+    let photoURLs = [];
 
-    if (selectedImage) {
-      const storageRef = ref(appStorage, `images/${uid}/${selectedImage.name}`);
+    for (const file of selectedImages) {
+      const storageRef = ref(appStorage, `images/${uid}/${file.name}`);
 
       try {
-        await uploadBytes(storageRef, selectedImage);
+        await uploadBytes(storageRef, file);
         // toast.success("상품을 등록하였습니다.");
-        photoURL = await getDownloadURL(storageRef);
+        const photoURL = await getDownloadURL(storageRef);
+        photoURLs.push(photoURL);
       } catch (error) {
         toast.success("상품 등록 오류 ❗️");
         return;
       }
     }
-
     const docRef = doc(collection(appFireStore, "Sharemarket"));
     const itemUid = docRef.id;
 
@@ -113,7 +142,7 @@ const ItemForm = ({ uid }) => {
       rentuser,
       rentalPeriod,
       displayName: currentUser?.displayName,
-      photoURL: photoURL,
+      photoURLs,
     };
 
     setTitle("");
@@ -122,9 +151,9 @@ const ItemForm = ({ uid }) => {
     setEa("");
     setDescription("");
     setRentUser("");
-    setSelectedImage(null);
+    setSelectedImages([]);
     setRentalPeriod({ startDate: new Date(), endDate: null });
-    setImagePreviewUrl("");
+    setImagePreviewUrls("");
     toast.success(`${title} 상품을 등록하였습니다.`);
     addDocument(dataToSubmit);
   };
@@ -137,28 +166,62 @@ const ItemForm = ({ uid }) => {
           <ul className={styles.formList}>
             <li>
               <input
-                type='file'
-                id='imageInput'
-                accept='image/*'
+                type="file"
+                id="imageInput"
+                accept="image/*"
                 onChange={handleImageChange}
                 style={{ display: "none" }}
+                multiple
               />
-              <label htmlFor='imageInput'>이미지 선택하기</label>
+              <label htmlFor="imageInput">이미지 선택하기</label>
             </li>
-            {imagePreviewUrl && (
-              <img
-                src={imagePreviewUrl}
-                alt='Preview'
-                required
-                className={styles.imagePreview}
-              />
+            {imagePreviewUrls.length > 3 && (
+              <div className={styles.imageIndexIndicator}>
+                {`상품 이미지 (${visibleStartIndex + 3} / ${
+                  imagePreviewUrls.length
+                })`}
+              </div>
             )}
+            <div className={styles.imagePreviewFrame}>
+              {imagePreviewUrls.length > 3 && (
+                <button
+                  className={styles.prevButton}
+                  onClick={prevImage}
+                  type="button"
+                >
+                  &lt;
+                </button>
+              )}
+              <div className={styles.imagePreviewContainer}>
+                {Array.isArray(imagePreviewUrls) &&
+                  imagePreviewUrls.length > 0 &&
+                  imagePreviewUrls
+                    .slice(visibleStartIndex, visibleStartIndex + 3)
+                    .map((url, index) => (
+                      <img
+                        key={index}
+                        src={url}
+                        alt={`Preview ${index + 1}`}
+                        className={styles.imagePreview}
+                      />
+                    ))}
+              </div>
+              {imagePreviewUrls.length > 3 && (
+                <button
+                  className={styles.nextButton}
+                  onClick={nextImage}
+                  type="button"
+                >
+                  &gt;
+                </button>
+              )}
+            </div>
             <li>
               <input
                 className={styles.formItem}
-                placeholder='제목'
-                id='tit'
-                type='text'
+                placeholder="제목"
+                id="tit"
+                type="text"
                 value={title}
                 required
                 onChange={handleData}
@@ -167,27 +230,27 @@ const ItemForm = ({ uid }) => {
 
             <li className={styles.formItem}>
               <select
-                id='category'
+                id="category"
                 value={category}
                 onChange={handleData}
                 required
               >
                 <option>카테고리</option>
-                <option value='가전'>가전</option>
-                <option value='여행'>여행</option>
-                <option value='의류'>의류</option>
-                <option value='취미'>취미</option>
+                <option value="가전">가전</option>
+                <option value="여행">여행</option>
+                <option value="의류">의류</option>
+                <option value="취미">취미</option>
               </select>
             </li>
 
             <li className={styles.formItem}>
               <input
-                placeholder='시간당 가격'
-                id='price'
-                type='number'
+                placeholder="시간당 가격"
+                id="price"
+                type="number"
                 value={price}
-                min='1000'
-                step='500'
+                min="1000"
+                step="500"
                 required
                 onChange={handleData}
               />
@@ -195,12 +258,12 @@ const ItemForm = ({ uid }) => {
 
             <li className={styles.formItem}>
               <input
-                placeholder='수량'
-                id='ea'
-                type='number'
+                placeholder="수량"
+                id="ea"
+                type="number"
                 value={ea}
-                min='1'
-                step='1'
+                min="1"
+                step="1"
                 required
                 onChange={handleData}
               />
@@ -208,9 +271,9 @@ const ItemForm = ({ uid }) => {
 
             <li className={styles.formItem}>
               <textarea
-                placeholder='대여하는 사람을 위해 자세히 적어주세요.'
-                id='txt'
-                type='text'
+                placeholder="대여하는 사람을 위해 자세히 적어주세요."
+                id="txt"
+                type="text"
                 value={description}
                 required
                 onChange={handleData}
@@ -218,7 +281,7 @@ const ItemForm = ({ uid }) => {
             </li>
           </ul>
 
-          <button className={styles.register_Btn} type='submit'>
+          <button className={styles.register_Btn} type="submit">
             올리기
           </button>
         </fieldset>
