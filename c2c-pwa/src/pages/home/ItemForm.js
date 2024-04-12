@@ -80,19 +80,19 @@ const ItemForm = ({ uid }) => {
   // };
   const handleImageChange = (event) => {
     if (event.target.files) {
-      const filesArray = Array.from(event.target.files).slice(0, 12); // 파일 배열 생성
-      setSelectedImages(filesArray); // 선택된 이미지 상태 업데이트
+      const filesArray = Array.from(event.target.files).slice(0, 12); 
+      setSelectedImages(filesArray); 
 
       const fileReaders = filesArray.map((file) => {
         const reader = new FileReader();
-        reader.readAsDataURL(file); // 각 파일을 데이터 URL로 읽기
+        reader.readAsDataURL(file); 
         return new Promise((resolve) => {
-          reader.onloadend = () => resolve(reader.result); // 각 파일 로드 완료 시 Promise 해결
+          reader.onloadend = () => resolve(reader.result);
         });
       });
 
       Promise.all(fileReaders).then((files) => {
-        setImagePreviewUrls(files); // 모든 파일이 로드 완료되면 이미지 URL 상태 업데이트
+        setImagePreviewUrls(files);
       });
     }
   };
@@ -117,7 +117,6 @@ const ItemForm = ({ uid }) => {
 
       try {
         await uploadBytes(storageRef, file);
-        // toast.success("상품을 등록하였습니다.");
         const photoURL = await getDownloadURL(storageRef);
         photoURLs.push(photoURL);
       } catch (error) {
