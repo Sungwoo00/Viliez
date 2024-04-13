@@ -5,11 +5,11 @@ import {
   where,
   getDocs,
   collection,
-} from 'firebase/firestore';
-import { deleteUser } from 'firebase/auth';
-import { appAuth, appFireStore } from '../firebase/config';
-import useAuthContext from './useAuthContext';
-import { useState } from 'react';
+} from "firebase/firestore";
+import { deleteUser } from "firebase/auth";
+import { appAuth, appFireStore } from "../firebase/config";
+import useAuthContext from "./useAuthContext";
+import { useState } from "react";
 
 const useDelete = () => {
   const [error, setError] = useState(null);
@@ -18,8 +18,8 @@ const useDelete = () => {
 
   const userDelete = async () => {
     const confirmed = window.confirm(
-      '정말 탈퇴 하시겠습니까? 탈퇴하면 회원님의 모든 정보가 사라집니다.' +
-        ' 이 작업은 되돌릴 수 없습니다.'
+      "정말 탈퇴 하시겠습니까? 탈퇴하면 회원님의 모든 정보가 사라집니다." +
+        " 이 작업은 되돌릴 수 없습니다."
     );
 
     if (!confirmed) {
@@ -31,8 +31,8 @@ const useDelete = () => {
     const user = appAuth.currentUser;
 
     try {
-      const itemsCollection = collection(appFireStore, 'Sharemarket');
-      const itemsQuery = query(itemsCollection, where('uid', '==', user.uid));
+      const itemsCollection = collection(appFireStore, "Sharemarket");
+      const itemsQuery = query(itemsCollection, where("uid", "==", user.uid));
       const itemDocs = await getDocs(itemsQuery);
 
       itemDocs.forEach(async (itemDoc) => {
@@ -41,7 +41,7 @@ const useDelete = () => {
 
       await deleteUser(user);
 
-      dispatch({ type: 'logout' });
+      dispatch({ type: "logout" });
       setError(null);
       setIsPending(false);
     } catch (err) {
