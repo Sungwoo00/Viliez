@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
-import { appAuth } from '../firebase/config';
-import useAuthContext from './useAuthContext';
+import { appAuth } from "../firebase/config";
+import useAuthContext from "./useAuthContext";
 
 const useLogin = () => {
   const [error, setError] = useState(null);
@@ -16,13 +16,12 @@ const useLogin = () => {
     signInWithEmailAndPassword(appAuth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        dispatch({ type: 'login', payload: user });
+        dispatch({ type: "login", payload: user });
         setError(null);
         setIsPending(false);
-        console.log(user);
 
         if (!user) {
-          throw new Error('로그인에 실패했습니다.');
+          throw new Error("로그인에 실패했습니다.");
         }
       })
       .catch((err) => {
