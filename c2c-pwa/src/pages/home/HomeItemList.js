@@ -213,8 +213,8 @@ const HomeItemList = ({ items, selectedCategory }) => {
         <img
           alt={item.id}
           className={styles.homeImg}
-          src={item.photoURL}
-          onClick={() => openImageModal(item.photoURL)}
+          src={item.photoURLs}
+          onClick={() => openImageModal(item.photoURLs)}
         />
         <p className={styles.amountP}>
           남은 수량: {item.ea} 개 (
