@@ -3,6 +3,7 @@ import useFirestore from "../../hooks/useFirestore";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./ItemList.module.css";
+import ImageSlider from "../../components/ImageSlider";
 
 const ItemList = ({ items }) => {
   const { deleteDocument, updateDocument } = useFirestore("Sharemarket");
@@ -88,9 +89,9 @@ const EditItemForm = ({ item, handleChange, handleUpdate, cancelEditing }) => {
     <>
       <input
         className={styles.itemlist_input}
-        id='editTitle'
-        type='text'
-        placeholder='새로운 제목'
+        id="editTitle"
+        type="text"
+        placeholder="새로운 제목"
         value={item.title}
         onChange={(e) => handleChange("title", e.target.value)}
       />
@@ -99,36 +100,36 @@ const EditItemForm = ({ item, handleChange, handleUpdate, cancelEditing }) => {
         value={item.category}
         onChange={(e) => handleChange("category", e.target.value)}
       >
-        <option value='가전'>가전</option>
-        <option value='여행'>여행</option>
-        <option value='의류'>의류</option>
-        <option value='취미'>취미</option>
+        <option value="가전">가전</option>
+        <option value="여행">여행</option>
+        <option value="의류">의류</option>
+        <option value="취미">취미</option>
       </select>
 
       <input
         className={styles.itemlist_input}
-        id='editPrice'
-        type='number'
-        placeholder='새로운 가격'
+        id="editPrice"
+        type="number"
+        placeholder="새로운 가격"
         value={item.price}
         onChange={(e) => handleChange("price", e.target.value)}
-        min='1000'
-        step='500'
+        min="1000"
+        step="500"
       />
       <input
         className={styles.itemlist_input}
-        id='editEa'
-        type='number'
-        placeholder='새로운 수량'
+        id="editEa"
+        type="number"
+        placeholder="새로운 수량"
         value={item.ea}
         onChange={(e) => handleChange("ea", e.target.value)}
-        min='1'
-        step='1'
+        min="1"
+        step="1"
       />
       <textarea
         className={styles.itemlist_textarea}
-        id='editDescription'
-        placeholder='새로운 설명'
+        id="editDescription"
+        placeholder="새로운 설명"
         value={item.description}
         onChange={(e) => handleChange("description", e.target.value)}
       />
@@ -162,11 +163,7 @@ const ViewItem = ({ item, startEditing, deleteItem }) => {
       ) : (
         <p>현재 예약 중인 사람이 없습니다.</p>
       )}
-      <div>
-        {item.photoURL && (
-          <img src={item.photoURL} alt='Product' className={styles.ImgSize} />
-        )}
-      </div>
+      <ImageSlider photoURLs={item.photoURLs} />
       <strong className={styles.title}>{item.title}</strong>
       <p className={styles.price}>
         가격 : {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원

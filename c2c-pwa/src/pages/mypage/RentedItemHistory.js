@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./RentedItemHistory.module.css";
 import useFirestore from "../../hooks/useFirestore";
+import ImageSlider from "../../components/ImageSlider";
 
 const RentedItemHistory = ({ items, currentUserDisplayName, fetchItems }) => {
   const countRentedItems = () => {
@@ -142,9 +143,7 @@ const ViewItem = ({
 
   return (
     <div className={styles.item}>
-      {item.photoURL && (
-        <img className={styles.returnedImg} src={item.photoURL} alt='Product' />
-      )}
+      {item.photoURLs && <ImageSlider photoURLs={item.photoURLs} />}
       <strong className={styles.title}>{item.title}</strong>
       {/* <p className={styles.price}>총 대여 비용: {formatPrice(item.TotalRentPrice)}원</p> */}
       <p className={styles.description}>{item.description}</p>
