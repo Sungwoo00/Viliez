@@ -8,6 +8,7 @@ import styles from "./ItemForm.module.css";
 import { appFireStore } from "../../firebase/config";
 import { collection, doc } from "firebase/firestore";
 import { toast } from "react-toastify";
+import ImagePreviewFrame from "../../components/ImagePreviewFrame";
 
 const ItemForm = ({ uid }) => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -66,26 +67,14 @@ const ItemForm = ({ uid }) => {
     }
   }, [response]);
 
-  // const handleImageChange = (event) => {
-  //   if (event.target.files && event.target.files[0]) {
-  //     const file = event.target.files[0];
-  //     setSelectedImage(file);
-
-  //     const reader = new FileReader();
-  //     reader.onloadend = () => {
-  //       setImagePreviewUrl(reader.result);
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // };
   const handleImageChange = (event) => {
     if (event.target.files) {
-      const filesArray = Array.from(event.target.files).slice(0, 12); 
-      setSelectedImages(filesArray); 
+      const filesArray = Array.from(event.target.files).slice(0, 12);
+      setSelectedImages(filesArray);
 
       const fileReaders = filesArray.map((file) => {
         const reader = new FileReader();
-        reader.readAsDataURL(file); 
+        reader.readAsDataURL(file);
         return new Promise((resolve) => {
           reader.onloadend = () => resolve(reader.result);
         });
@@ -181,40 +170,12 @@ const ItemForm = ({ uid }) => {
                 })`}
               </div>
             )}
-            <div className={styles.imagePreviewFrame}>
-              {imagePreviewUrls.length > 3 && (
-                <button
-                  className={styles.prevButton}
-                  onClick={prevImage}
-                  type="button"
-                >
-                  &lt;
-                </button>
-              )}
-              <div className={styles.imagePreviewContainer}>
-                {Array.isArray(imagePreviewUrls) &&
-                  imagePreviewUrls.length > 0 &&
-                  imagePreviewUrls
-                    .slice(visibleStartIndex, visibleStartIndex + 3)
-                    .map((url, index) => (
-                      <img
-                        key={index}
-                        src={url}
-                        alt={`Preview ${index + 1}`}
-                        className={styles.imagePreview}
-                      />
-                    ))}
-              </div>
-              {imagePreviewUrls.length > 3 && (
-                <button
-                  className={styles.nextButton}
-                  onClick={nextImage}
-                  type="button"
-                >
-                  &gt;
-                </button>
-              )}
-            </div>
+            <ImagePreviewFrame
+              imagePreviewUrls={imagePreviewUrls}
+              visibleStartIndex={visibleStartIndex}
+              prevImage={prevImage}
+              nextImage={nextImage}
+            />
             <li>
               <input
                 className={styles.formItem}
