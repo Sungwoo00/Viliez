@@ -8,7 +8,6 @@ import styles from "./ItemForm.module.css";
 import { appFireStore } from "../../firebase/config";
 import { collection, doc } from "firebase/firestore";
 import { toast } from "react-toastify";
-import ImagePreviewFrame from "../../components/ImagePreviewFrame";
 
 const ItemForm = ({ uid }) => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -170,12 +169,40 @@ const ItemForm = ({ uid }) => {
                 })`}
               </div>
             )}
-            <ImagePreviewFrame
-              imagePreviewUrls={imagePreviewUrls}
-              visibleStartIndex={visibleStartIndex}
-              prevImage={prevImage}
-              nextImage={nextImage}
-            />
+            <div className={styles.imagePreviewFrame}>
+              {imagePreviewUrls.length > 3 && (
+                <button
+                  className={styles.prevButton}
+                  onClick={prevImage}
+                  type="button"
+                >
+                  &lt;
+                </button>
+              )}
+              <div className={styles.imagePreviewContainer}>
+                {Array.isArray(imagePreviewUrls) &&
+                  imagePreviewUrls.length > 0 &&
+                  imagePreviewUrls
+                    .slice(visibleStartIndex, visibleStartIndex + 3)
+                    .map((url, index) => (
+                      <img
+                        key={index}
+                        src={url}
+                        alt={`Preview ${index + 1}`}
+                        className={styles.imagePreview}
+                      />
+                    ))}
+              </div>
+              {imagePreviewUrls.length > 3 && (
+                <button
+                  className={styles.nextButton}
+                  onClick={nextImage}
+                  type="button"
+                >
+                  &gt;
+                </button>
+              )}
+            </div>
             <li>
               <input
                 className={styles.formItem}

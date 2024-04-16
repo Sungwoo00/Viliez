@@ -16,6 +16,36 @@ ul {
   display: block;
 }
 
+.imagePreviewList {
+  display: flex;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  padding: 0;
+  list-style: none;
+  white-space: nowrap;
+}
+
+.imagePreviewList li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.imagePreview {
+  width: 80px;
+  height: 80px;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  margin: 2vh;
+}
+
+.imagePreviewFrame {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .register_Btn {
   display: block;
   width: 100%;
@@ -25,4 +55,44 @@ ul {
   border-radius: 16px;
   color: white;
   border: none;
+}
+
+.nextButton,
+.prevButton {
+  width: 60px;
+  height: 60px;
+  z-index: 10;
+  border-radius: 60%;
+  border: none;
+  background-color: transparent;
+  color: rgb(206, 204, 204);
+  font-size: 30px;
+  cursor: pointer;
+  padding: 10px;
+}
+.imagePreviewContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nextButton:hover,
+.prevButton:hover {
+  background-color: rgba(62, 61, 61, 0.7);
+  color: white;
+}
+.nextButton {
+  position: absolute;
+  right: 0;
+}
+
+.prevButton {
+  position: absolute;
+  left: 0;
+}
+
+.imageIndexIndicator {
+  font-size: 16px;
+  color: #666;
 }

@@ -8,6 +8,7 @@ import CustomDatePicker from "../../components/CustomDatePicker";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { differenceInMilliseconds } from "date-fns";
 import { toast } from "react-toastify";
+import ImageSlider from "../../components/ImageSlider";
 
 const HomeItemList = ({ items, selectedCategory }) => {
   const { updateDocument } = useFirestore("Sharemarket");
@@ -21,17 +22,19 @@ const HomeItemList = ({ items, selectedCategory }) => {
   });
   const [quantity, setQuantity] = useState("");
   const [isImageModalOpen, setImageModalOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImages, setSelectedImages] = useState([]);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isStartDatePickerOpen, setIsStartDatePickerOpen] = useState(false);
   const [isEndDatePickerOpen, setIsEndDatePickerOpen] = useState(false);
 
-  const openImageModal = (imageURL) => {
-    setSelectedImage(imageURL);
+  const openImageModal = (imageURLs) => {
+    setSelectedImages(imageURLs);
+    setCurrentImageIndex(0);
     setImageModalOpen(true);
   };
 
   const closeImageModal = () => {
-    setSelectedImage(null);
+    setSelectedImages([]);
     setImageModalOpen(false);
   };
 
@@ -340,7 +343,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
         >
           <IoIosCloseCircleOutline />
         </button>
-        {selectedImage && <img src={selectedImage} alt="Large" />}
+        <ImageSlider photoURLs={selectedImages} />
       </div>
     </div>
   );
