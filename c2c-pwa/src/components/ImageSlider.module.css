@@ -1,0 +1,14 @@
+.imgSlide {
+  width: 200px;
+  height: 200px;
+}
+@media (max-width: 550px) {
+  .imgSlide {
+    width: 125px;
+    height: 125px;
+    float: left;
+  }
+  .btn {
+    display: none;
+  }
+}
