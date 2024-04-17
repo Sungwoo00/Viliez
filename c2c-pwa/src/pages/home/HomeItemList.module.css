@@ -32,14 +32,16 @@
   text-align: center;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
+
 .img_modal img {
-  width: 70%;
-  height: 70%;
+  width: 300px;
+  height: 300px;
 }
 
 .closeBtn {
   background-color: transparent;
   border: none;
+  z-index: 100;
   position: absolute;
   top: 10px;
   right: 10px;
@@ -145,5 +147,9 @@
   }
   .modalOverlay {
     top: -50px;
+  }
+  .img_modal img {
+    width: 200px;
+    height: 200px;
   }
 }
