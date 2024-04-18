@@ -55,6 +55,7 @@ const ImageSlider = ({ photoURLs, onClick }) => {
 
   return (
     <div
+      className={styles.SliderContainer}
       onMouseDown={startDrag}
       onMouseMove={onDrag}
       onMouseUp={endDrag}
