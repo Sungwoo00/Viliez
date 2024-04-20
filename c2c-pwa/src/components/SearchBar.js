@@ -21,7 +21,9 @@ function SearchBar({ onSearch }) {
           value={keyword}
           onChange={handleChange}
         />
-        <button type="submit">검색</button>
+        <button className={styles.searchBtn} type="submit">
+          검색
+        </button>
       </div>
     </form>
   );
