@@ -1,10 +1,10 @@
-import { useState, useRef, useEffect } from 'react';
-import { IoMenu } from 'react-icons/io5';
-import styles from './Sidebar.module.css';
+import { useState, useRef, useEffect } from "react";
+import { IoMenu } from "react-icons/io5";
+import styles from "./Category.module.css";
 
 const Sidebar = ({ onCategoryChange }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('카테고리 선택');
+  const [selectedOption, setSelectedOption] = useState("카테고리 선택");
   const sidebarRef = useRef(null);
 
   const handleOptionClick = (option) => {
@@ -20,9 +20,9 @@ const Sidebar = ({ onCategoryChange }) => {
   };
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -31,13 +31,13 @@ const Sidebar = ({ onCategoryChange }) => {
       <IoMenu size={25} className={styles.icon} />
       <ul
         className={`${styles.menu} ${
-          isSidebarOpen ? `${styles.menuOpen} ${styles.menuAnimation}` : ''
+          isSidebarOpen ? `${styles.menuOpen} ${styles.menuAnimation}` : ""
         }`}
       >
         <li
-          onClick={() => handleOptionClick('모든 물품')}
+          onClick={() => handleOptionClick("모든 물품")}
           className={
-            selectedOption === '모든 물품'
+            selectedOption === "모든 물품"
               ? `${styles.item} ${styles.active}`
               : styles.item
           }
@@ -45,9 +45,9 @@ const Sidebar = ({ onCategoryChange }) => {
           모든 물품
         </li>
         <li
-          onClick={() => handleOptionClick('가전')}
+          onClick={() => handleOptionClick("가전")}
           className={
-            selectedOption === '가전'
+            selectedOption === "가전"
               ? `${styles.item} ${styles.active}`
               : styles.item
           }
@@ -55,9 +55,9 @@ const Sidebar = ({ onCategoryChange }) => {
           가전
         </li>
         <li
-          onClick={() => handleOptionClick('여행')}
+          onClick={() => handleOptionClick("여행")}
           className={
-            selectedOption === '여행'
+            selectedOption === "여행"
               ? `${styles.item} ${styles.active}`
               : styles.item
           }
@@ -65,9 +65,9 @@ const Sidebar = ({ onCategoryChange }) => {
           여행
         </li>
         <li
-          onClick={() => handleOptionClick('의류')}
+          onClick={() => handleOptionClick("의류")}
           className={
-            selectedOption === '의류'
+            selectedOption === "의류"
               ? `${styles.item} ${styles.active}`
               : styles.item
           }
@@ -75,9 +75,9 @@ const Sidebar = ({ onCategoryChange }) => {
           의류
         </li>
         <li
-          onClick={() => handleOptionClick('취미')}
+          onClick={() => handleOptionClick("취미")}
           className={
-            selectedOption === '취미'
+            selectedOption === "취미"
               ? `${styles.item} ${styles.active}`
               : styles.item
           }
