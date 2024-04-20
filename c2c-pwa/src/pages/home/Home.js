@@ -4,7 +4,7 @@ import styles from "./Home.module.css";
 import useCollection from "../../hooks/useCollection";
 import SyncLoader from "react-spinners/SyncLoader";
 import Paginate from "../../components/Paginate";
-import Sidebar from "../../components/Sidebar";
+import Category from "../../components/Category";
 import SearchBar from "../../components/SearchBar";
 
 const Home = () => {
@@ -36,7 +36,7 @@ const Home = () => {
     <>
       <div className={styles.container}>
         <div className={styles.sidebar}>
-          <Sidebar onCategoryChange={setSelectedCategory} />
+          <Category onCategoryChange={setSelectedCategory} />
         </div>
         <SearchBar onSearch={setSearchItem} />
         {isLoading && (
