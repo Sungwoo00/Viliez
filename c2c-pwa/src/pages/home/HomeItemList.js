@@ -9,6 +9,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import { differenceInMilliseconds } from "date-fns";
 import { toast } from "react-toastify";
 import ImageSlider from "../../components/ImageSlider";
+import { FaRegHeart } from "react-icons/fa";
 
 const HomeItemList = ({ items, selectedCategory }) => {
   const { updateDocument } = useFirestore("Sharemarket");
@@ -23,9 +24,11 @@ const HomeItemList = ({ items, selectedCategory }) => {
   const [quantity, setQuantity] = useState("");
   const [isImageModalOpen, setImageModalOpen] = useState(false);
   const [selectedImages, setSelectedImages] = useState([]);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [, setCurrentImageIndex] = useState(0);
   const [isStartDatePickerOpen, setIsStartDatePickerOpen] = useState(false);
   const [isEndDatePickerOpen, setIsEndDatePickerOpen] = useState(false);
+  const [isWished, setIsWished] = useState(false);
+  // const [favoriteItems, setFavoriteItems] = useState([]);
 
   const openImageModal = (imageURLs) => {
     setSelectedImages(imageURLs);
@@ -187,7 +190,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
       ? item.curRentInfo.reduce((nearestDate, rentInfo) => {
           if (!nearestDate) return rentInfo.endDate;
           const currentDate = new Date();
-          const nearestDateDiff = Math.abs(new Date(nearestDate) - currentDate); // 현재 날짜와 가장 가까운 날짜 차이 계산
+          const nearestDateDiff = Math.abs(new Date(nearestDate) - currentDate);
           const rentInfoDateDiff = Math.abs(
             new Date(rentInfo.endDate) - currentDate
           );
@@ -210,9 +213,20 @@ const HomeItemList = ({ items, selectedCategory }) => {
 
     const { nearestEndDate } = calculateNearestEndDate(item);
 
+    const wishAddHandler = async () => {
+      if (!user) {
+        return;
+      }
+      setIsWished(!isWished);
+    };
+
     return (
       <li key={item.id} className={styles.item}>
         <strong className={styles.title}>{item.title}</strong>
+        <FaRegHeart
+          className={`${styles.heart} ${isWished ? styles.wished : ""}`}
+          onClick={wishAddHandler}
+        />
         <img
           alt={item.id}
           className={styles.homeImg}
