@@ -1,20 +1,20 @@
-import { useState, useEffect } from "react";
-import HomeItemList from "./HomeItemList";
-import styles from "./Home.module.css";
-import useCollection from "../../hooks/useCollection";
-import SyncLoader from "react-spinners/SyncLoader";
-import Paginate from "../../components/Paginate";
-import Category from "../../components/Category";
-import SearchBar from "../../components/SearchBar";
+import { useState, useEffect } from 'react';
+import HomeItemList from './HomeItemList';
+import styles from './Home.module.css';
+import useCollection from '../../hooks/useCollection';
+import SyncLoader from 'react-spinners/SyncLoader';
+import Paginate from '../../components/Paginate';
+import Category from '../../components/Category';
+import SearchBar from '../../components/SearchBar';
 
 const Home = () => {
-  const { documents, error, isLoading } = useCollection("Sharemarket");
-  const [selectedCategory, setSelectedCategory] = useState("모든 물품");
-  const [SearchItem, setSearchItem] = useState("");
+  const { documents, error, isLoading } = useCollection('Sharemarket');
+  const [selectedCategory, setSelectedCategory] = useState('모든 물품');
+  const [SearchItem, setSearchItem] = useState('');
 
   const filteredItems = documents?.filter(
     (item) =>
-      (selectedCategory === "모든 물품" ||
+      (selectedCategory === '모든 물품' ||
         item.category === selectedCategory) &&
       item.title.toLowerCase().includes(SearchItem.toLowerCase())
   );
