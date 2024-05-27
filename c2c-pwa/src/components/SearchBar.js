@@ -1,7 +1,9 @@
-import React, { useState } from "react";
-import styles from "./SearchBar.module.css";
+import React, { useState } from 'react';
+import styles from './SearchBar.module.css';
+import { CgSearch } from 'react-icons/cg';
+
 function SearchBar({ onSearch }) {
-  const [keyword, setKeyword] = useState("");
+  const [keyword, setKeyword] = useState('');
 
   const handleChange = (event) => {
     setKeyword(event.target.value);
@@ -22,7 +24,7 @@ function SearchBar({ onSearch }) {
           onChange={handleChange}
         />
         <button className={styles.searchBtn} type="submit">
-          검색
+          <CgSearch style={{ fontSize: '22px' }} />
         </button>
       </div>
     </form>
