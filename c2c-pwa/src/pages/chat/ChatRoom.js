@@ -58,6 +58,13 @@ const ChatRoom = () => {
         return () => unsubscribe();
     }, [chatRoomId]);
 
+    useEffect(() => {
+        if (messagesContainerRef.current) {
+            messagesContainerRef.current.scrollTop =
+                messagesContainerRef.current.scrollHeight;
+        }
+    }, [messages]);
+
     const sendMessage = async () => {
         if (newMessage.trim() !== '' && chatRoomId) {
             const messagesRef = collection(
@@ -111,10 +118,10 @@ const ChatRoom = () => {
             </div>
             <div className={styles.inputContainer}>
                 <input
-                    type="text"
+                    type='text'
                     value={newMessage}
                     onChange={(event) => setNewMessage(event.target.value)}
-                    placeholder="메세지를 입력하세요."
+                    placeholder='메세지를 입력하세요.'
                     onKeyPress={handleKeyPress}
                     className={styles.inputMessage}
                 />

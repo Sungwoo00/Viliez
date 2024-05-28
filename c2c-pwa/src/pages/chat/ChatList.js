@@ -5,7 +5,7 @@ import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import { appFireStore } from '../../firebase/config';
 import styles from './Chat.module.css';
 
-const ChatList = () => {
+const ChatRoomList = () => {
     const { user } = useAuthContext();
     const [chatRooms, setChatRooms] = useState([]);
     const navigate = useNavigate();
@@ -25,10 +25,6 @@ const ChatList = () => {
                 ...doc.data(),
             }));
             setChatRooms(loadedChatRooms);
-
-            loadedChatRooms.forEach((chatRoom) => {
-                console.log('Chat Room ID:', chatRoom.id);
-            });
         });
 
         return () => unsubscribe();
@@ -40,17 +36,25 @@ const ChatList = () => {
 
     return (
         <div className={styles.chatRoomsList}>
-            {chatRooms.map((chatRoom) => (
-                <div
-                    key={chatRoom.id}
-                    onClick={() => handleChatRoomClick(chatRoom.id)}
-                    className={styles.chatRoomItem}
-                >
-                    {chatRoom.id}
-                </div>
-            ))}
+            <h3>채팅</h3>
+            <ul>
+                {chatRooms.map((chatRoom) => (
+                    <li
+                        key={chatRoom.id}
+                        onClick={() => handleChatRoomClick(chatRoom.id)}
+                        className={styles.chatRoomItem}
+                    >
+                        {chatRoom.participantNames
+                            ? chatRoom.participantNames
+                                  .filter((name) => name !== user.displayName)
+                                  .map((name) => `${name}님과의 채팅`)
+                                  .join(', ')
+                            : `${chatRoom.id}님과의 채팅`}
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 };
 
-export default ChatList;
+export default ChatRoomList;

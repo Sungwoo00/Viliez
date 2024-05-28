@@ -197,6 +197,9 @@ const HomeItemList = ({ items, selectedCategory }) => {
             await setDoc(chatRoomRef, {
                 participants: [user.uid, item.uid],
                 createdAt: serverTimestamp(),
+                participantNames: [user.displayName, item.displayName],
+                itemId: item.id,
+                itemTitle: item.title,
             });
         }
 
@@ -282,7 +285,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
                         자세히
                     </button>
                     <button
-                        type="button"
+                        type='button'
                         className={styles.chatBtn}
                         onClick={() => chatHandler(item)}
                     >
@@ -303,7 +306,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
                     onClick={(e) => e.stopPropagation()}
                 >
                     <button
-                        type="button"
+                        type='button'
                         className={styles.closeBtn}
                         onClick={closeModal}
                     >
@@ -354,10 +357,10 @@ const HomeItemList = ({ items, selectedCategory }) => {
                             <div className={styles.inputContainer}>
                                 <input
                                     className={styles.quantityInput}
-                                    placeholder="수량을 입력하세요."
-                                    id="quantityInput"
-                                    type="number"
-                                    min="1"
+                                    placeholder='수량을 입력하세요.'
+                                    id='quantityInput'
+                                    type='number'
+                                    min='1'
                                     max={selectedItem.ea}
                                     value={quantity}
                                     onChange={handleQuantityChange}
@@ -365,7 +368,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
                                 />
 
                                 <button
-                                    type="button"
+                                    type='button'
                                     className={styles.rentBtn}
                                     onClick={rentHandler}
                                 >
@@ -398,7 +401,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
                 onClick={(e) => e.stopPropagation()}
             >
                 <button
-                    type="button"
+                    type='button'
                     className={styles.closeBtn}
                     onClick={closeImageModal}
                 >

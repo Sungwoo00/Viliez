@@ -7,8 +7,8 @@ const Chat = () => {
     return (
         <>
             <Routes>
-                <Route path="/" element={<ChatList />} />
-                <Route path=":chatRoomId" element={<ChatRoom />} />
+                <Route path='/' element={<ChatList />} />
+                <Route path=':chatRoomId' element={<ChatRoom />} />
             </Routes>
         </>
     );

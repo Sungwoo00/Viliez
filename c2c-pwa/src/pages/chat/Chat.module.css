@@ -12,11 +12,14 @@
         padding: 20px;
     }
 }
-
+h3 {
+    margin: auto;
+    /* border-bottom: solid 1px gray; */
+}
 /* 채팅 리스트 스타일 */
 .chatRoomsList {
     border: 1px solid black;
-    margin-top: 20%;
+    margin: 20% 30%;
     padding: 10px;
     height: 500px;
     overflow-y: auto;
@@ -27,13 +30,15 @@
     border-bottom: 1px solid gray;
     cursor: pointer;
     transition: background-color 0.3s;
+    width: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .chatRoomItem:hover {
     background-color: lightgray;
 }
 
-/* 채팅 메시지 리스트 스타일 */
 .messageList {
     border: 1px solid black;
     height: 500px;
@@ -42,7 +47,6 @@
     overflow: auto;
 }
 
-/* 입력 컨테이너 스타일 */
 .inputContainer {
     display: flex;
     margin-top: 10px;
@@ -65,7 +69,6 @@
     margin-left: 10px;
 }
 
-/* 메시지 스타일 */
 .myMessage {
     text-align: center;
     position: relative;
