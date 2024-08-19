@@ -18,7 +18,6 @@ const Auth = () => {
       value: event.target.value,
     };
 
-    // 인풋 타입에 따라 state 값을 변경합니다.
     if (inputData.type === 'email') {
       setEmail(inputData.value);
     } else if (inputData.type === 'password') {
@@ -26,25 +25,21 @@ const Auth = () => {
     }
   };
 
-  // 폼이 제출되면 트리거 됩니다.
   const onSubmit = (event) => {
     event.preventDefault();
 
-    // 로그인 관련한 코드를 추가합니다.
     const auth = getAuth();
     let user;
     try {
       if (newAccount) {
         createUserWithEmailAndPassword(auth, email, password).then(
           (userCredential) => {
-            // Signed in
             console.log(userCredential.user);
           }
         );
       } else {
         signInWithEmailAndPassword(auth, email, password).then(
           (userCredential) => {
-            // Signed in
             console.log((user = userCredential.user));
             // ...
           }
@@ -62,7 +57,7 @@ const Auth = () => {
         <div>
           <label>이메일 : </label>
           <input
-            type='email'
+            type="email"
             value={email}
             onChange={onChange}
             required
@@ -71,13 +66,13 @@ const Auth = () => {
         <div>
           <label>비밀번호 : </label>
           <input
-            type='password'
+            type="password"
             value={password}
             onChange={onChange}
             required
           ></input>
         </div>
-        <button type='submit'>{newAccount ? '회원가입하기' : '로그인'}</button>
+        <button type="submit">{newAccount ? '회원가입하기' : '로그인'}</button>
       </form>
     </>
   );
