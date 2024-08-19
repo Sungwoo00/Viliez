@@ -1,0 +1,36 @@
+.list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 20px;
+}
+
+.details {
+  flex-grow: 1;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.price {
+  color: #666;
+}
+
+.amount {
+  color: #888;
+}

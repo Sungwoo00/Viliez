@@ -69,20 +69,25 @@ const HomeItemList = ({ items, selectedCategory }) => {
       return;
     }
 
-    const favoriteDocRef = doc(
-      appFireStore,
-      'users',
-      user.uid,
-      'favorites',
-      itemId
-    );
+    try {
+      const favoriteDocRef = doc(
+        appFireStore,
+        'users',
+        user.uid,
+        'favorites',
+        itemId
+      );
 
-    if (favoriteItems.includes(itemId)) {
-      await deleteDoc(favoriteDocRef);
-      setFavoriteItems(favoriteItems.filter((id) => id !== itemId));
-    } else {
-      await setDoc(favoriteDocRef, { itemId });
-      setFavoriteItems([...favoriteItems, itemId]);
+      if (favoriteItems.includes(itemId)) {
+        await deleteDoc(favoriteDocRef);
+        setFavoriteItems(favoriteItems.filter((id) => id !== itemId));
+      } else {
+        await setDoc(favoriteDocRef, { itemId });
+        setFavoriteItems([...favoriteItems, itemId]);
+      }
+    } catch (error) {
+      console.error('Error toggling favorite: ', error);
+      toast.error('찜한 상품을 처리하는 중 오류가 발생했습니다.');
     }
   };
 
