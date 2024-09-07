@@ -241,7 +241,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
       toast.error('자신이 등록한 물품에는 대화를 시도할 수 없습니다.');
       return;
     }
-    const chatRoomId = generateChatRoomId(user.uid, item.uid);
+    const chatRoomId = generateChatRoomId(user.uid, item.uid, item.id);
     const chatRoomRef = doc(appFireStore, 'chatRooms', chatRoomId);
 
     const chatRoomSnap = await getDoc(chatRoomRef);
@@ -260,8 +260,8 @@ const HomeItemList = ({ items, selectedCategory }) => {
     closeModal();
   };
 
-  const generateChatRoomId = (uid1, uid2) => {
-    return [uid1, uid2].sort().join('-');
+  const generateChatRoomId = (uid1, uid2, itemId) => {
+    return [uid1, uid2].sort().join('-') + '-' + itemId;
   };
 
   const calculateNearestEndDate = (item) => {
@@ -324,7 +324,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
             자세히
           </button>
           <button
-            type="button"
+            type='button'
             className={styles.chatBtn}
             onClick={() => chatHandler(item)}
           >
@@ -342,7 +342,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
       <div className={styles.modalOverlay}>
         <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
           <button
-            type="button"
+            type='button'
             className={styles.closeBtn}
             onClick={closeModal}
           >
@@ -385,10 +385,10 @@ const HomeItemList = ({ items, selectedCategory }) => {
               <div className={styles.inputContainer}>
                 <input
                   className={styles.quantityInput}
-                  placeholder="수량을 입력하세요."
-                  id="quantityInput"
-                  type="number"
-                  min="1"
+                  placeholder='수량을 입력하세요.'
+                  id='quantityInput'
+                  type='number'
+                  min='1'
                   max={selectedItem.ea}
                   value={quantity}
                   onChange={handleQuantityChange}
@@ -396,7 +396,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
                 />
 
                 <button
-                  type="button"
+                  type='button'
                   className={styles.rentBtn}
                   onClick={rentHandler}
                 >
@@ -424,7 +424,7 @@ const HomeItemList = ({ items, selectedCategory }) => {
     <div className={styles.modalOverlay} onClick={closeImageModal}>
       <div className={styles.img_modal} onClick={(e) => e.stopPropagation()}>
         <button
-          type="button"
+          type='button'
           className={styles.closeBtn}
           onClick={closeImageModal}
         >
