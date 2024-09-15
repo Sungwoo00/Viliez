@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import useAuthContext from '../../hooks/useAuthContext';
+
 import {
   collection,
   getDocs,
@@ -68,11 +69,11 @@ const LikeItem = () => {
   };
 
   return (
-    <div>
+    <div className={styles.LikeItemBox}>
       <h1>
-        <br />
-        <br />
-        <br />
+        <br className={styles.brHide} />
+        <br className={styles.brHide} />
+        <br className={styles.brHide} />
         찜한 상품
       </h1>
       {isLoading ? (
