@@ -5,6 +5,40 @@
   padding: 30px;
 }
 
+/* 물품 정보 스타일*/
+.itemInfo {
+  display: flex;
+  margin: 2%;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.itemImage {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+.itemDetails {
+  flex-grow: 1;
+}
+
+.itemDetails h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.itemDetails p {
+  margin: 5px 0 0 0;
+  font-size: 14px;
+  color: #666;
+}
+
 @media (max-width: 550px) {
   .container {
     max-width: 90%;
@@ -17,6 +51,11 @@ h3 {
   /* border-bottom: solid 1px gray; */
 }
 /* 채팅 리스트 스타일 */
+
+.chatContainer {
+  border: 1px solid black;
+}
+
 .chatRoomsList {
   border: 1px solid black;
   border-radius: 1%;
@@ -54,7 +93,6 @@ h3 {
   text-align: left;
 }
 .messageList {
-  border: 1px solid black;
   border-radius: 1%;
   height: 500px;
   list-style: none;
