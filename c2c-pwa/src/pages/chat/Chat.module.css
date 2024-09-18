@@ -1,132 +1,147 @@
 /* 공통 컨테이너 스타일 */
 .container {
-    max-width: 600px;
-    margin: 120px auto;
-    padding: 30px;
+  max-width: 600px;
+  margin: 120px auto;
+  padding: 30px;
 }
 
 @media (max-width: 550px) {
-    .container {
-        max-width: 90%;
-        margin: 40px auto;
-        padding: 20px;
-    }
+  .container {
+    max-width: 90%;
+    margin: 40px auto;
+    padding: 20px;
+  }
 }
 h3 {
-    margin: auto;
-    /* border-bottom: solid 1px gray; */
+  margin: auto;
+  /* border-bottom: solid 1px gray; */
 }
 /* 채팅 리스트 스타일 */
 .chatRoomsList {
-    border: 1px solid black;
-    margin: 20% 30%;
-    padding: 10px;
-    height: 500px;
-    overflow-y: auto;
+  border: 1px solid black;
+  border-radius: 1%;
+  margin: 10% 20%;
+  padding: 10px;
+  height: 500px;
+  overflow-y: auto;
 }
 
 .chatRoomItem {
-    padding: 10px;
-    border-bottom: 1px solid gray;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 100%;
-    display: flex;
-    align-items: center;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid gray;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+  display: flex;
 }
 
 .chatRoomItem:hover {
-    background-color: lightgray;
+  background-color: lightgray;
 }
 
+.nickname {
+  font-size: 12px;
+  color: #666;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.item {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: left;
+}
 .messageList {
-    border: 1px solid black;
-    height: 500px;
-    list-style: none;
-    padding: 10px;
-    overflow: auto;
+  border: 1px solid black;
+  border-radius: 1%;
+  height: 500px;
+  list-style: none;
+  padding: 10px;
+  overflow: auto;
 }
 
 .inputContainer {
-    display: flex;
-    margin-top: 10px;
+  display: flex;
+  margin-top: 10px;
 }
 
 .inputMessage {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 .sendMessageButton {
-    background-color: royalblue;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-left: 10px;
+  background-color: royalblue;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: 10px;
 }
 
 .myMessage {
-    text-align: center;
-    position: relative;
-    background-color: #7db2f0;
-    border-radius: 10px;
-    padding: 10px;
-    margin-left: auto;
-    max-width: 80%;
+  text-align: center;
+  position: relative;
+  background-color: #7db2f0;
+  border-radius: 10px;
+  padding: 10px;
+  margin-left: auto;
+  max-width: 80%;
 }
 
 .myMessage::before {
-    content: '';
-    position: absolute;
-    top: 30%;
-    left: 100%;
-    border-top: 10px solid transparent;
-    border-left: 12px solid #7db2f0;
-    border-bottom: 10px solid transparent;
+  content: '';
+  position: absolute;
+  top: 30%;
+  left: 100%;
+  border-top: 10px solid transparent;
+  border-left: 12px solid #7db2f0;
+  border-bottom: 10px solid transparent;
 }
 
 .otherMessage {
-    text-align: center;
-    position: relative;
-    background-color: rgb(212, 206, 206);
-    border-radius: 10px;
-    padding: 10px;
-    margin-right: auto;
-    max-width: 80%;
+  text-align: center;
+  position: relative;
+  background-color: rgb(212, 206, 206);
+  border-radius: 10px;
+  padding: 10px;
+  margin-right: auto;
+  max-width: 80%;
 }
 
 .otherMessage::before {
-    content: '';
-    position: absolute;
-    top: 30%;
-    right: 100%;
-    border-top: 10px solid transparent;
-    border-right: 12px solid rgb(212, 206, 206);
-    border-bottom: 10px solid transparent;
+  content: '';
+  position: absolute;
+  top: 30%;
+  right: 100%;
+  border-top: 10px solid transparent;
+  border-right: 12px solid rgb(212, 206, 206);
+  border-bottom: 10px solid transparent;
 }
 
 .myMessage p,
 .otherMessage p {
-    margin: 0 auto;
+  margin: 0 auto;
 }
 
 /* 사용자 이름 스타일 */
 .myDisplayName {
-    margin: 5px auto;
-    font-weight: bold;
-    color: royalblue;
-    text-align: right;
-    margin-right: 5px;
+  margin: 5px auto;
+  font-weight: bold;
+  color: royalblue;
+  text-align: right;
+  margin-right: 5px;
 }
 
 .otherDisplayName {
-    margin: 5px auto;
-    font-weight: bold;
-    color: royalblue;
-    text-align: left;
-    margin-left: 5px;
+  margin: 5px auto;
+  font-weight: bold;
+  color: royalblue;
+  text-align: left;
+  margin-left: 5px;
 }
