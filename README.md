@@ -1,10 +1,14 @@
-## 📌 Stack 📌
-<p>
+
+<div align='center'>
   <img src="https://img.shields.io/badge/React.js-61DAFB?style=for-the-badge&logo=React&logoColor=white">
   <img src="https://img.shields.io/badge/firebase-DD2C00?style=for-the-badge&logo=firebase&logoColor=ffffff"/>
   <img src="https://img.shields.io/badge/PWA-5A0FC8?style=for-the-badge&logo=pwa&logoColor=ffffff"/>
-</p>
+</div>
 
+<div align='center'>
+  <h3>리액트를 처음 공부하며 학부 캡스톤디자인 시간에 진행한 프로젝트입니다. <br />코드 구조가 매우 지저분하고 비효율적인 부분이 많습니다.</h3>
+</div>
+  
 ## ❓ Viliez
 **Viliez**는 **<u>사용자 간 평소 사용하지 않는 물품을 공유</u>** 하기 위해 만들었어요.
 
