@@ -50,74 +50,49 @@ function App() {
       </div>
     );
   }
-
   return (
     <div>
       {isAuthReady ? (
-        <BrowserRouter>
+        <BrowserRouter basename="/Viliez">
           <Nav />
           <div>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route
-                path="/Register"
-                element={
-                  user ? <Register /> : <Navigate replace={true} to="/login" />
-                }
+                path="/register"
+                element={user ? <Register /> : <Navigate replace to="/login" />}
               />
               <Route
                 path="/chat"
-                element={
-                  user ? <ChatList /> : <Navigate replace={true} to="/login" />
-                }
+                element={user ? <ChatList /> : <Navigate replace to="/login" />}
               />
               <Route
                 path="/chat/:chatRoomId"
-                element={
-                  user ? <ChatRoom /> : <Navigate replace={true} to="/login" />
-                }
+                element={user ? <ChatRoom /> : <Navigate replace to="/login" />}
               />
               <Route
                 path="/mypage"
-                element={
-                  user ? <MyPage /> : <Navigate replace={true} to="../login" />
-                }
+                element={user ? <MyPage /> : <Navigate replace to="/login" />}
               />
               <Route
                 path="/myitem"
-                element={
-                  user ? <MyItem /> : <Navigate replace={true} to="../login" />
-                }
+                element={user ? <MyItem /> : <Navigate replace to="/login" />}
               />
               <Route
                 path="/renteditem"
-                element={
-                  user ? (
-                    <RentedItem />
-                  ) : (
-                    <Navigate replace={true} to="../login" />
-                  )
-                }
+                element={user ? <RentedItem /> : <Navigate replace to="/login" />}
               />
               <Route
                 path="/likeitem"
-                element={
-                  user ? (
-                    <LikeItem />
-                  ) : (
-                    <Navigate replace={true} to="../login" />
-                  )
-                }
+                element={user ? <LikeItem /> : <Navigate replace to="/login" />}
               />
               <Route
                 path="/login"
-                element={!user ? <Login /> : <Navigate replace={true} to="/" />}
+                element={!user ? <Login /> : <Navigate replace to="/" />}
               />
               <Route
                 path="/signup"
-                element={
-                  !user ? <Signup /> : <Navigate replace={true} to="/" />
-                }
+                element={!user ? <Signup /> : <Navigate replace to="/" />}
               />
             </Routes>
           </div>
@@ -126,7 +101,6 @@ function App() {
         ''
       )}
     </div>
-  );
+  ); 
 }
-
 export default App;
