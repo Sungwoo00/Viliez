@@ -59,39 +59,39 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route
-                path="/register"
+                path="/Viliez/register"
                 element={user ? <Register /> : <Navigate replace to="/login" />}
               />
               <Route
-                path="/chat"
+                path="/Viliez/chat"
                 element={user ? <ChatList /> : <Navigate replace to="/login" />}
               />
               <Route
-                path="/chat/:chatRoomId"
+                path="/Viliez/chat/:chatRoomId"
                 element={user ? <ChatRoom /> : <Navigate replace to="/login" />}
               />
               <Route
-                path="/mypage"
+                path="/Viliez/mypage"
                 element={user ? <MyPage /> : <Navigate replace to="/login" />}
               />
               <Route
-                path="/myitem"
+                path="/Viliez/myitem"
                 element={user ? <MyItem /> : <Navigate replace to="/login" />}
               />
               <Route
-                path="/renteditem"
+                path="/Viliez/renteditem"
                 element={user ? <RentedItem /> : <Navigate replace to="/login" />}
               />
               <Route
-                path="/likeitem"
+                path="/Viliez/likeitem"
                 element={user ? <LikeItem /> : <Navigate replace to="/login" />}
               />
               <Route
-                path="/login"
+                path="/Viliez/login"
                 element={!user ? <Login /> : <Navigate replace to="/" />}
               />
               <Route
-                path="/signup"
+                path="/Viliezs/ignup"
                 element={!user ? <Signup /> : <Navigate replace to="/" />}
               />
             </Routes>
