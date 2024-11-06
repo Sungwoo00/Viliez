@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Viliez/static/css/main.b60ab448.css",
-    "main.js": "/Viliez/static/js/main.032515ff.js",
-    "static/media/viliez.jpg": "/Viliez/static/media/viliez.9af0b5fa5c46d4d8d53e.jpg",
-    "service-worker.js": "/Viliez/service-worker.js",
-    "index.html": "/Viliez/index.html",
-    "main.b60ab448.css.map": "/Viliez/static/css/main.b60ab448.css.map",
-    "main.032515ff.js.map": "/Viliez/static/js/main.032515ff.js.map"
+    "main.css": "https://Sungwoo00.github.io/Viliez/static/css/main.b60ab448.css",
+    "main.js": "https://Sungwoo00.github.io/Viliez/static/js/main.5527f43f.js",
+    "static/media/viliez.jpg": "https://Sungwoo00.github.io/Viliez/static/media/viliez.9af0b5fa5c46d4d8d53e.jpg",
+    "service-worker.js": "https://Sungwoo00.github.io/Viliez/service-worker.js",
+    "index.html": "https://Sungwoo00.github.io/Viliez/index.html",
+    "main.b60ab448.css.map": "https://Sungwoo00.github.io/Viliez/static/css/main.b60ab448.css.map",
+    "main.5527f43f.js.map": "https://Sungwoo00.github.io/Viliez/static/js/main.5527f43f.js.map"
   },
   "entrypoints": [
     "static/css/main.b60ab448.css",
-    "static/js/main.032515ff.js"
+    "static/js/main.5527f43f.js"
   ]
 }
