@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Viliez/static/css/main.b60ab448.css",
-    "main.js": "/Viliez/static/js/main.de355011.js",
+    "main.js": "/Viliez/static/js/main.032515ff.js",
     "static/media/viliez.jpg": "/Viliez/static/media/viliez.9af0b5fa5c46d4d8d53e.jpg",
     "service-worker.js": "/Viliez/service-worker.js",
     "index.html": "/Viliez/index.html",
     "main.b60ab448.css.map": "/Viliez/static/css/main.b60ab448.css.map",
-    "main.de355011.js.map": "/Viliez/static/js/main.de355011.js.map"
+    "main.032515ff.js.map": "/Viliez/static/js/main.032515ff.js.map"
   },
   "entrypoints": [
     "static/css/main.b60ab448.css",
-    "static/js/main.de355011.js"
+    "static/js/main.032515ff.js"
   ]
 }
