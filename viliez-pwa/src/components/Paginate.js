@@ -42,7 +42,7 @@ const Paginate = ({ itemsPerPage, totalItems, pages, currentPage }) => {
       <ul className={styles.Pages}>
         <li className={styles.page_item}>
           <a onClick={goToPrevPage} href='#' className={styles.page_Link}>
-            {"<"}
+            {"‹"}
           </a>
         </li>
         {pageNumbers.map((number) => (
@@ -63,7 +63,7 @@ const Paginate = ({ itemsPerPage, totalItems, pages, currentPage }) => {
         ))}
         <li className={styles.page_item}>
           <a onClick={goToNextPage} href='#' className={styles.page_Link}>
-            {">"}
+            {"›"}
           </a>
         </li>
       </ul>
