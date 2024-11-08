@@ -40,12 +40,7 @@ function App() {
           height: '85vh',
         }}
       >
-        <Lottie
-          loop={false}
-          animationData={loadingScreenJson}
-          play
-          style={{ width: 350, height: 400 }}
-        />
+        <Lottie loop={false} animationData={loadingScreenJson} play style={{ width: 350, height: 400 }} />
         <h2 style={{ color: '#192F71' }}>준비되는 동안 잠시만 기다려주세요</h2>
       </div>
     );
@@ -53,46 +48,46 @@ function App() {
   return (
     <div>
       {isAuthReady ? (
-        <BrowserRouter basename="/Viliez">
+        <BrowserRouter basename='/Viliez'>
           <Nav />
           <div>
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path='/' element={<Home />} />
               <Route
-                path="/Viliez/register"
-                element={user ? <Register /> : <Navigate replace to="/login" />}
+                path='/register' 
+                element={user ? <Register /> : <Navigate replace to='/login' />}
               />
               <Route
-                path="/Viliez/chat"
-                element={user ? <ChatList /> : <Navigate replace to="/login" />}
+                path='/chat' 
+                element={user ? <ChatList /> : <Navigate replace to='/login' />}
               />
               <Route
-                path="/Viliez/chat/:chatRoomId"
-                element={user ? <ChatRoom /> : <Navigate replace to="/login" />}
+                path='/chat/:chatRoomId' 
+                element={user ? <ChatRoom /> : <Navigate replace to='/login' />}
               />
               <Route
-                path="/Viliez/mypage"
-                element={user ? <MyPage /> : <Navigate replace to="/login" />}
+                path='/mypage' 
+                element={user ? <MyPage /> : <Navigate replace to='/login' />}
               />
               <Route
-                path="/Viliez/myitem"
-                element={user ? <MyItem /> : <Navigate replace to="/login" />}
+                path='/myitem' 
+                element={user ? <MyItem /> : <Navigate replace to='/login' />}
               />
               <Route
-                path="/Viliez/renteditem"
-                element={user ? <RentedItem /> : <Navigate replace to="/login" />}
+                path='/renteditem' 
+                element={user ? <RentedItem /> : <Navigate replace to='/login' />}
               />
               <Route
-                path="/Viliez/likeitem"
-                element={user ? <LikeItem /> : <Navigate replace to="/login" />}
+                path='/likeitem' 
+                element={user ? <LikeItem /> : <Navigate replace to='/login' />}
               />
               <Route
-                path="/Viliez/login"
-                element={!user ? <Login /> : <Navigate replace to="/" />}
+                path='/login' 
+                element={!user ? <Login /> : <Navigate replace to='/' />}
               />
               <Route
-                path="/Viliezs/ignup"
-                element={!user ? <Signup /> : <Navigate replace to="/" />}
+                path='/signup'
+                element={!user ? <Signup /> : <Navigate replace to='/' />}
               />
             </Routes>
           </div>
@@ -101,6 +96,6 @@ function App() {
         ''
       )}
     </div>
-  ); 
+  );
 }
 export default App;
