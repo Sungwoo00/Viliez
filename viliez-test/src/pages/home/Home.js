@@ -4,15 +4,19 @@ import styles from './Home.module.css';
 import useCollection from '../../hooks/useCollection';
 import SyncLoader from 'react-spinners/SyncLoader';
 import Paginate from '../../components/Paginate';
-import Sidebar from '../../components/Sidebar';
+import Category from '../../components/Category';
+import SearchBar from '../../components/SearchBar';
 
 const Home = () => {
   const { documents, error, isLoading } = useCollection('Sharemarket');
   const [selectedCategory, setSelectedCategory] = useState('모든 물품');
+  const [SearchItem, setSearchItem] = useState('');
 
   const filteredItems = documents?.filter(
     (item) =>
-      selectedCategory === '모든 물품' || item.category === selectedCategory
+      (selectedCategory === '모든 물품' ||
+        item.category === selectedCategory) &&
+      item.title.toLowerCase().includes(SearchItem.toLowerCase())
   );
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,7 +24,7 @@ const Home = () => {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [selectedCategory]);
+  }, [selectedCategory, SearchItem]);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -32,14 +36,15 @@ const Home = () => {
     <>
       <div className={styles.container}>
         <div className={styles.sidebar}>
-          <Sidebar onCategoryChange={setSelectedCategory} />
+          <Category onCategoryChange={setSelectedCategory} />
         </div>
+        <SearchBar onSearch={setSearchItem} />
         {isLoading && (
           <div className={styles.loadingContainer}>
             <h2>물건을 가져오는 중..</h2>
             <SyncLoader
-              color='#136CE1'
-              margin='2'
+              color="#136CE1"
+              margin="2"
               loading={isLoading}
               size={17}
             />
@@ -54,13 +59,13 @@ const Home = () => {
             ></HomeItemList>
           )}
         </ul>
+        <Paginate
+          itemsPerPage={itemsPerPage}
+          totalItems={filteredItems?.length || 0}
+          pages={paginate}
+          currentPage={currentPage}
+        />
       </div>
-      <Paginate
-        itemsPerPage={itemsPerPage}
-        totalItems={filteredItems?.length || 0}
-        pages={paginate}
-        currentPage={currentPage}
-      />
     </>
   );
 };

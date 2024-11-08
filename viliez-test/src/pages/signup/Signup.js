@@ -1,24 +1,24 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import BarLoader from 'react-spinners/BarLoader';
-import styles from './Signup.module.css';
-import useSignup from '../../hooks/useSignup';
+import BarLoader from "react-spinners/BarLoader";
+import styles from "./Signup.module.css";
+import useSignup from "../../hooks/useSignup";
 
 const Signup = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [password2, setPassword2] = useState('');
-  const [displayName, setDisplayName] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const { error, isPending, signup } = useSignup();
 
   const handleData = (event) => {
-    if (event.target.id === 'myEmail') {
+    if (event.target.id === "myEmail") {
       setEmail(event.target.value);
-    } else if (event.target.id === 'myPassword') {
+    } else if (event.target.id === "myPassword") {
       setPassword(event.target.value);
-    } else if (event.target.id === 'myNickName') {
+    } else if (event.target.id === "myNickName") {
       setDisplayName(event.target.value);
-    } else if (event.target.id === 'myPassword2') {
+    } else if (event.target.id === "myPassword2") {
       setPassword2(event.target.value);
     }
   };
@@ -27,7 +27,7 @@ const Signup = () => {
     event.preventDefault();
 
     if (password !== password2) {
-      signup(email, password, displayName, 'password-mismatch');
+      signup(email, password, displayName, "password-mismatch");
       return;
     }
 
@@ -36,16 +36,16 @@ const Signup = () => {
 
   const getErrorMsg = (errorCode) => {
     switch (errorCode) {
-      case 'auth/invalid-email':
-        return '유효하지 않은 이메일 주소입니다.';
-      case 'auth/email-already-in-use':
-        return '이미 사용 중인 이메일입니다.';
-      case 'auth/weak-password':
-        return '비밀번호는 6자 이상 입력하세요.';
-      case 'password-mismatch':
-        return '비밀번호가 일치하지 않습니다.';
+      case "auth/invalid-email":
+        return "유효하지 않은 이메일 주소입니다.";
+      case "auth/email-already-in-use":
+        return "이미 사용 중인 이메일입니다.";
+      case "auth/weak-password":
+        return "비밀번호는 6자 이상 입력하세요.";
+      case "password-mismatch":
+        return "비밀번호가 일치하지 않습니다.";
       default:
-        return '회원가입 중 오류가 발생했습니다.';
+        return "회원가입 중 오류가 발생했습니다.";
     }
   };
 
@@ -108,7 +108,7 @@ const Signup = () => {
               cssOverride={{}}
               height={5}
               speedMultiplier={1}
-              width={360}
+              width={280}
             />
           )}
           {error && (

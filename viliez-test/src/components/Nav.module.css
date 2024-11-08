@@ -1,18 +1,24 @@
-.nav {
+.nav_container {
   position: fixed;
-  top: 0;
   z-index: 5;
+  top: 0;
   width: 100%;
-  background-color: royalblue;
-  padding: 30px 60px;
+  background-color: #5271ff;
+}
+
+.nav {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .list_nav {
   display: flex;
-  justify-content: right;
   align-items: center;
 }
-
+.tit {
+  margin-left: 10px;
+}
 .tit a,
 .list_nav a {
   color: white;
@@ -26,19 +32,16 @@
 .tit a:hover,
 .list_nav a:hover {
   font-weight: bold;
-  font-size: calc(100% + 1px);
-  /* border-top: 1.8px solid silver; */
-  color: silver;
+  /* font-size: calc(100% + 1px); */
+  /* color: silver; */
 }
 
 .list_nav a {
   padding: 0 8px;
-  text-decoration-line: overline;
 }
 
 .selected {
   margin-left: 8px;
-  border-top: 1.8px solid white;
   padding-top: 2px;
   cursor: pointer;
   color: white;
@@ -47,14 +50,12 @@
 }
 .selected:hover {
   font-weight: bold;
-  font-size: calc(100% + 1px);
-  border-top: 1.8px solid silver;
+  /* font-size: calc(100% + 1px); */
   color: silver;
 }
 
 .user_delete_btn {
   border: none;
-  border-top: 1.8px solid white;
   color: white;
   text-decoration: none;
   transition: font-weight 0.5s ease, font-size 0.5s ease;
@@ -65,8 +66,7 @@
 
 .user_delete_btn:hover {
   font-weight: bold;
-  font-size: calc(100% + 1px);
-  border-top: 1.8px solid silver;
+  /* font-size: calc(100% + 1px); */
   color: silver;
 }
 
@@ -105,19 +105,79 @@
   color: white;
 }
 
-.menuOpen {
-  display: block;
-}
-
-.menuAnimation {
-  animation: fadeIn 0.8s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    max-height: 0;
+@media (max-width: 550px) {
+  .nav {
+    padding: 10px;
+    height: 75px;
   }
-  to {
-    max-height: 200px;
+  .tit a {
+    font-size: 20px;
+  }
+  .list_nav a {
+    font-size: 12px;
+  }
+  .user_delete_btn {
+    font-size: 12px;
+  }
+}
+
+.logo {
+  height: 75px;
+  width: auto;
+  object-fit: contain;
+}
+.iconButtonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  color: #ffffff;
+  font-size: 24px;
+  display: none;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+.mobileOnly {
+  display: none;
+}
+
+@media (max-width: 550px) {
+  .nav_container {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    width: 100%;
+  }
+  .logo {
+    display: none;
+  }
+  .nav {
+    display: flex;
+    justify-content: space-between;
+  }
+  .list_nav {
+    flex-grow: 1;
+    justify-content: space-around;
+  }
+  .list_nav li {
+    flex-grow: 1;
+    text-align: center;
+  }
+  .list_nav a {
+    font-size: 12px;
+  }
+  .user_delete_btn,
+  .tit a,
+  .list_nav a {
+    font-size: 12px;
+  }
+  .icon {
+    display: block;
+  }
+  .mobileOnly {
+    display: flex;
   }
 }

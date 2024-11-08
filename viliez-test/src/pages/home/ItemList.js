@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
-import useFirestore from '../../hooks/useFirestore';
-import styles from './ItemList.module.css';
+import React, { useState } from "react";
+import useFirestore from "../../hooks/useFirestore";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import styles from "./ItemList.module.css";
+import ImageSlider from "../../components/ImageSlider";
 
 const ItemList = ({ items }) => {
-  const { deleteDocument, updateDocument } = useFirestore('Sharemarket');
+  const { deleteDocument, updateDocument } = useFirestore("Sharemarket");
   const [editing, setEditing] = useState({});
   const [updatedItems, setUpdatedItems] = useState({});
 
@@ -51,10 +54,8 @@ const ItemList = ({ items }) => {
   };
 
   const handleDelete = (itemId) => {
-    const confirmed = window.confirm('정말 삭제하시겠습니까 ?');
-    if (confirmed) {
-      deleteDocument(itemId);
-    }
+    toast.success("상품을 삭제했습니다.");
+    deleteDocument(itemId);
   };
 
   return (
@@ -88,50 +89,49 @@ const EditItemForm = ({ item, handleChange, handleUpdate, cancelEditing }) => {
     <>
       <input
         className={styles.itemlist_input}
-        id='editTitle'
-        type='text'
-        placeholder='새로운 제목'
+        id="editTitle"
+        type="text"
+        placeholder="새로운 제목"
         value={item.title}
-        onChange={(e) => handleChange('title', e.target.value)}
+        onChange={(e) => handleChange("title", e.target.value)}
       />
       <select
         className={styles.itemlist_select}
         value={item.category}
-        onChange={(e) => handleChange('category', e.target.value)}
+        onChange={(e) => handleChange("category", e.target.value)}
       >
-        <option value='가전'>가전</option>
-        <option value='여행'>여행</option>
-        <option value='의류'>의류</option>
-        <option value='취미'>취미</option>
+        <option value="가전">가전</option>
+        <option value="여행">여행</option>
+        <option value="의류">의류</option>
+        <option value="취미">취미</option>
       </select>
 
-      {/* <label htmlFor='editPrice'>가격: </label> */}
       <input
         className={styles.itemlist_input}
-        id='editPrice'
-        type='number'
-        placeholder='새로운 가격'
+        id="editPrice"
+        type="number"
+        placeholder="새로운 가격"
         value={item.price}
-        onChange={(e) => handleChange('price', e.target.value)}
-        min='5000'
-        step='1000'
+        onChange={(e) => handleChange("price", e.target.value)}
+        min="1000"
+        step="500"
       />
       <input
         className={styles.itemlist_input}
-        id='editEa'
-        type='number'
-        placeholder='새로운 수량'
+        id="editEa"
+        type="number"
+        placeholder="새로운 수량"
         value={item.ea}
-        onChange={(e) => handleChange('ea', e.target.value)}
-        min='1'
-        step='1'
+        onChange={(e) => handleChange("ea", e.target.value)}
+        min="1"
+        step="1"
       />
       <textarea
         className={styles.itemlist_textarea}
-        id='editDescription'
-        placeholder='새로운 설명'
+        id="editDescription"
+        placeholder="새로운 설명"
         value={item.description}
-        onChange={(e) => handleChange('description', e.target.value)}
+        onChange={(e) => handleChange("description", e.target.value)}
       />
       <div className={styles.btn_container}>
         <button className={styles.btn_edit} onClick={handleUpdate}>
@@ -159,26 +159,14 @@ const ViewItem = ({ item, startEditing, deleteItem }) => {
   return (
     <>
       {item.rentuser ? (
-        <p>이 물품은 {rentusers.join(', ')}님이 예약 중입니다.</p>
+        <p>이 물품은 {rentusers.join(", ")}님이 예약 중입니다.</p>
       ) : (
         <p>현재 예약 중인 사람이 없습니다.</p>
       )}
-      {item.rentalPeriod && (
-        <p>
-          대여 가능 기간 :
-          {item.rentalPeriod.startDate?.toDate()?.toLocaleDateString('ko-KR') ||
-            '시작 날짜 정보가 없습니다.'}{' '}
-          ~
-          {item.rentalPeriod.endDate?.toDate()?.toLocaleDateString('ko-KR') ||
-            '종료 날짜 정보가 없습니다.'}
-        </p>
-      )}
-      <div>
-      {item.photoURL && <img src={item.photoURL} alt='Product' className={styles.ImgSize}/>}
-      </div>
+      <ImageSlider photoURLs={item.photoURLs} />
       <strong className={styles.title}>{item.title}</strong>
       <p className={styles.price}>
-        가격 : {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
+        가격 : {item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원
       </p>
       <p className={styles.ea}>수량 : {item.ea}개</p>
       <fieldset>

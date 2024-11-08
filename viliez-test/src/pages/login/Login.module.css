@@ -1,6 +1,6 @@
 .login_form {
-  max-width: 380px;
-  margin: 40px auto;
+  max-width: 330px;
+  margin: 120px auto;
 }
 
 .login_form fieldset {
@@ -50,7 +50,7 @@
 
 .input_box label::before,
 .input_box label::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   width: 12px;
@@ -134,4 +134,34 @@
   margin: 20px auto;
   text-align: center;
   font-weight: bold;
+}
+
+.btnWrapper {
+  padding-top: 24px;
+}
+
+.linkBtn {
+  width: 100%;
+  border: 1px solid #222;
+  background-color: #fff;
+
+  font-size: 16px;
+  font-weight: 600;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  text-decoration: none;
+}
+.btnWrapper a {
+  color: #000;
+  text-decoration: none;
+}
+.linkBtn:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+@media (max-width: 550px) {
 }

@@ -1,25 +1,24 @@
-.container {
-  max-width: 700px;
-  margin: 50px auto;
-  padding: 50px 60px;
+.register_container {
+  margin: 120px auto 0 auto;
+  max-width: 600px;
 }
 
-.side_menu form {
+.register_container form {
   padding: 20px;
-  background-color: #3498db;
   border-radius: 10px;
 }
 
-.side_menu legend {
+.register_container legend {
   font-size: 1.7em;
   font-weight: bold;
-  color: #fff;
 }
 
-.side_menu input,
-.side_menu select,
-.side_menu textarea {
+.register_container input,
+.register_container select,
+.register_container textarea {
   display: block;
+  color: #000;
+  background-color: white;
   width: 100%;
   padding: 10px;
   border: solid 1px black;
@@ -27,7 +26,7 @@
   margin-top: 4px;
 }
 
-.side_menu label {
+.register_container label {
   display: block;
   margin: 10px auto;
   color: black;
@@ -39,23 +38,20 @@
   cursor: pointer;
 }
 
-.side_menu textarea {
+.register_container textarea {
   height: auto;
 }
 
-.side_menu button {
+/* .register_container button {
   display: block;
   width: 100%;
-  margin-top: 20px;
   padding: 10px 15px;
-  border-radius: 5px;
-  background-color: transparent;
-  border: 2px solid white;
-  color: #fff;
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-}
+} */
 
-.side_menu button:hover {
-  background-color: white;
-  color: #3498db;
+@media (max-width: 550px) {
+  .register_container {
+    margin: 0 auto;
+    padding: 0px 20px;
+  }
 }

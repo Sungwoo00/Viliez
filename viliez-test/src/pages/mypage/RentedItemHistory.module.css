@@ -15,8 +15,16 @@
 
 .item {
   padding: 20px;
-  text-align: left;
+  text-align: center;
   bottom: 0;
+
+  p {
+    text-align: left;
+  }
+
+  strong {
+    text-align: left;
+  }
 }
 
 .title {

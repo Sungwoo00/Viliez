@@ -1,14 +1,14 @@
-import useAuthContext from '../../hooks/useAuthContext';
+import useAuthContext from "../../hooks/useAuthContext";
 
-import ItemList from '../home/ItemList';
-import styles from './MyItem.module.css';
-import useCollection from '../../hooks/useCollection';
+import ItemList from "../home/ItemList";
+import styles from "./MyItem.module.css";
+import useCollection from "../../hooks/useCollection";
 
 const MyItem = () => {
   const { user } = useAuthContext();
-  const { documents, error } = useCollection('Sharemarket', [
-    'uid',
-    '==',
+  const { documents, error } = useCollection("Sharemarket", [
+    "uid",
+    "==",
     user.uid,
   ]);
 

@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-left: 10px;
+  margin-left: 10px;
+  border: none;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+}
+
+.item {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.item:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.active {
+  background: rgb(229, 226, 226);
+}

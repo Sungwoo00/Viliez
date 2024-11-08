@@ -1,6 +1,6 @@
 .signup_form {
-  max-width: 380px;
-  margin: 40px auto;
+  max-width: 330px;
+  margin: 120px auto;
 }
 
 .signup_form fieldset {
@@ -50,7 +50,7 @@
 
 .input_box label::before,
 .input_box label::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   width: 12px;

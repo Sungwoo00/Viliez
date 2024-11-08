@@ -1,0 +1,37 @@
+.SearchBar {
+  height: 40px;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.SearchBar input {
+  flex: 1;
+  height: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px 0 0 5px;
+}
+
+.searchBtn {
+  height: 100%;
+  padding: 0 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.searchBtn:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 550px) {
+  .SearchBar {
+    margin-top: 40px;
+  }
+}

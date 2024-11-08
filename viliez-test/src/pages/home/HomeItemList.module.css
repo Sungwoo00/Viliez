@@ -32,14 +32,16 @@
   text-align: center;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
+
 .img_modal img {
-  width: 70%;
-  height: 70%;
+  width: 300px;
+  height: 300px;
 }
 
 .closeBtn {
   background-color: transparent;
   border: none;
+  z-index: 100;
   position: absolute;
   top: 10px;
   right: 10px;
@@ -120,6 +122,44 @@
 }
 .homeImg:hover {
   border: 2px solid lightslategrey;
-  transform: scale(1.15);
   z-index: 1;
+}
+.heart {
+  font-size: 20px;
+  float: right;
+}
+.heart:hover {
+  color: red;
+}
+.wished {
+  color: red;
+}
+
+@media (max-width: 550px) {
+  .homeImg {
+    width: 125px;
+    height: 125px;
+    float: left;
+  }
+  .infoBtn,
+  .chatBtn {
+    padding: 10px 20px;
+    font-size: 12px;
+  }
+  .dateP {
+    display: none;
+  }
+  .modal {
+    width: 300px;
+  }
+  .home_btn_container {
+    display: block;
+  }
+  .modalOverlay {
+    top: -50px;
+  }
+  .img_modal img {
+    width: 100%;
+    height: 100%;
+  }
 }
