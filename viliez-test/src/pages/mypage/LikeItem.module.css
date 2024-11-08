@@ -21,7 +21,9 @@
   margin-bottom: 20px;
   cursor: pointer;
   flex: 1 1 calc(100% - 20px);
-  position: relative; 
+  position: relative;
+  padding-left: 1rem;
+  border-left: 2px solid #e9ecef; 
 }
 
 .image {
